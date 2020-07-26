@@ -18,6 +18,8 @@ class ViewController: UIViewController {
 
 	let addNewHikakuBtn		= UIButton()
 
+	var count = 0
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
@@ -28,7 +30,7 @@ class ViewController: UIViewController {
 
 		// 表示用データ取得
 		let realm = try! Realm()
-		let allItems	= realm.objects(HikakuItemRealm.self)
+		let allItems = realm.objects(HikakuItemRealm.self)
 		for item in allItems {
 			var displayText = item.groupName
 			let contents = realm.objects(HikakuContentsRealm.self).filter("groupID="+String(item.groupId))
@@ -42,6 +44,7 @@ class ViewController: UIViewController {
 				i += 1
 			}
 			displayList.append(displayText)
+			count += 1
 		}
 
 		// 取得したデータ表示
@@ -80,7 +83,18 @@ class ViewController: UIViewController {
 	/// - Parameter sender: UIButton
 	/// - Authors: Nozomi Koyama
 	@objc func addNewHikakuBtnDidTap(_ sender: UIButton) {
-		
+		let nextVC = HikakuMainVC()
+		let realm = try! Realm()
+		var newGroupId: Int = 0
+		if( count == 0 ){
+			newGroupId = 0
+		} else {
+			let maxGroupId = realm.objects(HikakuItemRealm.self).sorted(byKeyPath: "groupId", ascending: false).first?.groupId
+			newGroupId = Int(maxGroupId!) + 1
+		}
+		nextVC.groupId = newGroupId
+		self.navigationController?.pushViewController(nextVC,
+													  animated: true)
 	}
 }
 
