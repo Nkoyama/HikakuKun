@@ -12,7 +12,11 @@ class ViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view.
+
+		title = "比較リスト"
+
+		// background color
+		self.view.backgroundColor = UIColor.white
 	}
 
 
