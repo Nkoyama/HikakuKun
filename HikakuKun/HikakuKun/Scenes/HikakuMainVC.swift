@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SnapKit
+import RealmSwift
 
 class HikakuMainVC: UIViewController, UITextFieldDelegate {
 
@@ -41,11 +43,20 @@ class HikakuMainVC: UIViewController, UITextFieldDelegate {
 			make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(10)
 		}
 
+		let items: Results<HikakuItemRealm>
+		let contents: Results<HikakuContentsRealm>
+		if( !newFlg ) {
+			//get contents
+			let realm = try! Realm()
+			items = realm.objects(HikakuItemRealm.self).filter("groupID="+String(groupId))
+			contents = realm.objects(HikakuContentsRealm.self).filter("groupID="+String(groupId))
+		}
+
 		// gourp name
 		if( newFlg ) {
 			self.groupNameTF.text = "新しい比較"
 		} else {
-			self.groupNameTF.text = ""
+			self.groupNameTF.text = items.first?.groupName
 		}
 		self.groupNameTF.textAlignment = NSTextAlignment.center
 		self.groupNameTF.font = UIFont.systemFont(ofSize: 25.0)
