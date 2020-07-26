@@ -6,6 +6,7 @@ target 'HikakuKun' do
   use_frameworks!
 
   # Pods for HikakuKun
+  pod 'SnapKit'
   pod 'RealmSwift'
 
 end
