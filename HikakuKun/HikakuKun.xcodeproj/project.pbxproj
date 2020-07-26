@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1661DB13C27FF0604E2F5C3F /* Pods_HikakuKun.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F658453B2C01A20502952D2C /* Pods_HikakuKun.framework */; };
 		434D599724CD64C0007FEEFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434D599624CD64C0007FEEFC /* AppDelegate.swift */; };
 		434D599924CD64C0007FEEFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434D599824CD64C0007FEEFC /* SceneDelegate.swift */; };
 		434D599B24CD64C0007FEEFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434D599A24CD64C0007FEEFC /* ViewController.swift */; };
@@ -22,6 +23,9 @@
 		434D599F24CD64C4007FEEFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		434D59A224CD64C4007FEEFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		434D59A424CD64C4007FEEFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E59BC89F815C39CF38F7197 /* Pods-HikakuKun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HikakuKun.release.xcconfig"; path = "Target Support Files/Pods-HikakuKun/Pods-HikakuKun.release.xcconfig"; sourceTree = "<group>"; };
+		D8B131504AD174BD0970FBB2 /* Pods-HikakuKun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HikakuKun.debug.xcconfig"; path = "Target Support Files/Pods-HikakuKun/Pods-HikakuKun.debug.xcconfig"; sourceTree = "<group>"; };
+		F658453B2C01A20502952D2C /* Pods_HikakuKun.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HikakuKun.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +33,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1661DB13C27FF0604E2F5C3F /* Pods_HikakuKun.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		07A44F0F8C1CCFA32E20A5B3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F658453B2C01A20502952D2C /* Pods_HikakuKun.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		434D598A24CD64C0007FEEFC = {
 			isa = PBXGroup;
 			children = (
 				434D599524CD64C0007FEEFC /* HikakuKun */,
 				434D599424CD64C0007FEEFC /* Products */,
+				E1C9B48DDC34D01A4B21240C /* Pods */,
+				07A44F0F8C1CCFA32E20A5B3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +69,31 @@
 		434D599524CD64C0007FEEFC /* HikakuKun */ = {
 			isa = PBXGroup;
 			children = (
+				434D59AA24CD6A81007FEEFC /* scenes */,
 				434D599624CD64C0007FEEFC /* AppDelegate.swift */,
 				434D599824CD64C0007FEEFC /* SceneDelegate.swift */,
-				434D599A24CD64C0007FEEFC /* ViewController.swift */,
 				434D599F24CD64C4007FEEFC /* Assets.xcassets */,
 				434D59A124CD64C4007FEEFC /* LaunchScreen.storyboard */,
 				434D59A424CD64C4007FEEFC /* Info.plist */,
 			);
 			path = HikakuKun;
+			sourceTree = "<group>";
+		};
+		434D59AA24CD6A81007FEEFC /* scenes */ = {
+			isa = PBXGroup;
+			children = (
+				434D599A24CD64C0007FEEFC /* ViewController.swift */,
+			);
+			path = scenes;
+			sourceTree = "<group>";
+		};
+		E1C9B48DDC34D01A4B21240C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D8B131504AD174BD0970FBB2 /* Pods-HikakuKun.debug.xcconfig */,
+				6E59BC89F815C39CF38F7197 /* Pods-HikakuKun.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +103,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 434D59A724CD64C4007FEEFC /* Build configuration list for PBXNativeTarget "HikakuKun" */;
 			buildPhases = (
+				251B9A8159B6D6BFAC6A1100 /* [CP] Check Pods Manifest.lock */,
 				434D598F24CD64C0007FEEFC /* Sources */,
 				434D599024CD64C0007FEEFC /* Frameworks */,
 				434D599124CD64C0007FEEFC /* Resources */,
+				8A24F33AAAA40AF7A6BFBCB6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -128,6 +162,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		251B9A8159B6D6BFAC6A1100 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HikakuKun-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8A24F33AAAA40AF7A6BFBCB6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HikakuKun/Pods-HikakuKun-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HikakuKun/Pods-HikakuKun-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HikakuKun/Pods-HikakuKun-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		434D598F24CD64C0007FEEFC /* Sources */ = {
@@ -270,6 +346,7 @@
 		};
 		434D59A824CD64C4007FEEFC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D8B131504AD174BD0970FBB2 /* Pods-HikakuKun.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -288,6 +365,7 @@
 		};
 		434D59A924CD64C4007FEEFC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6E59BC89F815C39CF38F7197 /* Pods-HikakuKun.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
