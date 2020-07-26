@@ -93,8 +93,18 @@ class ViewController: UIViewController {
 			newGroupId = Int(maxGroupId!) + 1
 		}
 		nextVC.groupId = newGroupId
-		self.navigationController?.pushViewController(nextVC,
-													  animated: true)
+		nextVC.callBack = { () in
+			self.callBack()
+		}
+		self.present(nextVC,
+					 animated: true,
+					 completion: nil)
+	}
+
+	/// 画面遷移から戻ってきたときに実行する関数
+	func callBack() {
+		// 画面再読み込み
+		self.viewDidLoad()
 	}
 }
 
