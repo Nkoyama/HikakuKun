@@ -55,6 +55,31 @@ class ViewController: UIViewController {
 		}
 
 		// add new hikaku button
+		self.addNewHikakuBtn.setTitle("＋", for: .normal)
+		self.addNewHikakuBtn.setTitleColor(UIColor.blue, for: .normal)
+		self.addNewHikakuBtn.backgroundColor = UIColor.clear
+		self.addNewHikakuBtn.titleLabel?.font = UIFont.systemFont(ofSize: 35.0)
+		self.addNewHikakuBtn.titleLabel?.adjustsFontSizeToFitWidth = true
+		self.addNewHikakuBtn.titleLabel?.baselineAdjustment = .alignCenters
+		self.addNewHikakuBtn.layer.borderColor = UIColor.blue.cgColor
+		self.addNewHikakuBtn.layer.borderWidth = 1.0
+		self.addNewHikakuBtn.layer.cornerRadius = 25.0
+		self.view.addSubview(self.addNewHikakuBtn)
+		self.addNewHikakuBtn.addTarget(self,
+									   action: #selector(self.addNewHikakuBtnDidTap(_:)),
+									   for: .touchUpInside)
+		self.addNewHikakuBtn.snp.makeConstraints { (make) in
+			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(20)
+			make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(70)
+			make.left.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(70)
+			make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(20)
+		}
+	}
+
+	/// add new hikaku button action
+	/// - Parameter sender: UIButton
+	/// - Authors: Nozomi Koyama
+	@objc func addNewHikakuBtnDidTap(_ sender: UIButton) {
 		
 	}
 }
@@ -63,7 +88,7 @@ extension ViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return displayList.count
 	}
-	
+
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = UITableViewCell()
 		cell.textLabel?.text = displayList[indexPath.row]
