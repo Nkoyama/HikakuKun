@@ -22,4 +22,5 @@ class HikakuItemRealm: Object {
 	dynamic var item8		: String	= ""	// 比較項目⑧
 	dynamic var item9		: String	= ""	// 比較項目⑨
 	dynamic var item10		: String	= ""	// 比較項目⑩
+	dynamic var timestamp	: String	= ""
 }

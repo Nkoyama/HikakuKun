@@ -101,8 +101,8 @@
 		434D59AB24CD6DF9007FEEFC /* RealmClasses */ = {
 			isa = PBXGroup;
 			children = (
-				434D59AC24CD6E4F007FEEFC /* HikakuContentsRealm.swift */,
 				434D59AE24CD7286007FEEFC /* HikakuItemRealm.swift */,
+				434D59AC24CD6E4F007FEEFC /* HikakuContentsRealm.swift */,
 			);
 			path = RealmClasses;
 			sourceTree = "<group>";

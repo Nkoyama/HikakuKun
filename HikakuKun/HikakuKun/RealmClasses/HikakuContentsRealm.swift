@@ -23,5 +23,6 @@ class HikakuContentsRealm: Object {
 	dynamic var content8	: String	= ""	// 比較項目⑧内容
 	dynamic var content9	: String	= ""	// 比較項目⑨内容
 	dynamic var content10	: String	= ""	// 比較項目⑩内容
-	dynamic var memo		: String	= ""	// memo
+	dynamic var memo		: String	= ""
+	dynamic var timestamp	: String	= ""
 }
