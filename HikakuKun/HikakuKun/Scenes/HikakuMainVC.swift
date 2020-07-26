@@ -16,7 +16,11 @@ class HikakuMainVC: UIViewController, UITextFieldDelegate {
 	let groupNameTF	= UITextField()
 
 	var groupId		= -1
+	var groupName	= ""
 	var newFlg		= true
+	var hikakuNum	= 1
+
+	let SCREEN_SIZE		= UIScreen.main.bounds.size
 
 	//クロージャを保持するためのプロパティ
 	var callBack: (() -> Void)?
@@ -46,17 +50,31 @@ class HikakuMainVC: UIViewController, UITextFieldDelegate {
 		let items: Results<HikakuItemRealm>
 		let contents: Results<HikakuContentsRealm>
 		if( !newFlg ) {
-			//get contents
+			/* get items and contents */
 			let realm = try! Realm()
 			items = realm.objects(HikakuItemRealm.self).filter("groupID="+String(groupId))
+			groupName = String(items.first!.groupName)
 			contents = realm.objects(HikakuContentsRealm.self).filter("groupID="+String(groupId))
+			//update contents num
+			if( contents.count > 1 ) {
+				hikakuNum = contents.count
+			}
+		}
+
+		// calc width
+		let itemWidth = (SCREEN_SIZE.width - 20) / 6
+		var eachWidth = (SCREEN_SIZE.width - 20) - itemWidth
+		if( hikakuNum < 5 ) {
+			eachWidth = (SCREEN_SIZE.width - 20 - itemWidth) / CGFloat(hikakuNum)
+		} else {
+			eachWidth = (SCREEN_SIZE.width - 20 - itemWidth) / 5
 		}
 
 		// gourp name
 		if( newFlg ) {
 			self.groupNameTF.text = "新しい比較"
 		} else {
-			self.groupNameTF.text = items.first?.groupName
+			self.groupNameTF.text = groupName
 		}
 		self.groupNameTF.textAlignment = NSTextAlignment.center
 		self.groupNameTF.font = UIFont.systemFont(ofSize: 25.0)
@@ -68,6 +86,7 @@ class HikakuMainVC: UIViewController, UITextFieldDelegate {
 			make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(75)
 		}
 		self.groupNameTF.delegate = self
+
 	}
 
 	/// back button action

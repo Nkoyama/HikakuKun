@@ -49,7 +49,7 @@ class ViewController: UIViewController {
 
 		// 取得したデータ表示
 		self.hikakuListTable.dataSource = self
-		view.addSubview(self.hikakuListTable)
+		self.view.addSubview(self.hikakuListTable)
 		self.hikakuListTable.snp.makeConstraints { make in
 			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(0)
 			make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(0)
