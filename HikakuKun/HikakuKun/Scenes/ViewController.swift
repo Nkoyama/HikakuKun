@@ -93,6 +93,7 @@ class ViewController: UIViewController {
 			newGroupId = Int(maxGroupId!) + 1
 		}
 		nextVC.groupId = newGroupId
+		nextVC.newFlg = true
 		nextVC.callBack = { () in
 			self.callBack()
 		}

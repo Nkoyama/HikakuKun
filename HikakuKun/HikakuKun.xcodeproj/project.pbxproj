@@ -16,6 +16,7 @@
 		434D59AD24CD6E4F007FEEFC /* HikakuContentsRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434D59AC24CD6E4F007FEEFC /* HikakuContentsRealm.swift */; };
 		434D59AF24CD7286007FEEFC /* HikakuItemRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434D59AE24CD7286007FEEFC /* HikakuItemRealm.swift */; };
 		434D59B124CD88DE007FEEFC /* HikakuMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434D59B024CD88DE007FEEFC /* HikakuMainVC.swift */; };
+		434D59B424CDAC32007FEEFC /* PublicConstantValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434D59B324CDAC32007FEEFC /* PublicConstantValues.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		434D59AC24CD6E4F007FEEFC /* HikakuContentsRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HikakuContentsRealm.swift; sourceTree = "<group>"; };
 		434D59AE24CD7286007FEEFC /* HikakuItemRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HikakuItemRealm.swift; sourceTree = "<group>"; };
 		434D59B024CD88DE007FEEFC /* HikakuMainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HikakuMainVC.swift; sourceTree = "<group>"; };
+		434D59B324CDAC32007FEEFC /* PublicConstantValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicConstantValues.swift; sourceTree = "<group>"; };
 		6E59BC89F815C39CF38F7197 /* Pods-HikakuKun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HikakuKun.release.xcconfig"; path = "Target Support Files/Pods-HikakuKun/Pods-HikakuKun.release.xcconfig"; sourceTree = "<group>"; };
 		D8B131504AD174BD0970FBB2 /* Pods-HikakuKun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HikakuKun.debug.xcconfig"; path = "Target Support Files/Pods-HikakuKun/Pods-HikakuKun.debug.xcconfig"; sourceTree = "<group>"; };
 		F658453B2C01A20502952D2C /* Pods_HikakuKun.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HikakuKun.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,8 +77,9 @@
 		434D599524CD64C0007FEEFC /* HikakuKun */ = {
 			isa = PBXGroup;
 			children = (
+				434D59B224CDAC07007FEEFC /* Common */,
 				434D59AB24CD6DF9007FEEFC /* RealmClasses */,
-				434D59AA24CD6A81007FEEFC /* scenes */,
+				434D59AA24CD6A81007FEEFC /* Scenes */,
 				434D599624CD64C0007FEEFC /* AppDelegate.swift */,
 				434D599824CD64C0007FEEFC /* SceneDelegate.swift */,
 				434D599F24CD64C4007FEEFC /* Assets.xcassets */,
@@ -86,13 +89,13 @@
 			path = HikakuKun;
 			sourceTree = "<group>";
 		};
-		434D59AA24CD6A81007FEEFC /* scenes */ = {
+		434D59AA24CD6A81007FEEFC /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
 				434D599A24CD64C0007FEEFC /* ViewController.swift */,
 				434D59B024CD88DE007FEEFC /* HikakuMainVC.swift */,
 			);
-			path = scenes;
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		434D59AB24CD6DF9007FEEFC /* RealmClasses */ = {
@@ -102,6 +105,14 @@
 				434D59AE24CD7286007FEEFC /* HikakuItemRealm.swift */,
 			);
 			path = RealmClasses;
+			sourceTree = "<group>";
+		};
+		434D59B224CDAC07007FEEFC /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				434D59B324CDAC32007FEEFC /* PublicConstantValues.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		E1C9B48DDC34D01A4B21240C /* Pods */ = {
@@ -233,6 +244,7 @@
 				434D59AF24CD7286007FEEFC /* HikakuItemRealm.swift in Sources */,
 				434D59AD24CD6E4F007FEEFC /* HikakuContentsRealm.swift in Sources */,
 				434D599924CD64C0007FEEFC /* SceneDelegate.swift in Sources */,
+				434D59B424CDAC32007FEEFC /* PublicConstantValues.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

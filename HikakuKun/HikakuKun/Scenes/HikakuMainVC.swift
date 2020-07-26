@@ -8,11 +8,13 @@
 
 import UIKit
 
-class HikakuMainVC: UIViewController {
+class HikakuMainVC: UIViewController, UITextFieldDelegate {
 
 	let backBtn		= UIButton()
+	let groupNameTF	= UITextField()
 
 	var groupId		= -1
+	var newFlg		= true
 
 	//クロージャを保持するためのプロパティ
 	var callBack: (() -> Void)?
@@ -36,8 +38,25 @@ class HikakuMainVC: UIViewController {
 							   for: .touchUpInside)
 		self.backBtn.snp.makeConstraints { (make) in
 			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(10)
-			make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(0)
+			make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(10)
 		}
+
+		// gourp name
+		if( newFlg ) {
+			self.groupNameTF.text = "新しい比較"
+		} else {
+			self.groupNameTF.text = ""
+		}
+		self.groupNameTF.textAlignment = NSTextAlignment.center
+		self.groupNameTF.font = UIFont.systemFont(ofSize: 25.0)
+		self.view.addSubview(self.groupNameTF)
+		self.groupNameTF.snp.makeConstraints{ (make) in
+			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(0)
+			make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(60)
+			make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(75)
+			make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(75)
+		}
+		self.groupNameTF.delegate = self
 	}
 
 	/// back button action
@@ -49,11 +68,11 @@ class HikakuMainVC: UIViewController {
 		let yesAction = UIAlertAction(title: "Yes",
 									  style: .default,
 									  handler:{
-			(action: UIAlertAction!) -> Void in
-			self.dismiss(animated: true){
-				// 現在の画面削除 & 親画面再描画
-				self.callBack?()
-			}
+										(action: UIAlertAction!) -> Void in
+										// 現在の画面削除 & 親画面再描画
+										self.dismiss(animated: true){
+											self.callBack?()
+										}
 		})
 		// alert message：Noボタン押下
 		let noAction = UIAlertAction(title: "No",
@@ -65,5 +84,26 @@ class HikakuMainVC: UIViewController {
 		alert.addAction(yesAction)
 		alert.addAction(noAction)
 		present(alert, animated: true, completion: nil)
+	}
+
+	/// TextField以外の部分をタッチした時の処理
+	/// - Parameters:
+	///   - touches: Set<UITouch>
+	///   - event: UIEvent
+	/// - Authors: Nozomi Koyama
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+		// close keyboard
+		self.groupNameTF.resignFirstResponder()
+	}
+
+	/// returnキーが押された時にキーボードを閉じる
+	/// - Parameter textField:
+	/// - Returns: (boolean)
+	/// - Authors: Nozomi Koyama
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		// キーボードを閉じる
+		textField.resignFirstResponder()
+		keyWindow?.endEditing(true)
+		return true
 	}
 }
