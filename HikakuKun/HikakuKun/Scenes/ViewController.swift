@@ -84,9 +84,8 @@ class ViewController: UIViewController {
 	/// - Authors: Nozomi Koyama
 	@objc func addNewHikakuBtnDidTap(_ sender: UIButton) {
 		let nextVC = CompareMainVC()
-		let newGroupId = CompareItemRealm().getMaxGroupId() + 1
+		let newGroupId = Int(CompareItemRealm().getMaxGroupId()) ?? -1 + 1
 		nextVC.groupId = newGroupId
-		nextVC.newFlg = true
 		nextVC.callBack = { () in
 			self.callBack()
 		}

@@ -10,32 +10,47 @@ import Foundation
 import RealmSwift
 
 class CompareItemRealm: Object {
-	dynamic var groupId		: Int		= 0		// 比較グループID
-	dynamic var groupName	: String	= ""	// 比較グループ名
-	dynamic var item1		: String	= ""	// 比較項目①
-	dynamic var item2		: String	= ""	// 比較項目②
-	dynamic var item3		: String	= ""	// 比較項目③
-	dynamic var item4		: String	= ""	// 比較項目④
-	dynamic var item5		: String	= ""	// 比較項目⑤
-	dynamic var item6		: String	= ""	// 比較項目⑥
-	dynamic var item7		: String	= ""	// 比較項目⑦
-	dynamic var item8		: String	= ""	// 比較項目⑧
-	dynamic var item9		: String	= ""	// 比較項目⑨
-	dynamic var item10		: String	= ""	// 比較項目⑩
-	dynamic var timestamp	: String	= ""
+	@objc dynamic var groupId	: String	= ""	// 比較グループID
+	@objc dynamic var groupName	: String	= ""	// 比較グループ名
+	@objc dynamic var item1		: String	= ""	// 比較項目①
+	@objc dynamic var item2		: String	= ""	// 比較項目②
+	@objc dynamic var item3		: String	= ""	// 比較項目③
+	@objc dynamic var item4		: String	= ""	// 比較項目④
+	@objc dynamic var item5		: String	= ""	// 比較項目⑤
+	@objc dynamic var item6		: String	= ""	// 比較項目⑥
+	@objc dynamic var item7		: String	= ""	// 比較項目⑦
+	@objc dynamic var item8		: String	= ""	// 比較項目⑧
+	@objc dynamic var item9		: String	= ""	// 比較項目⑨
+	@objc dynamic var item10	: String	= ""	// 比較項目⑩
+	@objc dynamic var timestamp	: String	= ""
 
 	/// get max groupId
 	/// - Returns: max groupId(Int)
 	/// - Authors: Nozomi Koyama
-	func getMaxGroupId() -> Int {
+	func getMaxGroupId() -> String {
 		let realm = try! Realm()
-		let groupIdCount = realm.objects(CompareItemRealm.self).count
-		var maxGroupId: Int = -1
-		if( groupIdCount > 0 ) {
+		let groupCount = realm.objects(CompareItemRealm.self).count
+		var maxGroupId: String = ""
+		if( groupCount > 0 ) {
 			let max = realm.objects(CompareItemRealm.self).sorted(byKeyPath: "groupId",
 																  ascending: false).first?.groupId
-			maxGroupId = Int(max!)
+			maxGroupId = max!
 		}
 		return maxGroupId
+	}
+
+	/// get items
+	/// - Parameter groupId: groupId(Int)
+	/// - Returns: contents list (Results<CompareItemRealm>)
+	/// - Authors: Nozomi Koyama
+	func getItems(groupId: String) throws -> Results<CompareItemRealm> {
+		var items: Results<CompareItemRealm>
+		do{
+			let realm = try Realm()
+			items = realm.objects(CompareItemRealm.self).filter("groupId = %@", groupId)
+		} catch {
+			throw NSError(domain: "error", code: -1, userInfo: nil)
+		}
+		return items
 	}
 }
