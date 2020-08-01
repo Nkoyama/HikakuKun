@@ -13,9 +13,9 @@
 		434D599B24CD64C0007FEEFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434D599A24CD64C0007FEEFC /* ViewController.swift */; };
 		434D59A024CD64C4007FEEFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 434D599F24CD64C4007FEEFC /* Assets.xcassets */; };
 		434D59A324CD64C4007FEEFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 434D59A124CD64C4007FEEFC /* LaunchScreen.storyboard */; };
-		434D59AD24CD6E4F007FEEFC /* HikakuContentsRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434D59AC24CD6E4F007FEEFC /* HikakuContentsRealm.swift */; };
-		434D59AF24CD7286007FEEFC /* HikakuItemRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434D59AE24CD7286007FEEFC /* HikakuItemRealm.swift */; };
-		434D59B124CD88DE007FEEFC /* HikakuMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434D59B024CD88DE007FEEFC /* HikakuMainVC.swift */; };
+		434D59AD24CD6E4F007FEEFC /* CompareContentsRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434D59AC24CD6E4F007FEEFC /* CompareContentsRealm.swift */; };
+		434D59AF24CD7286007FEEFC /* CompareItemRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434D59AE24CD7286007FEEFC /* CompareItemRealm.swift */; };
+		434D59B124CD88DE007FEEFC /* CompareMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434D59B024CD88DE007FEEFC /* CompareMainVC.swift */; };
 		434D59B424CDAC32007FEEFC /* PublicConstantValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434D59B324CDAC32007FEEFC /* PublicConstantValues.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,9 +27,9 @@
 		434D599F24CD64C4007FEEFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		434D59A224CD64C4007FEEFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		434D59A424CD64C4007FEEFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		434D59AC24CD6E4F007FEEFC /* HikakuContentsRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HikakuContentsRealm.swift; sourceTree = "<group>"; };
-		434D59AE24CD7286007FEEFC /* HikakuItemRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HikakuItemRealm.swift; sourceTree = "<group>"; };
-		434D59B024CD88DE007FEEFC /* HikakuMainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HikakuMainVC.swift; sourceTree = "<group>"; };
+		434D59AC24CD6E4F007FEEFC /* CompareContentsRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareContentsRealm.swift; sourceTree = "<group>"; };
+		434D59AE24CD7286007FEEFC /* CompareItemRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareItemRealm.swift; sourceTree = "<group>"; };
+		434D59B024CD88DE007FEEFC /* CompareMainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareMainVC.swift; sourceTree = "<group>"; };
 		434D59B324CDAC32007FEEFC /* PublicConstantValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicConstantValues.swift; sourceTree = "<group>"; };
 		6E59BC89F815C39CF38F7197 /* Pods-HikakuKun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HikakuKun.release.xcconfig"; path = "Target Support Files/Pods-HikakuKun/Pods-HikakuKun.release.xcconfig"; sourceTree = "<group>"; };
 		D8B131504AD174BD0970FBB2 /* Pods-HikakuKun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HikakuKun.debug.xcconfig"; path = "Target Support Files/Pods-HikakuKun/Pods-HikakuKun.debug.xcconfig"; sourceTree = "<group>"; };
@@ -93,7 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				434D599A24CD64C0007FEEFC /* ViewController.swift */,
-				434D59B024CD88DE007FEEFC /* HikakuMainVC.swift */,
+				434D59B024CD88DE007FEEFC /* CompareMainVC.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -101,8 +101,8 @@
 		434D59AB24CD6DF9007FEEFC /* RealmClasses */ = {
 			isa = PBXGroup;
 			children = (
-				434D59AE24CD7286007FEEFC /* HikakuItemRealm.swift */,
-				434D59AC24CD6E4F007FEEFC /* HikakuContentsRealm.swift */,
+				434D59AE24CD7286007FEEFC /* CompareItemRealm.swift */,
+				434D59AC24CD6E4F007FEEFC /* CompareContentsRealm.swift */,
 			);
 			path = RealmClasses;
 			sourceTree = "<group>";
@@ -240,9 +240,9 @@
 			files = (
 				434D599B24CD64C0007FEEFC /* ViewController.swift in Sources */,
 				434D599724CD64C0007FEEFC /* AppDelegate.swift in Sources */,
-				434D59B124CD88DE007FEEFC /* HikakuMainVC.swift in Sources */,
-				434D59AF24CD7286007FEEFC /* HikakuItemRealm.swift in Sources */,
-				434D59AD24CD6E4F007FEEFC /* HikakuContentsRealm.swift in Sources */,
+				434D59B124CD88DE007FEEFC /* CompareMainVC.swift in Sources */,
+				434D59AF24CD7286007FEEFC /* CompareItemRealm.swift in Sources */,
+				434D59AD24CD6E4F007FEEFC /* CompareContentsRealm.swift in Sources */,
 				434D599924CD64C0007FEEFC /* SceneDelegate.swift in Sources */,
 				434D59B424CDAC32007FEEFC /* PublicConstantValues.swift in Sources */,
 			);

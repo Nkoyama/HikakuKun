@@ -30,10 +30,10 @@ class ViewController: UIViewController {
 
 		// 表示用データ取得
 		let realm = try! Realm()
-		let allItems = realm.objects(HikakuItemRealm.self)
+		let allItems = realm.objects(CompareItemRealm.self)
 		for item in allItems {
 			var displayText = item.groupName
-			let contents = realm.objects(HikakuContentsRealm.self).filter("groupID="+String(item.groupId))
+			let contents = realm.objects(CompareContentsRealm.self).filter("groupID="+String(item.groupId))
 			var i = 0
 			for content in contents {
 				if( i == 0 ) {
@@ -83,13 +83,13 @@ class ViewController: UIViewController {
 	/// - Parameter sender: UIButton
 	/// - Authors: Nozomi Koyama
 	@objc func addNewHikakuBtnDidTap(_ sender: UIButton) {
-		let nextVC = HikakuMainVC()
+		let nextVC = CompareMainVC()
 		let realm = try! Realm()
 		var newGroupId: Int = 0
 		if( count == 0 ){
 			newGroupId = 0
 		} else {
-			let maxGroupId = realm.objects(HikakuItemRealm.self).sorted(byKeyPath: "groupId", ascending: false).first?.groupId
+			let maxGroupId = realm.objects(CompareItemRealm.self).sorted(byKeyPath: "groupId", ascending: false).first?.groupId
 			newGroupId = Int(maxGroupId!) + 1
 		}
 		nextVC.groupId = newGroupId

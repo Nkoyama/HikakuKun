@@ -1,5 +1,5 @@
 //
-//  HikakuMainVC.swift
+//  CompareMainVC.swift
 //  HikakuKun
 //
 //  Created by Nozomi Koyama on 2020/07/26.
@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import RealmSwift
 
-class HikakuMainVC: UIViewController, UITextFieldDelegate {
+class CompareMainVC: UIViewController, UITextFieldDelegate {
 
 	let backBtn		= UIButton()
 	let groupNameTF	= UITextField()
@@ -19,7 +19,7 @@ class HikakuMainVC: UIViewController, UITextFieldDelegate {
 	var groupId		= -1
 	var groupName	= ""
 	var newFlg		= true
-	var hikakuNum	= 1
+	var compareNum	= 1
 
 	let SCREEN_SIZE		= UIScreen.main.bounds.size
 
@@ -62,25 +62,25 @@ class HikakuMainVC: UIViewController, UITextFieldDelegate {
 			make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(10)
 		}
 
-		let items: Results<HikakuItemRealm>
-		let contents: Results<HikakuContentsRealm>
+		/* get items and contents */
+		let items: Results<CompareItemRealm>
+		let contents: Results<CompareContentsRealm>
 		if( !newFlg ) {
-			/* get items and contents */
 			let realm = try! Realm()
-			items = realm.objects(HikakuItemRealm.self).filter("groupID="+String(groupId))
+			items = realm.objects(CompareItemRealm.self).filter("groupID="+String(groupId))
 			groupName = String(items.first!.groupName)
-			contents = realm.objects(HikakuContentsRealm.self).filter("groupID="+String(groupId))
+			contents = realm.objects(CompareContentsRealm.self).filter("groupID="+String(groupId))
 			//update contents num
 			if( contents.count > 1 ) {
-				hikakuNum = contents.count
+				compareNum = contents.count
 			}
 		}
 
 		// calc width
 		let itemWidth = (SCREEN_SIZE.width - 20) / 6
 		var eachWidth = (SCREEN_SIZE.width - 20) - itemWidth
-		if( hikakuNum < 5 ) {
-			eachWidth = (SCREEN_SIZE.width - 20 - itemWidth) / CGFloat(hikakuNum)
+		if( compareNum < 5 ) {
+			eachWidth = (SCREEN_SIZE.width - 20 - itemWidth) / CGFloat(compareNum)
 		} else {
 			eachWidth = (SCREEN_SIZE.width - 20 - itemWidth) / 5
 		}

@@ -1,5 +1,5 @@
 //
-//  HikakuRealm.swift
+//  CompareRealm.swift
 //  HikakuKun
 //
 //  Created by Nozomi Koyama on 2020/07/26.
@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class HikakuContentsRealm: Object {
+class CompareContentsRealm: Object {
 	dynamic var groupId		: Int		= 0		// 比較グループID
 	dynamic var id			: Int		= 0		// 比較グループ内ID
 	dynamic var name		: String	= ""	// 比較対象名前

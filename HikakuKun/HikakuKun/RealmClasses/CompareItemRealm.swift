@@ -1,6 +1,6 @@
 //
-//  HikakuItemRealm.swift
-//  HikakuKun
+//  CompareItemRealm.swift
+//  hikakuKun
 //
 //  Created by Nozomi Koyama on 2020/07/26.
 //  Copyright © 2020 Nozomi Koyama. All rights reserved.
@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class HikakuItemRealm: Object {
+class CompareItemRealm: Object {
 	dynamic var groupId		: Int		= 0		// 比較グループID
 	dynamic var groupName	: String	= ""	// 比較グループ名
 	dynamic var item1		: String	= ""	// 比較項目①
