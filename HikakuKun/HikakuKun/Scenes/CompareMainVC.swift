@@ -17,6 +17,9 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 	let saveBtn		= UIButton()
 	let nameTF_1	= UITextField()
 	let nameTF_2	= UITextField()
+	let nameTF_3	= UITextField()
+	let nameTF_4	= UITextField()
+	let nameTF_5	= UITextField()
 	var itemsSV		= UIScrollView()
 
 	var groupId		= -1
@@ -71,9 +74,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 		var contents: Results<CompareContentsRealm>!
 		do{
 			items = try CompareItemRealm().getItems(groupId: String(groupId))
-			print(items!)
 			contents = try CompareContentsRealm().getContentsList(groupId: String(groupId))
-			print(contents!)
 			//update contents num
 			if( contents.count > 1 ) {
 				compareNum = contents.count
@@ -165,33 +166,79 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 		}
 		self.nameTF_2.delegate = self
 
-		// 3以降
+		// 3
 		if( contents.count >= 3 ) {
-			let nameTF = UITextField()
-			for colNum in 3...contents.count {
-				let content = contents.filter("id = %@", String(colNum-1)).first
-				if( (content?.name.count)! > 0 ) {
-					nameTF.text = content?.name
-				} else {
-					nameTF.text = "新規比較対象"
-				}
-				nameTF.textAlignment = NSTextAlignment.center
-				nameTF.adjustsFontSizeToFitWidth = true
-				nameTF.backgroundColor = UIColor.init(red: 0/255,
-													  green: 30/255,
-													  blue: 90/255,
-													  alpha: 0.5)
-				nameTF.layer.borderColor = UIColor.black.cgColor
-				nameTF.layer.borderWidth = 0.5
-				self.view.addSubview(nameTF)
-				nameTF.snp.makeConstraints{ (make) in
-					make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H)
-					make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + NAME_H)
-					make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(CGFloat(colNum-1)*eachWidth + itemWidth)
-					make.right.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(CGFloat(colNum)*eachWidth + itemWidth)
-				}
-				nameTF.delegate = self
+			if( (contents.filter("id = %@", "2").first?.name.count)! > 0 ) {
+				self.nameTF_3.text = contents.first?.name
+			} else {
+				self.nameTF_3.text = "新規比較対象"
 			}
+			self.nameTF_3.textAlignment = NSTextAlignment.center
+			self.nameTF_3.adjustsFontSizeToFitWidth = true
+			self.nameTF_3.backgroundColor = UIColor.init(red: 242/255,
+														 green: 279/255,
+														 blue: 61/255,
+														 alpha: 0.5)
+			self.nameTF_3.layer.borderColor = UIColor.black.cgColor
+			self.nameTF_3.layer.borderWidth = 0.5
+			self.view.addSubview(self.nameTF_3)
+			self.nameTF_3.snp.makeConstraints{ (make) in
+				make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H)
+				make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + NAME_H)
+				make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(2*eachWidth + itemWidth)
+				make.right.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(3*eachWidth + itemWidth)
+			}
+			self.nameTF_3.delegate = self
+		}
+
+		// 4
+		if( contents.count >= 4 ) {
+			if( (contents.filter("id = %@", "3").first?.name.count)! > 0 ) {
+				self.nameTF_4.text = contents.first?.name
+			} else {
+				self.nameTF_4.text = "新規比較対象"
+			}
+			self.nameTF_4.textAlignment = NSTextAlignment.center
+			self.nameTF_4.adjustsFontSizeToFitWidth = true
+			self.nameTF_4.backgroundColor = UIColor.init(red: 242/255,
+														 green: 279/255,
+														 blue: 61/255,
+														 alpha: 0.5)
+			self.nameTF_4.layer.borderColor = UIColor.black.cgColor
+			self.nameTF_4.layer.borderWidth = 0.5
+			self.view.addSubview(self.nameTF_4)
+			self.nameTF_4.snp.makeConstraints{ (make) in
+				make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H)
+				make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + NAME_H)
+				make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(3*eachWidth + itemWidth)
+				make.right.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(4*eachWidth + itemWidth)
+			}
+			self.nameTF_4.delegate = self
+		}
+
+		// 5
+		if( contents.count >= 5 ) {
+			if( (contents.filter("id = %@", "4").first?.name.count)! > 0 ) {
+				self.nameTF_5.text = contents.first?.name
+			} else {
+				self.nameTF_5.text = "新規比較対象"
+			}
+			self.nameTF_5.textAlignment = NSTextAlignment.center
+			self.nameTF_5.adjustsFontSizeToFitWidth = true
+			self.nameTF_5.backgroundColor = UIColor.init(red: 242/255,
+														 green: 279/255,
+														 blue: 61/255,
+														 alpha: 0.5)
+			self.nameTF_5.layer.borderColor = UIColor.black.cgColor
+			self.nameTF_5.layer.borderWidth = 0.5
+			self.view.addSubview(self.nameTF_5)
+			self.nameTF_5.snp.makeConstraints{ (make) in
+				make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H)
+				make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + NAME_H)
+				make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(4*eachWidth + itemWidth)
+				make.right.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(5*eachWidth + itemWidth)
+			}
+			self.nameTF_5.delegate = self
 		}
 
 		// items(scroll view)
@@ -250,6 +297,9 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 		self.groupNameTF.resignFirstResponder()
 		self.nameTF_1.resignFirstResponder()
 		self.nameTF_2.resignFirstResponder()
+		self.nameTF_3.resignFirstResponder()
+		self.nameTF_4.resignFirstResponder()
+		self.nameTF_5.resignFirstResponder()
 	}
 
 	/// returnキーが押された時にキーボードを閉じる
