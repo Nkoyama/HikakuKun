@@ -14,6 +14,7 @@ class HikakuMainVC: UIViewController, UITextFieldDelegate {
 
 	let backBtn		= UIButton()
 	let groupNameTF	= UITextField()
+	let saveBtn		= UIButton()
 
 	var groupId		= -1
 	var groupName	= ""
@@ -45,6 +46,20 @@ class HikakuMainVC: UIViewController, UITextFieldDelegate {
 		self.backBtn.snp.makeConstraints { (make) in
 			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(10)
 			make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(10)
+		}
+
+		// save button
+		self.saveBtn.setTitle("保存", for: .normal)
+		self.saveBtn.setTitleColor(UIColor.blue, for: .normal)
+		self.saveBtn.backgroundColor = UIColor.clear
+		self.saveBtn.layer.borderColor = UIColor.clear.cgColor
+		self.view.addSubview(self.saveBtn)
+		self.saveBtn.addTarget(self,
+							   action: #selector(self.saveBtnDidTap(_:)),
+							   for: .touchUpInside)
+		self.saveBtn.snp.makeConstraints { (make) in
+			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(10)
+			make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(10)
 		}
 
 		let items: Results<HikakuItemRealm>
@@ -114,6 +129,13 @@ class HikakuMainVC: UIViewController, UITextFieldDelegate {
 		alert.addAction(yesAction)
 		alert.addAction(noAction)
 		present(alert, animated: true, completion: nil)
+	}
+	
+	/// save button action
+	/// - Parameter sender: UIButton
+	/// - Authors: Nozomi Koyama
+	@objc func saveBtnDidTap(_ sender: UIButton) {
+		
 	}
 
 	/// TextField以外の部分をタッチした時の処理
