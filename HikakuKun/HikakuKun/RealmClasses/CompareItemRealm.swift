@@ -30,7 +30,7 @@ class CompareItemRealm: Object {
 	func getMaxGroupId() -> Int {
 		let realm = try! Realm()
 		let groupIdCount = realm.objects(CompareItemRealm.self).count
-		var maxGroupId: Int = 0
+		var maxGroupId: Int = -1
 		if( groupIdCount > 0 ) {
 			let max = realm.objects(CompareItemRealm.self).sorted(byKeyPath: "groupId",
 																  ascending: false).first?.groupId
