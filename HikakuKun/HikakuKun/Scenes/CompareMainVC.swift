@@ -20,15 +20,28 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 	let nameTF_3	= UITextField()
 	let nameTF_4	= UITextField()
 	let nameTF_5	= UITextField()
-	var itemsSV		= UIScrollView()
+
+	let itemsSV		= UIScrollView()
+	let itemTF_01	= UITextField()
+	let itemTF_02	= UITextField()
+	let itemTF_03	= UITextField()
+	let itemTF_04	= UITextField()
+	let itemTF_05	= UITextField()
+	let itemTF_06	= UITextField()
+	let itemTF_07	= UITextField()
+	let itemTF_08	= UITextField()
+	let itemTF_09	= UITextField()
+	let itemTF_10	= UITextField()
 
 	var groupId		= -1
 	var compareNum	= 1
 
-	let SCREEN_SIZE	= UIScreen.main.bounds.size
-	let TITLE_H		= 50
-	let NAME_H		= 30
-	let BOTTOM_H	= 50
+	let SCREEN_SIZE			= UIScreen.main.bounds.size
+	let TITLE_H				= 50
+	let NAME_H				= 30
+	let BOTTOM_H			= 50
+	let ITEM_H				= 30
+	let RIGHT_W: CGFloat	= 30.0
 
 	//クロージャを保持するためのプロパティ
 	var callBack: (() -> Void)?
@@ -84,21 +97,19 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 		}
 
 		// calc width
-		let itemWidth = (SCREEN_SIZE.width - 30) / 6
-		var eachWidth = (SCREEN_SIZE.width - 30) - itemWidth
+		let itemWidth = (SCREEN_SIZE.width - RIGHT_W) / 6
+		var eachWidth = (SCREEN_SIZE.width - itemWidth) / 5
 		if( compareNum <= 2 ) {
-			eachWidth = (SCREEN_SIZE.width - 30 - itemWidth) / 2
+			eachWidth = (SCREEN_SIZE.width - RIGHT_W - itemWidth) / 2
 		} else if( compareNum < 5 ) {
-			eachWidth = (SCREEN_SIZE.width - 30 - itemWidth) / CGFloat(compareNum)
-		} else {
-			eachWidth = (SCREEN_SIZE.width - 30 - itemWidth) / 5
+			eachWidth = (SCREEN_SIZE.width - RIGHT_W - itemWidth) / CGFloat(compareNum)
 		}
 
 		// gourp name
 		if( items.count > 0 ) {
 			self.groupNameTF.text = items.first?.groupName
 		} else {
-			self.groupNameTF.text = "タイトル"
+			self.groupNameTF.placeholder = "タイトル"
 		}
 		self.groupNameTF.textAlignment = NSTextAlignment.center
 		self.groupNameTF.font = UIFont.systemFont(ofSize: 25.0)
@@ -117,10 +128,10 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 			if( (contents.first?.name.count)! > 0 ) {
 				self.nameTF_1.text = contents.first?.name
 			} else {
-				self.nameTF_1.text = "比較対象名を入力"
+				self.nameTF_1.placeholder = "比較対象名を入力"
 			}
 		} else {
-			self.nameTF_1.text = "比較対象名を入力"
+			self.nameTF_1.placeholder = "比較対象名を入力"
 		}
 		self.nameTF_1.textAlignment = NSTextAlignment.center
 		self.nameTF_1.adjustsFontSizeToFitWidth = true
@@ -144,10 +155,10 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 			if( (contents.filter("id = %@", "1").first?.name.count)! > 0 ) {
 				self.nameTF_2.text = contents.first?.name
 			} else {
-				self.nameTF_2.text = ""
+				self.nameTF_2.placeholder = "比較対象名を入力"
 			}
 		} else {
-			self.nameTF_2.text = ""
+			self.nameTF_2.placeholder = "比較対象名を入力"
 		}
 		self.nameTF_2.textAlignment = NSTextAlignment.center
 		self.nameTF_2.adjustsFontSizeToFitWidth = true
@@ -171,7 +182,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 			if( (contents.filter("id = %@", "2").first?.name.count)! > 0 ) {
 				self.nameTF_3.text = contents.first?.name
 			} else {
-				self.nameTF_3.text = "新規比較対象"
+				self.nameTF_3.placeholder = "比較対象名を入力"
 			}
 			self.nameTF_3.textAlignment = NSTextAlignment.center
 			self.nameTF_3.adjustsFontSizeToFitWidth = true
@@ -196,7 +207,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 			if( (contents.filter("id = %@", "3").first?.name.count)! > 0 ) {
 				self.nameTF_4.text = contents.first?.name
 			} else {
-				self.nameTF_4.text = "新規比較対象"
+				self.nameTF_4.placeholder = "比較対象名を入力"
 			}
 			self.nameTF_4.textAlignment = NSTextAlignment.center
 			self.nameTF_4.adjustsFontSizeToFitWidth = true
@@ -221,7 +232,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 			if( (contents.filter("id = %@", "4").first?.name.count)! > 0 ) {
 				self.nameTF_5.text = contents.first?.name
 			} else {
-				self.nameTF_5.text = "新規比較対象"
+				self.nameTF_5.placeholder = "比較対象名を入力"
 			}
 			self.nameTF_5.textAlignment = NSTextAlignment.center
 			self.nameTF_5.adjustsFontSizeToFitWidth = true
@@ -241,16 +252,117 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 			self.nameTF_5.delegate = self
 		}
 
-		// items(scroll view)
-		self.itemsSV.layer.borderColor = UIColor.black.cgColor
-		self.itemsSV.layer.borderWidth = 0.5
+		/* items(scroll view) */
+		// item names
+		if( items.first != nil ) {
+			if( (items.first?.item1.count)! > 0 ) {
+				self.itemTF_01.text = items.first?.item1
+			} else {
+				self.itemTF_01.placeholder = "比較項目1"
+			}
+		} else {
+			self.itemTF_01.placeholder = "比較項目1"
+		}
+		self.itemTF_01.layer.borderColor = UIColor.black.cgColor
+		self.itemTF_01.layer.borderWidth = 0.5
+		self.itemTF_01.adjustsFontSizeToFitWidth = true
+		self.itemsSV.addSubview(self.itemTF_01)
+		self.itemTF_01.snp.makeConstraints{ (make) in
+			make.top.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top).inset(0)
+			make.bottom.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top).inset(ITEM_H)
+			make.left.equalToSuperview()
+			make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left).inset(itemWidth)
+		}
+
+		if( items.first != nil ) {
+			for itemNum in 1..<10 {
+				var itemNameTF = UITextField()
+				switch itemNum {
+					case 1:
+						itemNameTF = itemTF_02
+						if( (items.first?.item2.count)! > 0 ) {
+							itemNameTF.text = items.first?.item2
+							self.itemsSV.addSubview(itemNameTF)
+						}
+					case 2:
+						itemNameTF = itemTF_03
+						if( (items.first?.item3.count)! > 0 ) {
+							itemNameTF.text = items.first?.item3
+							self.itemsSV.addSubview(itemNameTF)
+						}
+					case 3:
+						itemNameTF = itemTF_04
+						if( (items.first?.item4.count)! > 0 ) {
+							itemNameTF.text = items.first?.item4
+							self.itemsSV.addSubview(itemNameTF)
+						}
+					case 4:
+						itemNameTF = itemTF_05
+						if( (items.first?.item5.count)! > 0 ) {
+							itemNameTF.text = items.first?.item5
+							self.itemsSV.addSubview(itemNameTF)
+						}
+					case 5:
+						itemNameTF = itemTF_06
+						if( (items.first?.item6.count)! > 0 ) {
+							itemNameTF.text = items.first?.item6
+							self.itemsSV.addSubview(itemNameTF)
+						}
+					case 6:
+						itemNameTF = itemTF_07
+						if( (items.first?.item7.count)! > 0 ) {
+							itemNameTF.text = items.first?.item7
+							self.itemsSV.addSubview(itemNameTF)
+						}
+					case 7:
+						itemNameTF = itemTF_08
+						if( (items.first?.item8.count)! > 0 ) {
+							itemNameTF.text = items.first?.item8
+							self.itemsSV.addSubview(itemNameTF)
+						}
+					case 8:
+						itemNameTF = itemTF_09
+						if( (items.first?.item9.count)! > 0 ) {
+							itemNameTF.text = items.first?.item9
+							self.itemsSV.addSubview(itemNameTF)
+						}
+					case 9:
+						itemNameTF = itemTF_10
+						if( (items.first?.item10.count)! > 0 ) {
+							itemNameTF.text = items.first?.item10
+							self.itemsSV.addSubview(itemNameTF)
+						}
+					default:
+						itemNameTF = itemTF_01
+						if( (items.first?.item1.count)! > 0 ) {
+							itemNameTF.text = items.first?.item1
+							self.itemsSV.addSubview(itemNameTF)
+						}
+				}
+				itemNameTF.layer.borderColor = UIColor.black.cgColor
+				itemNameTF.layer.borderWidth = 0.5
+				itemNameTF.adjustsFontSizeToFitWidth = true
+				itemNameTF.snp.makeConstraints{ (make) in
+					make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(itemNum*ITEM_H)
+					make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset((itemNum+1)*ITEM_H)
+					make.left.equalToSuperview()
+					make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(itemWidth)
+				}
+			}
+		}
+
 		self.view.addSubview(self.itemsSV)
 		self.itemsSV.snp.makeConstraints{ (make) in
 			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + NAME_H)
 			make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(BOTTOM_H)
 			make.left.equalToSuperview()
-			make.right.equalToSuperview()
+			if( contents.count >= 5 ) {
+				make.right.equalToSuperview()
+			} else {
+				make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(RIGHT_W)
+			}
 		}
+		/* items(scroll view) end */
 	}
 
 	/// back button action
