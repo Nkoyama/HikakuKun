@@ -25,4 +25,19 @@ class CompareContentsRealm: Object {
 	dynamic var content10	: String	= ""	// 比較項目⑩内容
 	dynamic var memo		: String	= ""
 	dynamic var timestamp	: String	= ""
+	
+	/// get max id
+	/// - Returns: max id(Int)
+	/// - Authors: Nozomi Koyama
+	func getMaxId() -> Int {
+		let realm = try! Realm()
+		let idCount = realm.objects(CompareContentsRealm.self).count
+		var maxId: Int = 0
+		if( idCount > 0 ) {
+			let max = realm.objects(CompareContentsRealm.self).sorted(byKeyPath: "id",
+																	  ascending: false).first?.id
+			maxId = Int(max!)
+		}
+		return maxId
+	}
 }

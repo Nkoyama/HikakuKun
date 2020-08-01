@@ -23,4 +23,19 @@ class CompareItemRealm: Object {
 	dynamic var item9		: String	= ""	// 比較項目⑨
 	dynamic var item10		: String	= ""	// 比較項目⑩
 	dynamic var timestamp	: String	= ""
+
+	/// get max groupId
+	/// - Returns: max groupId(Int)
+	/// - Authors: Nozomi Koyama
+	func getMaxGroupId() -> Int {
+		let realm = try! Realm()
+		let groupIdCount = realm.objects(CompareItemRealm.self).count
+		var maxGroupId: Int = 0
+		if( groupIdCount > 0 ) {
+			let max = realm.objects(CompareItemRealm.self).sorted(byKeyPath: "groupId",
+																  ascending: false).first?.groupId
+			maxGroupId = Int(max!)
+		}
+		return maxGroupId
+	}
 }
