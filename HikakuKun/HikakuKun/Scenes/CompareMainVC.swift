@@ -177,83 +177,61 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 		}
 		self.nameTF_2.delegate = self
 
-		// 3
+		// 3~
 		if( contents.count >= 3 ) {
-			if( (contents.filter("id = %@", "2").first?.name.count)! > 0 ) {
-				self.nameTF_3.text = contents.first?.name
-			} else {
-				self.nameTF_3.placeholder = "比較対象名を入力"
+			for nameNum in 3...contents.count {
+				var nameTF = UITextField()
+				switch nameNum {
+					case 3:
+						nameTF = self.nameTF_3
+						if( (contents.filter("id = %@", "2").first?.name.count)! > 0 ) {
+							nameTF.text = contents.first?.name
+							self.view.addSubview(nameTF)
+						} else {
+							nameTF.placeholder = "比較対象名を入力"
+						}
+					case 4:
+						nameTF = self.nameTF_4
+						if( (contents.filter("id = %@", "3").first?.name.count)! > 0 ) {
+							nameTF.text = contents.first?.name
+							self.view.addSubview(nameTF)
+						} else {
+							nameTF.placeholder = "比較対象名を入力"
+						}
+					case 5:
+						nameTF = self.nameTF_5
+						if( (contents.filter("id = %@", "4").first?.name.count)! > 0 ) {
+							nameTF.text = contents.first?.name
+							self.view.addSubview(nameTF)
+						} else {
+							nameTF.placeholder = "比較対象名を入力"
+						}
+					default:
+						break
+				}
+				nameTF.textAlignment = NSTextAlignment.center
+				nameTF.adjustsFontSizeToFitWidth = true
+				nameTF.backgroundColor = UIColor.init(red: 242/255,
+													  green: 279/255,
+													  blue: 61/255,
+													  alpha: 0.5)
+				nameTF.layer.borderColor = UIColor.black.cgColor
+				nameTF.layer.borderWidth = 0.5
+				nameTF.snp.makeConstraints{ (make) in
+					make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H)
+					make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+						.inset(TITLE_H + NAME_H)
+					make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left)
+						.inset(CGFloat(nameNum-1) * eachWidth + itemWidth)
+					make.right.equalTo(self.view.safeAreaLayoutGuide.snp.left)
+						.inset(CGFloat(nameNum) * eachWidth + itemWidth)
+				}
+				nameTF.delegate = self
 			}
-			self.nameTF_3.textAlignment = NSTextAlignment.center
-			self.nameTF_3.adjustsFontSizeToFitWidth = true
-			self.nameTF_3.backgroundColor = UIColor.init(red: 242/255,
-														 green: 279/255,
-														 blue: 61/255,
-														 alpha: 0.5)
-			self.nameTF_3.layer.borderColor = UIColor.black.cgColor
-			self.nameTF_3.layer.borderWidth = 0.5
-			self.view.addSubview(self.nameTF_3)
-			self.nameTF_3.snp.makeConstraints{ (make) in
-				make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H)
-				make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + NAME_H)
-				make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(2*eachWidth + itemWidth)
-				make.right.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(3*eachWidth + itemWidth)
-			}
-			self.nameTF_3.delegate = self
-		}
-
-		// 4
-		if( contents.count >= 4 ) {
-			if( (contents.filter("id = %@", "3").first?.name.count)! > 0 ) {
-				self.nameTF_4.text = contents.first?.name
-			} else {
-				self.nameTF_4.placeholder = "比較対象名を入力"
-			}
-			self.nameTF_4.textAlignment = NSTextAlignment.center
-			self.nameTF_4.adjustsFontSizeToFitWidth = true
-			self.nameTF_4.backgroundColor = UIColor.init(red: 242/255,
-														 green: 279/255,
-														 blue: 61/255,
-														 alpha: 0.5)
-			self.nameTF_4.layer.borderColor = UIColor.black.cgColor
-			self.nameTF_4.layer.borderWidth = 0.5
-			self.view.addSubview(self.nameTF_4)
-			self.nameTF_4.snp.makeConstraints{ (make) in
-				make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H)
-				make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + NAME_H)
-				make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(3*eachWidth + itemWidth)
-				make.right.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(4*eachWidth + itemWidth)
-			}
-			self.nameTF_4.delegate = self
-		}
-
-		// 5
-		if( contents.count >= 5 ) {
-			if( (contents.filter("id = %@", "4").first?.name.count)! > 0 ) {
-				self.nameTF_5.text = contents.first?.name
-			} else {
-				self.nameTF_5.placeholder = "比較対象名を入力"
-			}
-			self.nameTF_5.textAlignment = NSTextAlignment.center
-			self.nameTF_5.adjustsFontSizeToFitWidth = true
-			self.nameTF_5.backgroundColor = UIColor.init(red: 242/255,
-														 green: 279/255,
-														 blue: 61/255,
-														 alpha: 0.5)
-			self.nameTF_5.layer.borderColor = UIColor.black.cgColor
-			self.nameTF_5.layer.borderWidth = 0.5
-			self.view.addSubview(self.nameTF_5)
-			self.nameTF_5.snp.makeConstraints{ (make) in
-				make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H)
-				make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + NAME_H)
-				make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(4*eachWidth + itemWidth)
-				make.right.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(5*eachWidth + itemWidth)
-			}
-			self.nameTF_5.delegate = self
 		}
 
 		/* items(scroll view) */
-		// item names
+		// item name 1
 		if( items.first != nil ) {
 			if( (items.first?.item1.count)! > 0 ) {
 				self.itemTF_01.text = items.first?.item1
@@ -273,7 +251,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 			make.left.equalToSuperview()
 			make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left).inset(itemWidth)
 		}
-
+		// item names 2~
 		if( items.first != nil ) {
 			for itemNum in 1..<10 {
 				var itemNameTF = UITextField()
@@ -333,11 +311,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 							self.itemsSV.addSubview(itemNameTF)
 						}
 					default:
-						itemNameTF = itemTF_01
-						if( (items.first?.item1.count)! > 0 ) {
-							itemNameTF.text = items.first?.item1
-							self.itemsSV.addSubview(itemNameTF)
-						}
+						break
 				}
 				itemNameTF.layer.borderColor = UIColor.black.cgColor
 				itemNameTF.layer.borderWidth = 0.5
