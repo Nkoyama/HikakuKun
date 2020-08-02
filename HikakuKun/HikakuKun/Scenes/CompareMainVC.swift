@@ -10,16 +10,17 @@ import UIKit
 import SnapKit
 import RealmSwift
 
-class CompareMainVC: UIViewController, UITextFieldDelegate {
+class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
 
-	let backBtn		= UIButton()
-	let groupNameTF	= UITextField()
-	let saveBtn		= UIButton()
-	let nameTF_1	= UITextField()
-	let nameTF_2	= UITextField()
-	let nameTF_3	= UITextField()
-	let nameTF_4	= UITextField()
-	let nameTF_5	= UITextField()
+	let backBtn			= UIButton()
+	let groupNameTF		= UITextField()
+	let saveBtn			= UIButton()
+	let nameTF_1		= UITextField()
+	let nameTF_2		= UITextField()
+	let nameTF_3		= UITextField()
+	let nameTF_4		= UITextField()
+	let nameTF_5		= UITextField()
+	let addNewNameBtn	= UIButton()
 
 	let itemsSV			= UIScrollView()
 	let itemTF_01		= UITextField()
@@ -118,12 +119,17 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 
 		// calc width
 		let itemWidth = (SAFE_AREA_WIDTH - RIGHT_W) / 6
-		print(itemWidth)
 		var eachWidth = (SAFE_AREA_WIDTH - itemWidth) / 5
 		if( compareNum <= 2 ) {
 			eachWidth = (SAFE_AREA_WIDTH - RIGHT_W - itemWidth) / 2
-		} else if( compareNum < 5 ) {
-			eachWidth = (SAFE_AREA_WIDTH - RIGHT_W - itemWidth) / CGFloat(compareNum)
+		} else if( SAFE_AREA_WIDTH >= 800 ) {
+			if( compareNum < 5 ) {
+				eachWidth = (SAFE_AREA_WIDTH - RIGHT_W - itemWidth) / CGFloat(compareNum)
+			}
+		} else {
+			if( compareNum < 4 ) {
+				eachWidth = (SAFE_AREA_WIDTH - RIGHT_W - itemWidth) / CGFloat(compareNum)
+			}
 		}
 
 		// gourp name
@@ -251,6 +257,27 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 			}
 		}
 
+		// add new name button
+		self.addNewNameBtn.setTitle("＋", for: .normal)
+		self.addNewNameBtn.setTitleColor(UIColor.blue, for: .normal)
+		self.addNewNameBtn.backgroundColor = UIColor.clear
+		self.addNewNameBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20.0)
+		self.addNewNameBtn.titleLabel?.adjustsFontSizeToFitWidth = true
+		self.addNewNameBtn.titleLabel?.baselineAdjustment = .alignCenters
+		self.addNewNameBtn.layer.borderColor = UIColor.blue.cgColor
+		self.addNewNameBtn.layer.borderWidth = 1.0
+		self.addNewNameBtn.layer.cornerRadius = 12.0
+		self.view.addSubview(self.addNewNameBtn)
+		self.addNewNameBtn.addTarget(self,
+									 action: #selector(self.addNewNameBtnDidTap(_:)),
+									 for: .touchUpInside)
+		self.addNewNameBtn.snp.makeConstraints { (make) in
+			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + 3)
+			make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + 27)
+			make.left.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(27)
+			make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(3)
+		}
+
 		/* items(scroll view) */
 		// item 1
 		if( items.first != nil ) {
@@ -274,6 +301,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 			make.left.equalToSuperview()
 			make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left).inset(itemWidth)
 		}
+		self.itemTF_01.delegate = self
 		self.contentTF_1_01.layer.borderColor = UIColor.black.cgColor
 		self.contentTF_1_01.layer.borderWidth = 0.5
 		self.contentTF_1_01.adjustsFontSizeToFitWidth = true
@@ -285,6 +313,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 			make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
 				.inset(itemWidth + eachWidth)
 		}
+		self.contentTF_1_01.delegate = self
 		self.contentTF_2_01.layer.borderColor = UIColor.black.cgColor
 		self.contentTF_2_01.layer.borderWidth = 0.5
 		self.contentTF_2_01.adjustsFontSizeToFitWidth = true
@@ -296,6 +325,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 			make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
 				.inset(itemWidth + 2*eachWidth)
 		}
+		self.contentTF_2_01.delegate = self
 		// item 2~
 		if( items.first != nil ) {
 			for itemNum in 1..<10 {
@@ -443,6 +473,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 					make.left.equalToSuperview()
 					make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.right).inset(itemWidth)
 				}
+				itemNameTF.delegate = self
 				contentTF_1.layer.borderColor = UIColor.black.cgColor
 				contentTF_1.layer.borderWidth = 0.5
 				contentTF_1.adjustsFontSizeToFitWidth = true
@@ -455,6 +486,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 					make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
 						.inset(itemWidth + eachWidth)
 				}
+				contentTF_1.delegate = self
 				contentTF_2.layer.borderColor = UIColor.black.cgColor
 				contentTF_2.layer.borderWidth = 0.5
 				contentTF_2.adjustsFontSizeToFitWidth = true
@@ -467,6 +499,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 					make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
 						.inset(itemWidth + eachWidth)
 				}
+				contentTF_2.delegate = self
 			}
 		}
 
@@ -481,6 +514,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 				make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(RIGHT_W)
 			}
 		}
+		self.itemsSV.delegate = self
 		/* items(scroll view) end */
 	}
 
@@ -510,11 +544,18 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 		alert.addAction(noAction)
 		present(alert, animated: true, completion: nil)
 	}
-	
+
 	/// save button action
 	/// - Parameter sender: UIButton
 	/// - Authors: Nozomi Koyama
 	@objc func saveBtnDidTap(_ sender: UIButton) {
+		
+	}
+
+	/// addNewName button action
+	/// - Parameter sender: UIButton
+	/// - Authors: Nozomi Koyama
+	@objc func addNewNameBtnDidTap(_ sender: UIButton) {
 		
 	}
 
@@ -576,6 +617,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
+
+		// safe area の width, height を取得
 		let SCREEN_WIDTH = UIScreen.main.bounds.size.width
 		let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
 		var topPadding:CGFloat = 0

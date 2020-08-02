@@ -102,6 +102,8 @@ class ViewController: UIViewController {
 
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
+
+		// safe area の width, height を取得
 		let SCREEN_WIDTH = UIScreen.main.bounds.size.width
 		let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
 		var topPadding:CGFloat = 0
