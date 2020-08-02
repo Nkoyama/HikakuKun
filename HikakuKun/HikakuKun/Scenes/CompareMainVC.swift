@@ -258,24 +258,27 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 		}
 
 		// add new name button
-		self.addNewNameBtn.setTitle("＋", for: .normal)
-		self.addNewNameBtn.setTitleColor(UIColor.blue, for: .normal)
-		self.addNewNameBtn.backgroundColor = UIColor.clear
-		self.addNewNameBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20.0)
-		self.addNewNameBtn.titleLabel?.adjustsFontSizeToFitWidth = true
-		self.addNewNameBtn.titleLabel?.baselineAdjustment = .alignCenters
-		self.addNewNameBtn.layer.borderColor = UIColor.blue.cgColor
-		self.addNewNameBtn.layer.borderWidth = 1.0
-		self.addNewNameBtn.layer.cornerRadius = 12.0
-		self.view.addSubview(self.addNewNameBtn)
-		self.addNewNameBtn.addTarget(self,
-									 action: #selector(self.addNewNameBtnDidTap(_:)),
-									 for: .touchUpInside)
-		self.addNewNameBtn.snp.makeConstraints { (make) in
-			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + 3)
-			make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + 27)
-			make.left.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(27)
-			make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(3)
+		if( ( SAFE_AREA_WIDTH >= 800 && compareNum <= 4 )
+			|| ( SAFE_AREA_WIDTH < 800 && compareNum <= 3 ) ) {
+			self.addNewNameBtn.setTitle("＋", for: .normal)
+			self.addNewNameBtn.setTitleColor(UIColor.blue, for: .normal)
+			self.addNewNameBtn.backgroundColor = UIColor.clear
+			self.addNewNameBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20.0)
+			self.addNewNameBtn.titleLabel?.adjustsFontSizeToFitWidth = true
+			self.addNewNameBtn.titleLabel?.baselineAdjustment = .alignCenters
+			self.addNewNameBtn.layer.borderColor = UIColor.blue.cgColor
+			self.addNewNameBtn.layer.borderWidth = 1.0
+			self.addNewNameBtn.layer.cornerRadius = 12.0
+			self.view.addSubview(self.addNewNameBtn)
+			self.addNewNameBtn.addTarget(self,
+										 action: #selector(self.addNewNameBtnDidTap(_:)),
+										 for: .touchUpInside)
+			self.addNewNameBtn.snp.makeConstraints { (make) in
+				make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + 3)
+				make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + 27)
+				make.left.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(27)
+				make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(3)
+			}
 		}
 
 		/* items(scroll view) */
