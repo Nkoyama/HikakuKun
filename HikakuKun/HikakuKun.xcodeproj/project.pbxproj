@@ -17,10 +17,12 @@
 		434D59AF24CD7286007FEEFC /* CompareItemRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434D59AE24CD7286007FEEFC /* CompareItemRealm.swift */; };
 		434D59B124CD88DE007FEEFC /* CompareMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434D59B024CD88DE007FEEFC /* CompareMainVC.swift */; };
 		434D59B424CDAC32007FEEFC /* PublicConstantValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434D59B324CDAC32007FEEFC /* PublicConstantValues.swift */; };
+		434D59B624D69332007FEEFC /* CommonMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434D59B524D69332007FEEFC /* CommonMethods.swift */; };
+		434D59B824D6CEF4007FEEFC /* PublicValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434D59B724D6CEF4007FEEFC /* PublicValues.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		434D599324CD64C0007FEEFC /* HikakuKun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HikakuKun.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		434D599324CD64C0007FEEFC /* 比較くん.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "比較くん.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		434D599624CD64C0007FEEFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		434D599824CD64C0007FEEFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		434D599A24CD64C0007FEEFC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -31,6 +33,8 @@
 		434D59AE24CD7286007FEEFC /* CompareItemRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareItemRealm.swift; sourceTree = "<group>"; };
 		434D59B024CD88DE007FEEFC /* CompareMainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareMainVC.swift; sourceTree = "<group>"; };
 		434D59B324CDAC32007FEEFC /* PublicConstantValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicConstantValues.swift; sourceTree = "<group>"; };
+		434D59B524D69332007FEEFC /* CommonMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonMethods.swift; sourceTree = "<group>"; };
+		434D59B724D6CEF4007FEEFC /* PublicValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicValues.swift; sourceTree = "<group>"; };
 		6E59BC89F815C39CF38F7197 /* Pods-HikakuKun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HikakuKun.release.xcconfig"; path = "Target Support Files/Pods-HikakuKun/Pods-HikakuKun.release.xcconfig"; sourceTree = "<group>"; };
 		D8B131504AD174BD0970FBB2 /* Pods-HikakuKun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HikakuKun.debug.xcconfig"; path = "Target Support Files/Pods-HikakuKun/Pods-HikakuKun.debug.xcconfig"; sourceTree = "<group>"; };
 		F658453B2C01A20502952D2C /* Pods_HikakuKun.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HikakuKun.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,7 +73,7 @@
 		434D599424CD64C0007FEEFC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				434D599324CD64C0007FEEFC /* HikakuKun.app */,
+				434D599324CD64C0007FEEFC /* 比較くん.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -111,6 +115,8 @@
 			isa = PBXGroup;
 			children = (
 				434D59B324CDAC32007FEEFC /* PublicConstantValues.swift */,
+				434D59B524D69332007FEEFC /* CommonMethods.swift */,
+				434D59B724D6CEF4007FEEFC /* PublicValues.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -143,7 +149,7 @@
 			);
 			name = HikakuKun;
 			productName = HikakuKun;
-			productReference = 434D599324CD64C0007FEEFC /* HikakuKun.app */;
+			productReference = 434D599324CD64C0007FEEFC /* 比較くん.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -240,7 +246,9 @@
 			files = (
 				434D599B24CD64C0007FEEFC /* ViewController.swift in Sources */,
 				434D599724CD64C0007FEEFC /* AppDelegate.swift in Sources */,
+				434D59B824D6CEF4007FEEFC /* PublicValues.swift in Sources */,
 				434D59B124CD88DE007FEEFC /* CompareMainVC.swift in Sources */,
+				434D59B624D69332007FEEFC /* CommonMethods.swift in Sources */,
 				434D59AF24CD7286007FEEFC /* CompareItemRealm.swift in Sources */,
 				434D59AD24CD6E4F007FEEFC /* CompareContentsRealm.swift in Sources */,
 				434D599924CD64C0007FEEFC /* SceneDelegate.swift in Sources */,
@@ -389,7 +397,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.n.koyama.HikakuKun;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "比較くん";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -408,7 +416,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.n.koyama.HikakuKun;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "比較くん";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

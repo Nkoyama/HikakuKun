@@ -21,17 +21,37 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 	let nameTF_4	= UITextField()
 	let nameTF_5	= UITextField()
 
-	let itemsSV		= UIScrollView()
-	let itemTF_01	= UITextField()
-	let itemTF_02	= UITextField()
-	let itemTF_03	= UITextField()
-	let itemTF_04	= UITextField()
-	let itemTF_05	= UITextField()
-	let itemTF_06	= UITextField()
-	let itemTF_07	= UITextField()
-	let itemTF_08	= UITextField()
-	let itemTF_09	= UITextField()
-	let itemTF_10	= UITextField()
+	let itemsSV			= UIScrollView()
+	let itemTF_01		= UITextField()
+	let itemTF_02		= UITextField()
+	let itemTF_03		= UITextField()
+	let itemTF_04		= UITextField()
+	let itemTF_05		= UITextField()
+	let itemTF_06		= UITextField()
+	let itemTF_07		= UITextField()
+	let itemTF_08		= UITextField()
+	let itemTF_09		= UITextField()
+	let itemTF_10		= UITextField()
+	let contentTF_1_01	= UITextField()
+	let contentTF_1_02	= UITextField()
+	let contentTF_1_03	= UITextField()
+	let contentTF_1_04	= UITextField()
+	let contentTF_1_05	= UITextField()
+	let contentTF_1_06	= UITextField()
+	let contentTF_1_07	= UITextField()
+	let contentTF_1_08	= UITextField()
+	let contentTF_1_09	= UITextField()
+	let contentTF_1_10	= UITextField()
+	let contentTF_2_01	= UITextField()
+	let contentTF_2_02	= UITextField()
+	let contentTF_2_03	= UITextField()
+	let contentTF_2_04	= UITextField()
+	let contentTF_2_05	= UITextField()
+	let contentTF_2_06	= UITextField()
+	let contentTF_2_07	= UITextField()
+	let contentTF_2_08	= UITextField()
+	let contentTF_2_09	= UITextField()
+	let contentTF_2_10	= UITextField()
 
 	var groupId		= -1
 	var compareNum	= 1
@@ -97,12 +117,13 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 		}
 
 		// calc width
-		let itemWidth = (SCREEN_SIZE.width - RIGHT_W) / 6
-		var eachWidth = (SCREEN_SIZE.width - itemWidth) / 5
+		let itemWidth = (SAFE_AREA_WIDTH - RIGHT_W) / 6
+		print(itemWidth)
+		var eachWidth = (SAFE_AREA_WIDTH - itemWidth) / 5
 		if( compareNum <= 2 ) {
-			eachWidth = (SCREEN_SIZE.width - RIGHT_W - itemWidth) / 2
+			eachWidth = (SAFE_AREA_WIDTH - RIGHT_W - itemWidth) / 2
 		} else if( compareNum < 5 ) {
-			eachWidth = (SCREEN_SIZE.width - RIGHT_W - itemWidth) / CGFloat(compareNum)
+			eachWidth = (SAFE_AREA_WIDTH - RIGHT_W - itemWidth) / CGFloat(compareNum)
 		}
 
 		// gourp name
@@ -231,10 +252,12 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 		}
 
 		/* items(scroll view) */
-		// item name 1
+		// item 1
 		if( items.first != nil ) {
 			if( (items.first?.item1.count)! > 0 ) {
 				self.itemTF_01.text = items.first?.item1
+				self.contentTF_1_01.text = contents.first?.content1
+				self.contentTF_2_01.text = contents.first?.content2
 			} else {
 				self.itemTF_01.placeholder = "比較項目1"
 			}
@@ -251,64 +274,160 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 			make.left.equalToSuperview()
 			make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left).inset(itemWidth)
 		}
-		// item names 2~
+		self.contentTF_1_01.layer.borderColor = UIColor.black.cgColor
+		self.contentTF_1_01.layer.borderWidth = 0.5
+		self.contentTF_1_01.adjustsFontSizeToFitWidth = true
+		self.itemsSV.addSubview(self.contentTF_1_01)
+		self.contentTF_1_01.snp.makeConstraints{ (make) in
+			make.top.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top).inset(0)
+			make.bottom.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top).inset(ITEM_H)
+			make.left.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left).inset(itemWidth)
+			make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
+				.inset(itemWidth + eachWidth)
+		}
+		self.contentTF_2_01.layer.borderColor = UIColor.black.cgColor
+		self.contentTF_2_01.layer.borderWidth = 0.5
+		self.contentTF_2_01.adjustsFontSizeToFitWidth = true
+		self.itemsSV.addSubview(self.contentTF_2_01)
+		self.contentTF_2_01.snp.makeConstraints{ (make) in
+			make.top.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top).inset(0)
+			make.bottom.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top).inset(ITEM_H)
+			make.left.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left).inset(itemWidth + eachWidth)
+			make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
+				.inset(itemWidth + 2*eachWidth)
+		}
+		// item 2~
 		if( items.first != nil ) {
 			for itemNum in 1..<10 {
 				var itemNameTF = UITextField()
+				var contentTF_1 = UITextField()
+				var contentTF_2 = UITextField()
 				switch itemNum {
 					case 1:
 						itemNameTF = itemTF_02
+						contentTF_1 = contentTF_1_02
+						contentTF_2 = contentTF_2_02
 						if( (items.first?.item2.count)! > 0 ) {
 							itemNameTF.text = items.first?.item2
 							self.itemsSV.addSubview(itemNameTF)
+							self.itemsSV.addSubview(contentTF_1)
+							self.itemsSV.addSubview(contentTF_2)
+						}
+						if( contents.filter("id = %@", "1").first != nil ) {
+							contentTF_1.text = contents.filter("id = %@", "1").first?.content1
+							contentTF_2.text = contents.filter("id = %@", "1").first?.content2
 						}
 					case 2:
 						itemNameTF = itemTF_03
+						contentTF_1 = contentTF_1_03
+						contentTF_2 = contentTF_2_03
 						if( (items.first?.item3.count)! > 0 ) {
 							itemNameTF.text = items.first?.item3
 							self.itemsSV.addSubview(itemNameTF)
+							self.itemsSV.addSubview(contentTF_1)
+							self.itemsSV.addSubview(contentTF_2)
+						}
+						if( contents.filter("id = %@", "2").first != nil ) {
+							contentTF_1.text = contents.filter("id = %@", "2").first?.content1
+							contentTF_2.text = contents.filter("id = %@", "2").first?.content2
 						}
 					case 3:
 						itemNameTF = itemTF_04
+						contentTF_1 = contentTF_1_04
+						contentTF_2 = contentTF_2_04
 						if( (items.first?.item4.count)! > 0 ) {
 							itemNameTF.text = items.first?.item4
 							self.itemsSV.addSubview(itemNameTF)
+							self.itemsSV.addSubview(contentTF_1)
+							self.itemsSV.addSubview(contentTF_2)
+						}
+						if( contents.filter("id = %@", "3").first != nil ) {
+							contentTF_1.text = contents.filter("id = %@", "3").first?.content1
+							contentTF_2.text = contents.filter("id = %@", "3").first?.content2
 						}
 					case 4:
 						itemNameTF = itemTF_05
+						contentTF_1 = contentTF_1_05
+						contentTF_2 = contentTF_2_05
 						if( (items.first?.item5.count)! > 0 ) {
 							itemNameTF.text = items.first?.item5
 							self.itemsSV.addSubview(itemNameTF)
+							self.itemsSV.addSubview(contentTF_1)
+							self.itemsSV.addSubview(contentTF_2)
+						}
+						if( contents.filter("id = %@", "4").first != nil ) {
+							contentTF_1.text = contents.filter("id = %@", "4").first?.content1
+							contentTF_2.text = contents.filter("id = %@", "4").first?.content2
 						}
 					case 5:
 						itemNameTF = itemTF_06
+						contentTF_1 = contentTF_1_06
+						contentTF_2 = contentTF_2_06
 						if( (items.first?.item6.count)! > 0 ) {
 							itemNameTF.text = items.first?.item6
 							self.itemsSV.addSubview(itemNameTF)
+							self.itemsSV.addSubview(contentTF_1)
+							self.itemsSV.addSubview(contentTF_2)
+						}
+						if( contents.filter("id = %@", "5").first != nil ) {
+							contentTF_1.text = contents.filter("id = %@", "5").first?.content1
+							contentTF_2.text = contents.filter("id = %@", "5").first?.content2
 						}
 					case 6:
 						itemNameTF = itemTF_07
+						contentTF_1 = contentTF_1_07
+						contentTF_2 = contentTF_2_07
 						if( (items.first?.item7.count)! > 0 ) {
 							itemNameTF.text = items.first?.item7
 							self.itemsSV.addSubview(itemNameTF)
+							self.itemsSV.addSubview(contentTF_1)
+							self.itemsSV.addSubview(contentTF_2)
+						}
+						if( contents.filter("id = %@", "6").first != nil ) {
+							contentTF_1.text = contents.filter("id = %@", "6").first?.content1
+							contentTF_2.text = contents.filter("id = %@", "6").first?.content2
 						}
 					case 7:
 						itemNameTF = itemTF_08
+						contentTF_1 = contentTF_1_08
+						contentTF_2 = contentTF_2_08
 						if( (items.first?.item8.count)! > 0 ) {
 							itemNameTF.text = items.first?.item8
 							self.itemsSV.addSubview(itemNameTF)
+							self.itemsSV.addSubview(contentTF_1)
+							self.itemsSV.addSubview(contentTF_2)
+						}
+						if( contents.filter("id = %@", "7").first != nil ) {
+							contentTF_1.text = contents.filter("id = %@", "7").first?.content1
+							contentTF_2.text = contents.filter("id = %@", "7").first?.content2
 						}
 					case 8:
 						itemNameTF = itemTF_09
+						contentTF_1 = contentTF_1_09
+						contentTF_2 = contentTF_2_09
 						if( (items.first?.item9.count)! > 0 ) {
 							itemNameTF.text = items.first?.item9
 							self.itemsSV.addSubview(itemNameTF)
+							self.itemsSV.addSubview(contentTF_1)
+							self.itemsSV.addSubview(contentTF_2)
+						}
+						if( contents.filter("id = %@", "8").first != nil ) {
+							contentTF_1.text = contents.filter("id = %@", "8").first?.content1
+							contentTF_2.text = contents.filter("id = %@", "8").first?.content2
 						}
 					case 9:
 						itemNameTF = itemTF_10
+						contentTF_1 = contentTF_1_10
+						contentTF_2 = contentTF_2_10
 						if( (items.first?.item10.count)! > 0 ) {
 							itemNameTF.text = items.first?.item10
 							self.itemsSV.addSubview(itemNameTF)
+							self.itemsSV.addSubview(contentTF_1)
+							self.itemsSV.addSubview(contentTF_2)
+						}
+						if( contents.filter("id = %@", "9").first != nil ) {
+							contentTF_1.text = contents.filter("id = %@", "9").first?.content1
+							contentTF_2.text = contents.filter("id = %@", "9").first?.content2
 						}
 					default:
 						break
@@ -317,10 +436,36 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 				itemNameTF.layer.borderWidth = 0.5
 				itemNameTF.adjustsFontSizeToFitWidth = true
 				itemNameTF.snp.makeConstraints{ (make) in
-					make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(itemNum*ITEM_H)
-					make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset((itemNum+1)*ITEM_H)
+					make.top.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
+						.inset(itemNum * ITEM_H)
+					make.bottom.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
+						.inset((itemNum+1) * ITEM_H)
 					make.left.equalToSuperview()
-					make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(itemWidth)
+					make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.right).inset(itemWidth)
+				}
+				contentTF_1.layer.borderColor = UIColor.black.cgColor
+				contentTF_1.layer.borderWidth = 0.5
+				contentTF_1.adjustsFontSizeToFitWidth = true
+				contentTF_1.snp.makeConstraints{ (make) in
+					make.top.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
+						.inset(itemNum * ITEM_H)
+					make.bottom.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
+						.inset((itemNum+1) * ITEM_H)
+					make.left.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left).inset(itemWidth)
+					make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
+						.inset(itemWidth + eachWidth)
+				}
+				contentTF_2.layer.borderColor = UIColor.black.cgColor
+				contentTF_2.layer.borderWidth = 0.5
+				contentTF_2.adjustsFontSizeToFitWidth = true
+				contentTF_2.snp.makeConstraints{ (make) in
+					make.top.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
+						.inset((itemNum+1) * ITEM_H)
+					make.bottom.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
+						.inset((itemNum+2) * ITEM_H)
+					make.left.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left).inset(itemWidth)
+					make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
+						.inset(itemWidth + eachWidth)
 				}
 			}
 		}
@@ -329,9 +474,9 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 		self.itemsSV.snp.makeConstraints{ (make) in
 			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + NAME_H)
 			make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(BOTTOM_H)
-			make.left.equalToSuperview()
+			make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(0)
 			if( contents.count >= 5 ) {
-				make.right.equalToSuperview()
+				make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(0)
 			} else {
 				make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(RIGHT_W)
 			}
@@ -386,6 +531,36 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 		self.nameTF_3.resignFirstResponder()
 		self.nameTF_4.resignFirstResponder()
 		self.nameTF_5.resignFirstResponder()
+		self.itemTF_01.resignFirstResponder()
+		self.itemTF_02.resignFirstResponder()
+		self.itemTF_03.resignFirstResponder()
+		self.itemTF_04.resignFirstResponder()
+		self.itemTF_05.resignFirstResponder()
+		self.itemTF_06.resignFirstResponder()
+		self.itemTF_07.resignFirstResponder()
+		self.itemTF_08.resignFirstResponder()
+		self.itemTF_09.resignFirstResponder()
+		self.itemTF_10.resignFirstResponder()
+		self.contentTF_1_01.resignFirstResponder()
+		self.contentTF_1_02.resignFirstResponder()
+		self.contentTF_1_03.resignFirstResponder()
+		self.contentTF_1_04.resignFirstResponder()
+		self.contentTF_1_05.resignFirstResponder()
+		self.contentTF_1_06.resignFirstResponder()
+		self.contentTF_1_07.resignFirstResponder()
+		self.contentTF_1_08.resignFirstResponder()
+		self.contentTF_1_09.resignFirstResponder()
+		self.contentTF_1_10.resignFirstResponder()
+		self.contentTF_2_01.resignFirstResponder()
+		self.contentTF_2_02.resignFirstResponder()
+		self.contentTF_2_03.resignFirstResponder()
+		self.contentTF_2_04.resignFirstResponder()
+		self.contentTF_2_05.resignFirstResponder()
+		self.contentTF_2_06.resignFirstResponder()
+		self.contentTF_2_07.resignFirstResponder()
+		self.contentTF_2_08.resignFirstResponder()
+		self.contentTF_2_09.resignFirstResponder()
+		self.contentTF_2_10.resignFirstResponder()
 	}
 
 	/// returnキーが押された時にキーボードを閉じる
@@ -397,5 +572,24 @@ class CompareMainVC: UIViewController, UITextFieldDelegate {
 		textField.resignFirstResponder()
 		keyWindow?.endEditing(true)
 		return true
+	}
+
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		let SCREEN_WIDTH = UIScreen.main.bounds.size.width
+		let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
+		var topPadding:CGFloat = 0
+		var bottomPadding:CGFloat = 0
+		var leftPadding:CGFloat = 0
+		var rightPadding:CGFloat = 0
+		if #available(iOS 11.0, *) {
+			// viewDidLayoutSubviewsではSafeAreaの取得ができている
+			topPadding = self.view.safeAreaInsets.top
+			bottomPadding = self.view.safeAreaInsets.bottom
+			leftPadding = self.view.safeAreaInsets.left
+			rightPadding = self.view.safeAreaInsets.right
+		}
+		SAFE_AREA_WIDTH = SCREEN_WIDTH - leftPadding - rightPadding
+		SAFE_AREA_HEIGHT = SCREEN_HEIGHT - topPadding - bottomPadding
 	}
 }

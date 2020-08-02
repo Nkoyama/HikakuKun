@@ -99,6 +99,25 @@ class ViewController: UIViewController {
 		// 画面再読み込み
 		self.viewDidLoad()
 	}
+
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		let SCREEN_WIDTH = UIScreen.main.bounds.size.width
+		let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
+		var topPadding:CGFloat = 0
+		var bottomPadding:CGFloat = 0
+		var leftPadding:CGFloat = 0
+		var rightPadding:CGFloat = 0
+		if #available(iOS 11.0, *) {
+			// viewDidLayoutSubviewsではSafeAreaの取得ができている
+			topPadding = self.view.safeAreaInsets.top
+			bottomPadding = self.view.safeAreaInsets.bottom
+			leftPadding = self.view.safeAreaInsets.left
+			rightPadding = self.view.safeAreaInsets.right
+		}
+		SAFE_AREA_WIDTH = SCREEN_WIDTH - leftPadding - rightPadding
+		SAFE_AREA_HEIGHT = SCREEN_HEIGHT - topPadding - bottomPadding
+	}
 }
 
 extension ViewController: UITableViewDataSource {
