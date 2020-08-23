@@ -53,6 +53,36 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 	let contentTF_2_08	= UITextField()
 	let contentTF_2_09	= UITextField()
 	let contentTF_2_10	= UITextField()
+	let contentTF_3_01	= UITextField()
+	let contentTF_3_02	= UITextField()
+	let contentTF_3_03	= UITextField()
+	let contentTF_3_04	= UITextField()
+	let contentTF_3_05	= UITextField()
+	let contentTF_3_06	= UITextField()
+	let contentTF_3_07	= UITextField()
+	let contentTF_3_08	= UITextField()
+	let contentTF_3_09	= UITextField()
+	let contentTF_3_10	= UITextField()
+	let contentTF_4_01	= UITextField()
+	let contentTF_4_02	= UITextField()
+	let contentTF_4_03	= UITextField()
+	let contentTF_4_04	= UITextField()
+	let contentTF_4_05	= UITextField()
+	let contentTF_4_06	= UITextField()
+	let contentTF_4_07	= UITextField()
+	let contentTF_4_08	= UITextField()
+	let contentTF_4_09	= UITextField()
+	let contentTF_4_10	= UITextField()
+	let contentTF_5_01	= UITextField()
+	let contentTF_5_02	= UITextField()
+	let contentTF_5_03	= UITextField()
+	let contentTF_5_04	= UITextField()
+	let contentTF_5_05	= UITextField()
+	let contentTF_5_06	= UITextField()
+	let contentTF_5_07	= UITextField()
+	let contentTF_5_08	= UITextField()
+	let contentTF_5_09	= UITextField()
+	let contentTF_5_10	= UITextField()
 
 	var groupId		= -1
 	var compareNum	= 1
@@ -335,132 +365,270 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 				var itemNameTF = UITextField()
 				var contentTF_1 = UITextField()
 				var contentTF_2 = UITextField()
+				var contentTF_3 = UITextField()
+				var contentTF_4 = UITextField()
+				var contentTF_5 = UITextField()
 				switch itemNum {
 					case 1:
 						itemNameTF = itemTF_02
 						contentTF_1 = contentTF_1_02
 						contentTF_2 = contentTF_2_02
+						if( contents.count >= 3 ) {
+							contentTF_3 = contentTF_3_02
+						}
+						if( contents.count >= 4 ) {
+							contentTF_4 = contentTF_4_02
+						}
+						if( contents.count >= 3 ) {
+							contentTF_5 = contentTF_5_02
+						}
 						if( (items.first?.item2.count)! > 0 ) {
 							itemNameTF.text = items.first?.item2
 							self.itemsSV.addSubview(itemNameTF)
 							self.itemsSV.addSubview(contentTF_1)
 							self.itemsSV.addSubview(contentTF_2)
+							self.itemsSV.addSubview(contentTF_3)
+							self.itemsSV.addSubview(contentTF_4)
+							self.itemsSV.addSubview(contentTF_5)
 						}
 						if( contents.filter("id = %@", "1").first != nil ) {
 							contentTF_1.text = contents.filter("id = %@", "1").first?.content1
 							contentTF_2.text = contents.filter("id = %@", "1").first?.content2
+							contentTF_3.text = contents.filter("id = %@", "1").first?.content3
+							contentTF_4.text = contents.filter("id = %@", "1").first?.content4
+							contentTF_5.text = contents.filter("id = %@", "1").first?.content5
 						}
 					case 2:
 						itemNameTF = itemTF_03
 						contentTF_1 = contentTF_1_03
 						contentTF_2 = contentTF_2_03
+						if( contents.count >= 3 ) {
+							contentTF_3 = contentTF_3_03
+						}
+						if( contents.count >= 4 ) {
+							contentTF_4 = contentTF_4_03
+						}
+						if( contents.count >= 3 ) {
+							contentTF_5 = contentTF_5_03
+						}
 						if( (items.first?.item3.count)! > 0 ) {
 							itemNameTF.text = items.first?.item3
 							self.itemsSV.addSubview(itemNameTF)
 							self.itemsSV.addSubview(contentTF_1)
 							self.itemsSV.addSubview(contentTF_2)
+							self.itemsSV.addSubview(contentTF_3)
+							self.itemsSV.addSubview(contentTF_4)
+							self.itemsSV.addSubview(contentTF_5)
 						}
 						if( contents.filter("id = %@", "2").first != nil ) {
 							contentTF_1.text = contents.filter("id = %@", "2").first?.content1
 							contentTF_2.text = contents.filter("id = %@", "2").first?.content2
+							contentTF_3.text = contents.filter("id = %@", "2").first?.content3
+							contentTF_4.text = contents.filter("id = %@", "2").first?.content4
+							contentTF_5.text = contents.filter("id = %@", "2").first?.content5
 						}
 					case 3:
 						itemNameTF = itemTF_04
 						contentTF_1 = contentTF_1_04
 						contentTF_2 = contentTF_2_04
+						if( contents.count >= 3 ) {
+							contentTF_3 = contentTF_3_04
+						}
+						if( contents.count >= 4 ) {
+							contentTF_4 = contentTF_4_04
+						}
+						if( contents.count >= 3 ) {
+							contentTF_5 = contentTF_5_04
+						}
 						if( (items.first?.item4.count)! > 0 ) {
 							itemNameTF.text = items.first?.item4
 							self.itemsSV.addSubview(itemNameTF)
 							self.itemsSV.addSubview(contentTF_1)
 							self.itemsSV.addSubview(contentTF_2)
+							self.itemsSV.addSubview(contentTF_3)
+							self.itemsSV.addSubview(contentTF_4)
+							self.itemsSV.addSubview(contentTF_5)
 						}
 						if( contents.filter("id = %@", "3").first != nil ) {
 							contentTF_1.text = contents.filter("id = %@", "3").first?.content1
 							contentTF_2.text = contents.filter("id = %@", "3").first?.content2
+							contentTF_3.text = contents.filter("id = %@", "3").first?.content3
+							contentTF_4.text = contents.filter("id = %@", "3").first?.content4
+							contentTF_5.text = contents.filter("id = %@", "3").first?.content5
 						}
 					case 4:
 						itemNameTF = itemTF_05
 						contentTF_1 = contentTF_1_05
 						contentTF_2 = contentTF_2_05
+						if( contents.count >= 3 ) {
+							contentTF_3 = contentTF_3_05
+						}
+						if( contents.count >= 4 ) {
+							contentTF_4 = contentTF_4_05
+						}
+						if( contents.count >= 3 ) {
+							contentTF_5 = contentTF_5_05
+						}
 						if( (items.first?.item5.count)! > 0 ) {
 							itemNameTF.text = items.first?.item5
 							self.itemsSV.addSubview(itemNameTF)
 							self.itemsSV.addSubview(contentTF_1)
 							self.itemsSV.addSubview(contentTF_2)
+							self.itemsSV.addSubview(contentTF_3)
+							self.itemsSV.addSubview(contentTF_4)
+							self.itemsSV.addSubview(contentTF_5)
 						}
 						if( contents.filter("id = %@", "4").first != nil ) {
 							contentTF_1.text = contents.filter("id = %@", "4").first?.content1
 							contentTF_2.text = contents.filter("id = %@", "4").first?.content2
+							contentTF_3.text = contents.filter("id = %@", "4").first?.content3
+							contentTF_4.text = contents.filter("id = %@", "4").first?.content4
+							contentTF_5.text = contents.filter("id = %@", "4").first?.content5
 						}
 					case 5:
 						itemNameTF = itemTF_06
 						contentTF_1 = contentTF_1_06
 						contentTF_2 = contentTF_2_06
+						if( contents.count >= 3 ) {
+							contentTF_3 = contentTF_3_06
+						}
+						if( contents.count >= 4 ) {
+							contentTF_4 = contentTF_4_06
+						}
+						if( contents.count >= 3 ) {
+							contentTF_5 = contentTF_5_06
+						}
 						if( (items.first?.item6.count)! > 0 ) {
 							itemNameTF.text = items.first?.item6
 							self.itemsSV.addSubview(itemNameTF)
 							self.itemsSV.addSubview(contentTF_1)
 							self.itemsSV.addSubview(contentTF_2)
+							self.itemsSV.addSubview(contentTF_3)
+							self.itemsSV.addSubview(contentTF_4)
+							self.itemsSV.addSubview(contentTF_5)
 						}
 						if( contents.filter("id = %@", "5").first != nil ) {
 							contentTF_1.text = contents.filter("id = %@", "5").first?.content1
 							contentTF_2.text = contents.filter("id = %@", "5").first?.content2
+							contentTF_3.text = contents.filter("id = %@", "5").first?.content3
+							contentTF_4.text = contents.filter("id = %@", "5").first?.content4
+							contentTF_5.text = contents.filter("id = %@", "5").first?.content5
 						}
 					case 6:
 						itemNameTF = itemTF_07
 						contentTF_1 = contentTF_1_07
 						contentTF_2 = contentTF_2_07
+						if( contents.count >= 3 ) {
+							contentTF_3 = contentTF_3_07
+						}
+						if( contents.count >= 4 ) {
+							contentTF_4 = contentTF_4_07
+						}
+						if( contents.count >= 3 ) {
+							contentTF_5 = contentTF_5_07
+						}
 						if( (items.first?.item7.count)! > 0 ) {
 							itemNameTF.text = items.first?.item7
 							self.itemsSV.addSubview(itemNameTF)
 							self.itemsSV.addSubview(contentTF_1)
 							self.itemsSV.addSubview(contentTF_2)
+							self.itemsSV.addSubview(contentTF_3)
+							self.itemsSV.addSubview(contentTF_4)
+							self.itemsSV.addSubview(contentTF_5)
 						}
 						if( contents.filter("id = %@", "6").first != nil ) {
 							contentTF_1.text = contents.filter("id = %@", "6").first?.content1
 							contentTF_2.text = contents.filter("id = %@", "6").first?.content2
+							contentTF_3.text = contents.filter("id = %@", "6").first?.content3
+							contentTF_4.text = contents.filter("id = %@", "6").first?.content4
+							contentTF_5.text = contents.filter("id = %@", "6").first?.content5
 						}
 					case 7:
 						itemNameTF = itemTF_08
 						contentTF_1 = contentTF_1_08
 						contentTF_2 = contentTF_2_08
+						if( contents.count >= 3 ) {
+							contentTF_3 = contentTF_3_08
+						}
+						if( contents.count >= 4 ) {
+							contentTF_4 = contentTF_4_08
+						}
+						if( contents.count >= 3 ) {
+							contentTF_5 = contentTF_5_08
+						}
 						if( (items.first?.item8.count)! > 0 ) {
 							itemNameTF.text = items.first?.item8
 							self.itemsSV.addSubview(itemNameTF)
 							self.itemsSV.addSubview(contentTF_1)
 							self.itemsSV.addSubview(contentTF_2)
+							self.itemsSV.addSubview(contentTF_3)
+							self.itemsSV.addSubview(contentTF_4)
+							self.itemsSV.addSubview(contentTF_5)
 						}
 						if( contents.filter("id = %@", "7").first != nil ) {
 							contentTF_1.text = contents.filter("id = %@", "7").first?.content1
 							contentTF_2.text = contents.filter("id = %@", "7").first?.content2
+							contentTF_3.text = contents.filter("id = %@", "7").first?.content3
+							contentTF_4.text = contents.filter("id = %@", "7").first?.content4
+							contentTF_5.text = contents.filter("id = %@", "7").first?.content5
 						}
 					case 8:
 						itemNameTF = itemTF_09
 						contentTF_1 = contentTF_1_09
 						contentTF_2 = contentTF_2_09
+						if( contents.count >= 3 ) {
+							contentTF_3 = contentTF_3_09
+						}
+						if( contents.count >= 4 ) {
+							contentTF_4 = contentTF_4_09
+						}
+						if( contents.count >= 3 ) {
+							contentTF_5 = contentTF_5_09
+						}
 						if( (items.first?.item9.count)! > 0 ) {
 							itemNameTF.text = items.first?.item9
 							self.itemsSV.addSubview(itemNameTF)
 							self.itemsSV.addSubview(contentTF_1)
 							self.itemsSV.addSubview(contentTF_2)
+							self.itemsSV.addSubview(contentTF_3)
+							self.itemsSV.addSubview(contentTF_4)
+							self.itemsSV.addSubview(contentTF_5)
 						}
 						if( contents.filter("id = %@", "8").first != nil ) {
 							contentTF_1.text = contents.filter("id = %@", "8").first?.content1
 							contentTF_2.text = contents.filter("id = %@", "8").first?.content2
+							contentTF_3.text = contents.filter("id = %@", "8").first?.content3
+							contentTF_4.text = contents.filter("id = %@", "8").first?.content4
+							contentTF_5.text = contents.filter("id = %@", "8").first?.content5
 						}
 					case 9:
 						itemNameTF = itemTF_10
 						contentTF_1 = contentTF_1_10
 						contentTF_2 = contentTF_2_10
+						if( contents.count >= 3 ) {
+							contentTF_3 = contentTF_3_10
+						}
+						if( contents.count >= 4 ) {
+							contentTF_4 = contentTF_4_10
+						}
+						if( contents.count >= 3 ) {
+							contentTF_5 = contentTF_5_10
+						}
 						if( (items.first?.item10.count)! > 0 ) {
 							itemNameTF.text = items.first?.item10
 							self.itemsSV.addSubview(itemNameTF)
 							self.itemsSV.addSubview(contentTF_1)
 							self.itemsSV.addSubview(contentTF_2)
+							self.itemsSV.addSubview(contentTF_3)
+							self.itemsSV.addSubview(contentTF_4)
+							self.itemsSV.addSubview(contentTF_5)
 						}
 						if( contents.filter("id = %@", "9").first != nil ) {
 							contentTF_1.text = contents.filter("id = %@", "9").first?.content1
 							contentTF_2.text = contents.filter("id = %@", "9").first?.content2
+							contentTF_3.text = contents.filter("id = %@", "9").first?.content3
+							contentTF_4.text = contents.filter("id = %@", "9").first?.content4
+							contentTF_5.text = contents.filter("id = %@", "9").first?.content5
 						}
 					default:
 						break
@@ -503,6 +671,45 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 						.inset(itemWidth + eachWidth)
 				}
 				contentTF_2.delegate = self
+				contentTF_3.layer.borderColor = UIColor.black.cgColor
+				contentTF_3.layer.borderWidth = 0.5
+				contentTF_3.adjustsFontSizeToFitWidth = true
+				contentTF_3.snp.makeConstraints{ (make) in
+					make.top.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
+						.inset((itemNum+2) * ITEM_H)
+					make.bottom.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
+						.inset((itemNum+3) * ITEM_H)
+					make.left.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left).inset(itemWidth)
+					make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
+						.inset(itemWidth + eachWidth)
+				}
+				contentTF_3.delegate = self
+				contentTF_4.layer.borderColor = UIColor.black.cgColor
+				contentTF_4.layer.borderWidth = 0.5
+				contentTF_4.adjustsFontSizeToFitWidth = true
+				contentTF_4.snp.makeConstraints{ (make) in
+					make.top.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
+						.inset((itemNum+3) * ITEM_H)
+					make.bottom.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
+						.inset((itemNum+4) * ITEM_H)
+					make.left.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left).inset(itemWidth)
+					make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
+						.inset(itemWidth + eachWidth)
+				}
+				contentTF_4.delegate = self
+				contentTF_5.layer.borderColor = UIColor.black.cgColor
+				contentTF_5.layer.borderWidth = 0.5
+				contentTF_5.adjustsFontSizeToFitWidth = true
+				contentTF_5.snp.makeConstraints{ (make) in
+					make.top.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
+						.inset((itemNum+4) * ITEM_H)
+					make.bottom.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
+						.inset((itemNum+5) * ITEM_H)
+					make.left.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left).inset(itemWidth)
+					make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
+						.inset(itemWidth + eachWidth)
+				}
+				contentTF_5.delegate = self
 			}
 		}
 
@@ -605,6 +812,36 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 		self.contentTF_2_08.resignFirstResponder()
 		self.contentTF_2_09.resignFirstResponder()
 		self.contentTF_2_10.resignFirstResponder()
+		self.contentTF_3_01.resignFirstResponder()
+		self.contentTF_3_02.resignFirstResponder()
+		self.contentTF_3_03.resignFirstResponder()
+		self.contentTF_3_04.resignFirstResponder()
+		self.contentTF_3_05.resignFirstResponder()
+		self.contentTF_3_06.resignFirstResponder()
+		self.contentTF_3_07.resignFirstResponder()
+		self.contentTF_3_08.resignFirstResponder()
+		self.contentTF_3_09.resignFirstResponder()
+		self.contentTF_3_10.resignFirstResponder()
+		self.contentTF_4_01.resignFirstResponder()
+		self.contentTF_4_02.resignFirstResponder()
+		self.contentTF_4_03.resignFirstResponder()
+		self.contentTF_4_04.resignFirstResponder()
+		self.contentTF_4_05.resignFirstResponder()
+		self.contentTF_4_06.resignFirstResponder()
+		self.contentTF_4_07.resignFirstResponder()
+		self.contentTF_4_08.resignFirstResponder()
+		self.contentTF_4_09.resignFirstResponder()
+		self.contentTF_4_10.resignFirstResponder()
+		self.contentTF_5_01.resignFirstResponder()
+		self.contentTF_5_02.resignFirstResponder()
+		self.contentTF_5_03.resignFirstResponder()
+		self.contentTF_5_04.resignFirstResponder()
+		self.contentTF_5_05.resignFirstResponder()
+		self.contentTF_5_06.resignFirstResponder()
+		self.contentTF_5_07.resignFirstResponder()
+		self.contentTF_5_08.resignFirstResponder()
+		self.contentTF_5_09.resignFirstResponder()
+		self.contentTF_5_10.resignFirstResponder()
 	}
 
 	/// returnキーが押された時にキーボードを閉じる
