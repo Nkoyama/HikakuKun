@@ -86,6 +86,7 @@ class ViewController: UIViewController {
 		let nextVC = CompareMainVC()
 		let newGroupId = Int(CompareItemRealm().getMaxGroupId()) ?? -1 + 1
 		nextVC.groupId = newGroupId
+		nextVC.rowNum = 2
 		nextVC.callBack = { () in
 			self.callBack()
 		}
