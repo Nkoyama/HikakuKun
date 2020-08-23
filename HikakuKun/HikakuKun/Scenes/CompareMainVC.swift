@@ -663,12 +663,13 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 				contentTF_2.adjustsFontSizeToFitWidth = true
 				contentTF_2.snp.makeConstraints{ (make) in
 					make.top.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
-						.inset((itemNum+1) * ITEM_H)
+						.inset((itemNum) * ITEM_H)
 					make.bottom.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
-						.inset((itemNum+2) * ITEM_H)
-					make.left.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left).inset(itemWidth)
-					make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
+						.inset((itemNum+1) * ITEM_H)
+					make.left.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
 						.inset(itemWidth + eachWidth)
+					make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
+						.inset(itemWidth + 2*eachWidth)
 				}
 				contentTF_2.delegate = self
 				contentTF_3.layer.borderColor = UIColor.black.cgColor
@@ -676,12 +677,13 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 				contentTF_3.adjustsFontSizeToFitWidth = true
 				contentTF_3.snp.makeConstraints{ (make) in
 					make.top.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
-						.inset((itemNum+2) * ITEM_H)
+						.inset((itemNum) * ITEM_H)
 					make.bottom.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
-						.inset((itemNum+3) * ITEM_H)
-					make.left.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left).inset(itemWidth)
+						.inset((itemNum+1) * ITEM_H)
+					make.left.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
+						.inset(itemWidth + 2*eachWidth)
 					make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
-						.inset(itemWidth + eachWidth)
+						.inset(itemWidth + 3*eachWidth)
 				}
 				contentTF_3.delegate = self
 				contentTF_4.layer.borderColor = UIColor.black.cgColor
@@ -689,12 +691,13 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 				contentTF_4.adjustsFontSizeToFitWidth = true
 				contentTF_4.snp.makeConstraints{ (make) in
 					make.top.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
-						.inset((itemNum+3) * ITEM_H)
+						.inset((itemNum) * ITEM_H)
 					make.bottom.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
-						.inset((itemNum+4) * ITEM_H)
-					make.left.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left).inset(itemWidth)
+						.inset((itemNum+1) * ITEM_H)
+					make.left.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
+						.inset(itemWidth + 3*eachWidth)
 					make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
-						.inset(itemWidth + eachWidth)
+						.inset(itemWidth + 4*eachWidth)
 				}
 				contentTF_4.delegate = self
 				contentTF_5.layer.borderColor = UIColor.black.cgColor
@@ -702,12 +705,13 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 				contentTF_5.adjustsFontSizeToFitWidth = true
 				contentTF_5.snp.makeConstraints{ (make) in
 					make.top.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
-						.inset((itemNum+4) * ITEM_H)
+						.inset((itemNum) * ITEM_H)
 					make.bottom.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
-						.inset((itemNum+5) * ITEM_H)
-					make.left.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left).inset(itemWidth)
+						.inset((itemNum+1) * ITEM_H)
+					make.left.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
+						.inset(itemWidth + 4*eachWidth)
 					make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
-						.inset(itemWidth + eachWidth)
+						.inset(itemWidth + 5*eachWidth)
 				}
 				contentTF_5.delegate = self
 			}
