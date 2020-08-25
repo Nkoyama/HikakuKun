@@ -68,7 +68,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 
 	var groupId		= -1
 	var compareNum	= 1
-	var rowNum		= 2
+	var colNum		= 2
+	var rowNum		= 1
 
 	let SCREEN_SIZE			= UIScreen.main.bounds.size
 	let TITLE_H				= 50
@@ -218,7 +219,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 		self.nameTF_2.delegate = self
 
 		// 3~
-		if( rowNum >= 3 ) {
+		if( colNum >= 3 ) {
 			for nameNum in 3...contents.count {
 				var nameTF = UITextField()
 				switch nameNum {
@@ -271,8 +272,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 		}
 
 		// add new name button
-		if( ( SAFE_AREA_WIDTH >= 800 && rowNum <= 4 )
-			|| ( SAFE_AREA_WIDTH < 800 && rowNum <= 3 ) ) {
+		if( ( SAFE_AREA_WIDTH >= 800 && colNum <= 4 )
+			|| ( SAFE_AREA_WIDTH < 800 && colNum <= 3 ) ) {
 			self.addNewNameBtn.setTitle("＋", for: .normal)
 			self.addNewNameBtn.setTitleColor(UIColor.blue, for: .normal)
 			self.addNewNameBtn.backgroundColor = UIColor.clear
@@ -364,13 +365,13 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 							self.itemsSV.addSubview(itemNameTF)
 							self.itemsSV.addSubview(contentTF_1)
 							self.itemsSV.addSubview(contentTF_2)
-							if( rowNum >= 3 ) {
+							if( colNum >= 3 ) {
 								self.itemsSV.addSubview(contentTF_3)
 							}
-							if( rowNum >= 4 ) {
+							if( colNum >= 4 ) {
 								self.itemsSV.addSubview(contentTF_4)
 							}
-							if( rowNum >= 5 ) {
+							if( colNum >= 5 ) {
 								self.itemsSV.addSubview(contentTF_5)
 							}
 						}
@@ -393,13 +394,13 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 							self.itemsSV.addSubview(itemNameTF)
 							self.itemsSV.addSubview(contentTF_1)
 							self.itemsSV.addSubview(contentTF_2)
-							if( rowNum >= 3 ) {
+							if( colNum >= 3 ) {
 								self.itemsSV.addSubview(contentTF_3)
 							}
-							if( rowNum >= 4 ) {
+							if( colNum >= 4 ) {
 								self.itemsSV.addSubview(contentTF_4)
 							}
-							if( rowNum >= 5 ) {
+							if( colNum >= 5 ) {
 								self.itemsSV.addSubview(contentTF_5)
 							}
 						}
@@ -422,13 +423,13 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 							self.itemsSV.addSubview(itemNameTF)
 							self.itemsSV.addSubview(contentTF_1)
 							self.itemsSV.addSubview(contentTF_2)
-							if( rowNum >= 3 ) {
+							if( colNum >= 3 ) {
 								self.itemsSV.addSubview(contentTF_3)
 							}
-							if( rowNum >= 4 ) {
+							if( colNum >= 4 ) {
 								self.itemsSV.addSubview(contentTF_4)
 							}
-							if( rowNum >= 5 ) {
+							if( colNum >= 5 ) {
 								self.itemsSV.addSubview(contentTF_5)
 							}
 						}
@@ -451,13 +452,13 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 							self.itemsSV.addSubview(itemNameTF)
 							self.itemsSV.addSubview(contentTF_1)
 							self.itemsSV.addSubview(contentTF_2)
-							if( rowNum >= 3 ) {
+							if( colNum >= 3 ) {
 								self.itemsSV.addSubview(contentTF_3)
 							}
-							if( rowNum >= 4 ) {
+							if( colNum >= 4 ) {
 								self.itemsSV.addSubview(contentTF_4)
 							}
-							if( rowNum >= 5 ) {
+							if( colNum >= 5 ) {
 								self.itemsSV.addSubview(contentTF_5)
 							}
 						}
@@ -480,13 +481,13 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 							self.itemsSV.addSubview(itemNameTF)
 							self.itemsSV.addSubview(contentTF_1)
 							self.itemsSV.addSubview(contentTF_2)
-							if( rowNum >= 3 ) {
+							if( colNum >= 3 ) {
 								self.itemsSV.addSubview(contentTF_3)
 							}
-							if( rowNum >= 4 ) {
+							if( colNum >= 4 ) {
 								self.itemsSV.addSubview(contentTF_4)
 							}
-							if( rowNum >= 5 ) {
+							if( colNum >= 5 ) {
 								self.itemsSV.addSubview(contentTF_5)
 							}
 						}
@@ -509,13 +510,13 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 							self.itemsSV.addSubview(itemNameTF)
 							self.itemsSV.addSubview(contentTF_1)
 							self.itemsSV.addSubview(contentTF_2)
-							if( rowNum >= 3 ) {
+							if( colNum >= 3 ) {
 								self.itemsSV.addSubview(contentTF_3)
 							}
-							if( rowNum >= 4 ) {
+							if( colNum >= 4 ) {
 								self.itemsSV.addSubview(contentTF_4)
 							}
-							if( rowNum >= 5 ) {
+							if( colNum >= 5 ) {
 								self.itemsSV.addSubview(contentTF_5)
 							}
 						}
@@ -568,7 +569,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 						.inset(itemWidth + 2*eachWidth)
 				}
 				contentTF_2.delegate = self
-				if( rowNum >= 3 ) {
+				if( colNum >= 3 ) {
 					contentTF_3.layer.borderColor = UIColor.black.cgColor
 					contentTF_3.layer.borderWidth = 0.5
 					contentTF_3.adjustsFontSizeToFitWidth = true
@@ -584,7 +585,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 						contentTF_3.delegate = self
 					}
 				}
-				if( rowNum >= 4 ) {
+				if( colNum >= 4 ) {
 					contentTF_4.layer.borderColor = UIColor.black.cgColor
 					contentTF_4.layer.borderWidth = 0.5
 					contentTF_4.adjustsFontSizeToFitWidth = true
@@ -600,7 +601,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 					}
 					contentTF_4.delegate = self
 				}
-				if( rowNum >= 5 ) {
+				if( colNum >= 5 ) {
 					contentTF_5.layer.borderColor = UIColor.black.cgColor
 					contentTF_5.layer.borderWidth = 0.5
 					contentTF_5.adjustsFontSizeToFitWidth = true
@@ -672,7 +673,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 	/// - Parameter sender: UIButton
 	/// - Authors: Nozomi Koyama
 	@objc func addNewNameBtnDidTap(_ sender: UIButton) {
-		
+		colNum = colNum + 1
 	}
 
 	/// TextField以外の部分をタッチした時の処理
