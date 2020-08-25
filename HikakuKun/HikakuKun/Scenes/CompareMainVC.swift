@@ -666,7 +666,55 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 	/// - Parameter sender: UIButton
 	/// - Authors: Nozomi Koyama
 	@objc func saveBtnDidTap(_ sender: UIButton) {
-		
+		for col in 1...colNum {
+			let colItem = CompareItemRealm()
+			let colContents = CompareContentsRealm()
+			let realm = try! Realm()
+			//set values
+			colItem.groupId = String(groupId)
+			colItem.groupName = groupNameTF.text!
+			colItem.item1 = itemTF_01.text!
+			colItem.item2 = itemTF_02.text!
+			colItem.item3 = itemTF_03.text!
+			colItem.item4 = itemTF_04.text!
+			colItem.item5 = itemTF_05.text!
+			colItem.item6 = itemTF_06.text!
+			colItem.item7 = itemTF_07.text!
+			let dt = Date()
+			let dateFormatter = DateFormatter()
+			dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyyMMddHHmmss",
+																options: 0,
+																locale: Locale(identifier: "ja_JP"))
+			colItem.timestamp = dateFormatter.string(from: dt)
+			colContents.groupId = String(groupId)
+			colContents.id = String(col)
+			colContents.content1 = contentTF_1_01.text!
+			colContents.content2 = contentTF_1_02.text!
+			colContents.content3 = contentTF_1_03.text!
+			colContents.content4 = contentTF_1_04.text!
+			colContents.content5 = contentTF_1_05.text!
+			colContents.content6 = contentTF_1_06.text!
+			colContents.content7 = contentTF_1_07.text!
+			colContents.timestamp = dateFormatter.string(from: dt)
+			//insert data
+			try! realm.write {
+				realm.add(colItem)
+				realm.add(colContents)
+			}
+
+			//complete message
+			let defaultAction = UIAlertAction(title: "OK",
+											  style: .default,
+											  handler:{(action: UIAlertAction!) -> Void in})
+			let alert = UIAlertController(title: "",
+										  message: "保存されました。",
+										  preferredStyle: .alert)
+			alert.addAction(defaultAction)
+			present(alert, animated: true, completion: nil)
+
+			//redisplay
+			self.viewDidLoad()
+		}
 	}
 
 	/// addNewName button action

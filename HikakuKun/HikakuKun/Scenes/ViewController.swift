@@ -30,6 +30,7 @@ class ViewController: UIViewController {
 
 		// 表示用データ取得
 		let realm = try! Realm()
+		print(Realm.Configuration.defaultConfiguration.fileURL!)
 		let allItems = realm.objects(CompareItemRealm.self)
 		for item in allItems {
 			var displayText = item.groupName
