@@ -19,9 +19,6 @@ class CompareItemRealm: Object {
 	@objc dynamic var item5		: String	= ""	// 比較項目⑤
 	@objc dynamic var item6		: String	= ""	// 比較項目⑥
 	@objc dynamic var item7		: String	= ""	// 比較項目⑦
-	@objc dynamic var item8		: String	= ""	// 比較項目⑧
-	@objc dynamic var item9		: String	= ""	// 比較項目⑨
-	@objc dynamic var item10	: String	= ""	// 比較項目⑩
 	@objc dynamic var timestamp	: String	= ""
 
 	/// get max groupId

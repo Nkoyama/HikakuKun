@@ -20,9 +20,6 @@ class CompareContentsRealm: Object {
 	@objc dynamic var content5	: String	= ""	// 比較項目⑤内容
 	@objc dynamic var content6	: String	= ""	// 比較項目⑥内容
 	@objc dynamic var content7	: String	= ""	// 比較項目⑦内容
-	@objc dynamic var content8	: String	= ""	// 比較項目⑧内容
-	@objc dynamic var content9	: String	= ""	// 比較項目⑨内容
-	@objc dynamic var content10	: String	= ""	// 比較項目⑩内容
 	@objc dynamic var memo		: String	= ""
 	@objc dynamic var timestamp	: String	= ""
 

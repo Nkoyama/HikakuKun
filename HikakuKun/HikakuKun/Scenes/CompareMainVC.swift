@@ -30,9 +30,6 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 	let itemTF_05		= UITextField()
 	let itemTF_06		= UITextField()
 	let itemTF_07		= UITextField()
-	let itemTF_08		= UITextField()
-	let itemTF_09		= UITextField()
-	let itemTF_10		= UITextField()
 	let contentTF_1_01	= UITextField()
 	let contentTF_1_02	= UITextField()
 	let contentTF_1_03	= UITextField()
@@ -40,9 +37,6 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 	let contentTF_1_05	= UITextField()
 	let contentTF_1_06	= UITextField()
 	let contentTF_1_07	= UITextField()
-	let contentTF_1_08	= UITextField()
-	let contentTF_1_09	= UITextField()
-	let contentTF_1_10	= UITextField()
 	let contentTF_2_01	= UITextField()
 	let contentTF_2_02	= UITextField()
 	let contentTF_2_03	= UITextField()
@@ -50,9 +44,6 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 	let contentTF_2_05	= UITextField()
 	let contentTF_2_06	= UITextField()
 	let contentTF_2_07	= UITextField()
-	let contentTF_2_08	= UITextField()
-	let contentTF_2_09	= UITextField()
-	let contentTF_2_10	= UITextField()
 	let contentTF_3_01	= UITextField()
 	let contentTF_3_02	= UITextField()
 	let contentTF_3_03	= UITextField()
@@ -60,9 +51,6 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 	let contentTF_3_05	= UITextField()
 	let contentTF_3_06	= UITextField()
 	let contentTF_3_07	= UITextField()
-	let contentTF_3_08	= UITextField()
-	let contentTF_3_09	= UITextField()
-	let contentTF_3_10	= UITextField()
 	let contentTF_4_01	= UITextField()
 	let contentTF_4_02	= UITextField()
 	let contentTF_4_03	= UITextField()
@@ -70,9 +58,6 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 	let contentTF_4_05	= UITextField()
 	let contentTF_4_06	= UITextField()
 	let contentTF_4_07	= UITextField()
-	let contentTF_4_08	= UITextField()
-	let contentTF_4_09	= UITextField()
-	let contentTF_4_10	= UITextField()
 	let contentTF_5_01	= UITextField()
 	let contentTF_5_02	= UITextField()
 	let contentTF_5_03	= UITextField()
@@ -80,9 +65,6 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 	let contentTF_5_05	= UITextField()
 	let contentTF_5_06	= UITextField()
 	let contentTF_5_07	= UITextField()
-	let contentTF_5_08	= UITextField()
-	let contentTF_5_09	= UITextField()
-	let contentTF_5_10	= UITextField()
 
 	var groupId		= -1
 	var compareNum	= 1
@@ -362,7 +344,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 		self.contentTF_2_01.delegate = self
 		// item 2~
 		if( items.first != nil ) {
-			for itemNum in 1..<10 {
+			for itemNum in 1..<7 {
 				var itemNameTF = UITextField()
 				var contentTF_1 = UITextField()
 				var contentTF_2 = UITextField()
@@ -544,93 +526,6 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 							contentTF_4.text = contents.filter("id = %@", "6").first?.content4
 							contentTF_5.text = contents.filter("id = %@", "6").first?.content5
 						}
-					case 7:
-						itemNameTF = itemTF_08
-						contentTF_1 = contentTF_1_08
-						contentTF_2 = contentTF_2_08
-						contentTF_3 = contentTF_3_08
-						contentTF_4 = contentTF_4_08
-						contentTF_5 = contentTF_5_08
-						if( (items.first?.item8.count)! > 0 ) {
-							itemNameTF.text = items.first?.item8
-							self.itemsSV.addSubview(itemNameTF)
-							self.itemsSV.addSubview(contentTF_1)
-							self.itemsSV.addSubview(contentTF_2)
-							if( rowNum >= 3 ) {
-								self.itemsSV.addSubview(contentTF_3)
-							}
-							if( rowNum >= 4 ) {
-								self.itemsSV.addSubview(contentTF_4)
-							}
-							if( rowNum >= 5 ) {
-								self.itemsSV.addSubview(contentTF_5)
-							}
-						}
-						if( contents.filter("id = %@", "7").first != nil ) {
-							contentTF_1.text = contents.filter("id = %@", "7").first?.content1
-							contentTF_2.text = contents.filter("id = %@", "7").first?.content2
-							contentTF_3.text = contents.filter("id = %@", "7").first?.content3
-							contentTF_4.text = contents.filter("id = %@", "7").first?.content4
-							contentTF_5.text = contents.filter("id = %@", "7").first?.content5
-						}
-					case 8:
-						itemNameTF = itemTF_09
-						contentTF_1 = contentTF_1_09
-						contentTF_2 = contentTF_2_09
-						contentTF_3 = contentTF_3_09
-						contentTF_4 = contentTF_4_09
-						contentTF_5 = contentTF_5_09
-						if( (items.first?.item9.count)! > 0 ) {
-							itemNameTF.text = items.first?.item9
-							self.itemsSV.addSubview(itemNameTF)
-							self.itemsSV.addSubview(contentTF_1)
-							self.itemsSV.addSubview(contentTF_2)
-							if( rowNum >= 3 ) {
-								self.itemsSV.addSubview(contentTF_3)
-							}
-							if( rowNum >= 4 ) {
-								self.itemsSV.addSubview(contentTF_4)
-							}
-							if( rowNum >= 5 ) {
-								self.itemsSV.addSubview(contentTF_5)
-							}
-						}
-						if( contents.filter("id = %@", "8").first != nil ) {
-							contentTF_1.text = contents.filter("id = %@", "8").first?.content1
-							contentTF_2.text = contents.filter("id = %@", "8").first?.content2
-							contentTF_3.text = contents.filter("id = %@", "8").first?.content3
-							contentTF_4.text = contents.filter("id = %@", "8").first?.content4
-							contentTF_5.text = contents.filter("id = %@", "8").first?.content5
-						}
-					case 9:
-						itemNameTF = itemTF_10
-						contentTF_1 = contentTF_1_10
-						contentTF_2 = contentTF_2_10
-						contentTF_3 = contentTF_3_10
-						contentTF_4 = contentTF_4_10
-						contentTF_5 = contentTF_5_10
-						if( (items.first?.item10.count)! > 0 ) {
-							itemNameTF.text = items.first?.item10
-							self.itemsSV.addSubview(itemNameTF)
-							self.itemsSV.addSubview(contentTF_1)
-							self.itemsSV.addSubview(contentTF_2)
-							if( rowNum >= 3 ) {
-								self.itemsSV.addSubview(contentTF_3)
-							}
-							if( rowNum >= 4 ) {
-								self.itemsSV.addSubview(contentTF_4)
-							}
-							if( rowNum >= 5 ) {
-								self.itemsSV.addSubview(contentTF_5)
-							}
-						}
-						if( contents.filter("id = %@", "9").first != nil ) {
-							contentTF_1.text = contents.filter("id = %@", "9").first?.content1
-							contentTF_2.text = contents.filter("id = %@", "9").first?.content2
-							contentTF_3.text = contents.filter("id = %@", "9").first?.content3
-							contentTF_4.text = contents.filter("id = %@", "9").first?.content4
-							contentTF_5.text = contents.filter("id = %@", "9").first?.content5
-						}
 					default:
 						break
 				}
@@ -800,9 +695,6 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 		self.itemTF_05.resignFirstResponder()
 		self.itemTF_06.resignFirstResponder()
 		self.itemTF_07.resignFirstResponder()
-		self.itemTF_08.resignFirstResponder()
-		self.itemTF_09.resignFirstResponder()
-		self.itemTF_10.resignFirstResponder()
 		self.contentTF_1_01.resignFirstResponder()
 		self.contentTF_1_02.resignFirstResponder()
 		self.contentTF_1_03.resignFirstResponder()
@@ -810,9 +702,6 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 		self.contentTF_1_05.resignFirstResponder()
 		self.contentTF_1_06.resignFirstResponder()
 		self.contentTF_1_07.resignFirstResponder()
-		self.contentTF_1_08.resignFirstResponder()
-		self.contentTF_1_09.resignFirstResponder()
-		self.contentTF_1_10.resignFirstResponder()
 		self.contentTF_2_01.resignFirstResponder()
 		self.contentTF_2_02.resignFirstResponder()
 		self.contentTF_2_03.resignFirstResponder()
@@ -820,9 +709,6 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 		self.contentTF_2_05.resignFirstResponder()
 		self.contentTF_2_06.resignFirstResponder()
 		self.contentTF_2_07.resignFirstResponder()
-		self.contentTF_2_08.resignFirstResponder()
-		self.contentTF_2_09.resignFirstResponder()
-		self.contentTF_2_10.resignFirstResponder()
 		self.contentTF_3_01.resignFirstResponder()
 		self.contentTF_3_02.resignFirstResponder()
 		self.contentTF_3_03.resignFirstResponder()
@@ -830,9 +716,6 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 		self.contentTF_3_05.resignFirstResponder()
 		self.contentTF_3_06.resignFirstResponder()
 		self.contentTF_3_07.resignFirstResponder()
-		self.contentTF_3_08.resignFirstResponder()
-		self.contentTF_3_09.resignFirstResponder()
-		self.contentTF_3_10.resignFirstResponder()
 		self.contentTF_4_01.resignFirstResponder()
 		self.contentTF_4_02.resignFirstResponder()
 		self.contentTF_4_03.resignFirstResponder()
@@ -840,9 +723,6 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 		self.contentTF_4_05.resignFirstResponder()
 		self.contentTF_4_06.resignFirstResponder()
 		self.contentTF_4_07.resignFirstResponder()
-		self.contentTF_4_08.resignFirstResponder()
-		self.contentTF_4_09.resignFirstResponder()
-		self.contentTF_4_10.resignFirstResponder()
 		self.contentTF_5_01.resignFirstResponder()
 		self.contentTF_5_02.resignFirstResponder()
 		self.contentTF_5_03.resignFirstResponder()
@@ -850,9 +730,6 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 		self.contentTF_5_05.resignFirstResponder()
 		self.contentTF_5_06.resignFirstResponder()
 		self.contentTF_5_07.resignFirstResponder()
-		self.contentTF_5_08.resignFirstResponder()
-		self.contentTF_5_09.resignFirstResponder()
-		self.contentTF_5_10.resignFirstResponder()
 	}
 
 	/// returnキーが押された時にキーボードを閉じる
