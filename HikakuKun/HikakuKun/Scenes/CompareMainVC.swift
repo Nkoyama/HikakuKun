@@ -538,7 +538,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 						.inset(itemNum * ITEM_H)
 					make.bottom.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
 						.inset((itemNum+1) * ITEM_H)
-					make.left.equalToSuperview()
+					make.left.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left).inset(0)
 					make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.right).inset(itemWidth)
 				}
 				itemNameTF.delegate = self
@@ -666,7 +666,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 	/// - Parameter sender: UIButton
 	/// - Authors: Nozomi Koyama
 	@objc func saveBtnDidTap(_ sender: UIButton) {
-		for col in 1...colNum {
+		for col in 0..<colNum {
 			let colItem = CompareItemRealm()
 			let colContents = CompareContentsRealm()
 			let realm = try! Realm()

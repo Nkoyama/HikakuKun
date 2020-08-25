@@ -34,7 +34,7 @@ class ViewController: UIViewController {
 		let allItems = realm.objects(CompareItemRealm.self)
 		for item in allItems {
 			var displayText = item.groupName
-			let contents = realm.objects(CompareContentsRealm.self).filter("groupID="+String(item.groupId))
+			let contents = realm.objects(CompareContentsRealm.self).filter("groupId="+String(item.groupId))
 			var i = 0
 			for content in contents {
 				if( i == 0 ) {
