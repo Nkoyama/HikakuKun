@@ -121,8 +121,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 		var items: Results<CompareItemRealm>!
 		var contents: Results<CompareContentsRealm>!
 		do{
-			items = try CompareItemRealm().getItems(groupId: String(groupId))
-			contents = try CompareContentsRealm().getContentsList(groupId: String(groupId))
+			items = try CompareItemRealm().getItems(groupId: groupId)
+			contents = try CompareContentsRealm().getContentsList(groupId: groupId)
 			//update contents num
 			if( contents.count > 1 ) {
 				compareNum = contents.count

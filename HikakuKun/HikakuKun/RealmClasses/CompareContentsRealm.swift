@@ -46,11 +46,11 @@ class CompareContentsRealm: Object {
 	/// - Parameter groupId: groupId(Int)
 	/// - Returns: contents list (Results<CompareContentsRealm>)
 	/// - Authors: Nozomi Koyama
-	func getContentsList(groupId: String) throws -> Results<CompareContentsRealm> {
+	func getContentsList(groupId: Int) throws -> Results<CompareContentsRealm> {
 		var contentsList: Results<CompareContentsRealm>
 		do {
 			let realm = try Realm(configuration: config)
-			contentsList = realm.objects(CompareContentsRealm.self).filter("groupId = %@", groupId)
+			contentsList = realm.objects(CompareContentsRealm.self).filter("groupId="+String(groupId))
 		} catch {
 			throw NSError(domain: "error", code: -1, userInfo: nil)
 		}

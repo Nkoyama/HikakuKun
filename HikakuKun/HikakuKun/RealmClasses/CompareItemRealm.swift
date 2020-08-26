@@ -44,7 +44,7 @@ class CompareItemRealm: Object {
 	/// - Parameter groupId: groupId(Int)
 	/// - Returns: contents list (Results<CompareItemRealm>)
 	/// - Authors: Nozomi Koyama
-	func getItems(groupId: String) throws -> Results<CompareItemRealm> {
+	func getItems(groupId: Int) throws -> Results<CompareItemRealm> {
 		var items: Results<CompareItemRealm>
 		do{
 			let realm = try Realm(configuration: config)
