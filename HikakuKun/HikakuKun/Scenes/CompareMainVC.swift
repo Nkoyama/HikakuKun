@@ -669,7 +669,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 		for col in 0..<colNum {
 			let colItem = CompareItemRealm()
 			let colContents = CompareContentsRealm()
-			let realm = try! Realm()
+			let realm = try! Realm(configuration: config)
 			//set values
 			colItem.groupId = groupId
 			colItem.groupName = groupNameTF.text!
@@ -687,7 +687,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 																locale: Locale(identifier: "ja_JP"))
 			colItem.timestamp = dateFormatter.string(from: dt)
 			colContents.groupId = groupId
-			colContents.id = col
+			colContents.id = Int(col)
+			colContents.name = nameTF_1.text!
 			colContents.content1 = contentTF_1_01.text!
 			colContents.content2 = contentTF_1_02.text!
 			colContents.content3 = contentTF_1_03.text!
