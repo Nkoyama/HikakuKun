@@ -23,6 +23,7 @@ class CompareItemRealm: Object {
 	@objc dynamic var item9		: String	= ""	// no use
 	@objc dynamic var item10	: String	= ""	// no use
 	@objc dynamic var timestamp	: String	= ""
+	@objc dynamic var del_flg	: Bool		= false
 
 	/// get max groupId
 	/// - Returns: max groupId(Int)

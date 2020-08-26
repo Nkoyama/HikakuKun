@@ -25,6 +25,7 @@ class CompareContentsRealm: Object {
 	@objc dynamic var content10	: String	= ""	// no use
 	@objc dynamic var memo		: String	= ""
 	@objc dynamic var timestamp	: String	= ""
+	@objc dynamic var del_flg	: Bool		= false
 
 	/// get max id
 	/// - Returns: max id(Int)
