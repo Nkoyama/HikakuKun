@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 class CompareContentsRealm: Object {
-	@objc dynamic var groupId	: String	= ""	// 比較グループID
+	@objc dynamic var groupId	: Int		= 0		// 比較グループID
 	@objc dynamic var id		: String	= ""	// 比較グループ内ID
 	@objc dynamic var name		: String	= ""	// 比較対象名前
 	@objc dynamic var content1	: String	= ""	// 比較項目①内容

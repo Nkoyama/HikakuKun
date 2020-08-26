@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 class CompareItemRealm: Object {
-	@objc dynamic var groupId	: String	= ""	// 比較グループID
+	@objc dynamic var groupId	: Int		= 0		// 比較グループID
 	@objc dynamic var groupName	: String	= ""	// 比較グループ名
 	@objc dynamic var item1		: String	= ""	// 比較項目①
 	@objc dynamic var item2		: String	= ""	// 比較項目②
@@ -27,10 +27,10 @@ class CompareItemRealm: Object {
 	/// get max groupId
 	/// - Returns: max groupId(Int)
 	/// - Authors: Nozomi Koyama
-	func getMaxGroupId() -> String {
+	func getMaxGroupId() -> Int {
 		let realm = try! Realm()
 		let groupCount = realm.objects(CompareItemRealm.self).count
-		var maxGroupId: String = ""
+		var maxGroupId: Int = 0
 		if( groupCount > 0 ) {
 			let max = realm.objects(CompareItemRealm.self).sorted(byKeyPath: "groupId",
 																  ascending: false).first?.groupId
