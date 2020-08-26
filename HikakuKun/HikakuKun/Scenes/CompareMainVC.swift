@@ -687,7 +687,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 																locale: Locale(identifier: "ja_JP"))
 			colItem.timestamp = dateFormatter.string(from: dt)
 			colContents.groupId = groupId
-			colContents.id = String(col)
+			colContents.id = col
 			colContents.content1 = contentTF_1_01.text!
 			colContents.content2 = contentTF_1_02.text!
 			colContents.content3 = contentTF_1_03.text!

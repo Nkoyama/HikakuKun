@@ -28,7 +28,7 @@ class CompareItemRealm: Object {
 	/// - Returns: max groupId(Int)
 	/// - Authors: Nozomi Koyama
 	func getMaxGroupId() -> Int {
-		let realm = try! Realm()
+		let realm = try! Realm(configuration: config)
 		let groupCount = realm.objects(CompareItemRealm.self).count
 		var maxGroupId: Int = 0
 		if( groupCount > 0 ) {
@@ -46,7 +46,7 @@ class CompareItemRealm: Object {
 	func getItems(groupId: String) throws -> Results<CompareItemRealm> {
 		var items: Results<CompareItemRealm>
 		do{
-			let realm = try Realm()
+			let realm = try Realm(configuration: config)
 			items = realm.objects(CompareItemRealm.self).filter("groupId = %@", groupId)
 		} catch {
 			throw NSError(domain: "error", code: -1, userInfo: nil)

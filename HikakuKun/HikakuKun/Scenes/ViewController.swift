@@ -29,8 +29,7 @@ class ViewController: UIViewController {
 		self.view.backgroundColor = UIColor.white
 
 		// 表示用データ取得
-		let realm = try! Realm()
-		print(Realm.Configuration.defaultConfiguration.fileURL!)
+		let realm = try! Realm(configuration: config)
 		let allItems = realm.objects(CompareItemRealm.self)
 		for item in allItems {
 			var displayText = item.groupName
@@ -85,7 +84,7 @@ class ViewController: UIViewController {
 	/// - Authors: Nozomi Koyama
 	@objc func addNewHikakuBtnDidTap(_ sender: UIButton) {
 		let nextVC = CompareMainVC()
-		let newGroupId = Int(CompareItemRealm().getMaxGroupId()) ?? -1 + 1
+		let newGroupId = Int(CompareItemRealm().getMaxGroupId()) + 1
 		nextVC.groupId = newGroupId
 		nextVC.rowNum = 2
 		nextVC.callBack = { () in

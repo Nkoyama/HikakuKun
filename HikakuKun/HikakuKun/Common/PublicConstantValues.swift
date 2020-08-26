@@ -7,6 +7,14 @@
 //
 
 import UIKit
+import RealmSwift
+
+public var config = Realm.Configuration()
+public let configFileURL =  config.fileURL!
+	.deletingLastPathComponent()
+	.deletingLastPathComponent()
+	.deletingLastPathComponent()
+	.appendingPathComponent("Hikakukun_develop/develop.realm")
 
 public let keyWindow = UIApplication.shared.connectedScenes
 	.filter({$0.activationState == .foregroundActive})

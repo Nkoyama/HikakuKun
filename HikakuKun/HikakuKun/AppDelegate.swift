@@ -23,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// 表示する
 		window?.makeKeyAndVisible()
 
+		config.fileURL = configFileURL
+
 		return true
 	}
 

@@ -11,7 +11,7 @@ import RealmSwift
 
 class CompareContentsRealm: Object {
 	@objc dynamic var groupId	: Int		= 0		// 比較グループID
-	@objc dynamic var id		: String	= ""	// 比較グループ内ID
+	@objc dynamic var id		: Int		= 0		// 比較グループ内ID
 	@objc dynamic var name		: String	= ""	// 比較対象名前
 	@objc dynamic var content1	: String	= ""	// 比較項目①内容
 	@objc dynamic var content2	: String	= ""	// 比較項目②内容
@@ -30,7 +30,7 @@ class CompareContentsRealm: Object {
 	/// - Returns: max id(Int)
 	/// - Authors: Nozomi Koyama
 	func getMaxId() -> String {
-		let realm = try! Realm()
+		let realm = try! Realm(configuration: config)
 		let idCount = realm.objects(CompareContentsRealm.self).count
 		var maxId: String = "-1"
 		if( idCount > 0 ) {
@@ -48,7 +48,7 @@ class CompareContentsRealm: Object {
 	func getContentsList(groupId: String) throws -> Results<CompareContentsRealm> {
 		var contentsList: Results<CompareContentsRealm>
 		do {
-			let realm = try Realm()
+			let realm = try Realm(configuration: config)
 			contentsList = realm.objects(CompareContentsRealm.self).filter("groupId = %@", groupId)
 		} catch {
 			throw NSError(domain: "error", code: -1, userInfo: nil)
