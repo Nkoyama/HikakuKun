@@ -304,42 +304,6 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 				self.itemTF_01.text = items.first?.item1
 				self.contentTF_1_01.text = contents.first?.content1
 				self.contentTF_2_01.text = contents.filter("id = 1").first?.content1
-				if( contents.filter("id = 2").first != nil) {
-					self.contentTF_3_01.text = contents.filter("id = 2").first?.content1
-					self.contentTF_3_01.layer.borderColor = UIColor.black.cgColor
-					self.contentTF_3_01.layer.borderWidth = 0.5
-					self.contentTF_3_01.adjustsFontSizeToFitWidth = true
-					self.contentTF_3_01.frame = CGRect(x: 2 * Int(itemWidth),
-													   y: 0,
-													   width: Int(eachWidth),
-													   height: ITEM_H)
-					self.itemsSV.addSubview(self.contentTF_3_01)
-					self.contentTF_3_01.delegate = self
-				}
-				if( contents.filter("id = 3").first != nil) {
-					self.contentTF_4_01.text = contents.filter("id = 3").first?.content1
-					self.contentTF_4_01.layer.borderColor = UIColor.black.cgColor
-					self.contentTF_4_01.layer.borderWidth = 0.5
-					self.contentTF_4_01.adjustsFontSizeToFitWidth = true
-					self.contentTF_4_01.frame = CGRect(x: 3 * Int(itemWidth),
-													   y: 0,
-													   width: Int(eachWidth),
-													   height: ITEM_H)
-					self.itemsSV.addSubview(self.contentTF_4_01)
-					self.contentTF_4_01.delegate = self
-				}
-				if( contents.filter("id = 4").first != nil) {
-					self.contentTF_5_01.text = contents.filter("id = 4").first?.content1
-					self.contentTF_5_01.layer.borderColor = UIColor.black.cgColor
-					self.contentTF_5_01.layer.borderWidth = 0.5
-					self.contentTF_5_01.adjustsFontSizeToFitWidth = true
-					self.contentTF_5_01.frame = CGRect(x: 4 * Int(itemWidth),
-													   y: 0,
-													   width: Int(eachWidth),
-													   height: ITEM_H)
-					self.itemsSV.addSubview(self.contentTF_5_01)
-					self.contentTF_5_01.delegate = self
-				}
 			} else {
 				self.itemTF_01.placeholder = "比較項目1"
 			}
@@ -375,6 +339,43 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 										   height: ITEM_H)
 		self.itemsSV.addSubview(self.contentTF_2_01)
 		self.contentTF_2_01.delegate = self
+
+		if( colNum >= 3 ) {
+			self.contentTF_3_01.text = contents.filter("id = 2").first?.content1
+			self.contentTF_3_01.layer.borderColor = UIColor.black.cgColor
+			self.contentTF_3_01.layer.borderWidth = 0.5
+			self.contentTF_3_01.adjustsFontSizeToFitWidth = true
+			self.contentTF_3_01.frame = CGRect(x: 2 * Int(itemWidth),
+											   y: 0,
+											   width: Int(eachWidth),
+											   height: ITEM_H)
+			self.itemsSV.addSubview(self.contentTF_3_01)
+			self.contentTF_3_01.delegate = self
+		}
+		if( colNum >= 4 ) {
+			self.contentTF_4_01.text = contents.filter("id = 3").first?.content1
+			self.contentTF_4_01.layer.borderColor = UIColor.black.cgColor
+			self.contentTF_4_01.layer.borderWidth = 0.5
+			self.contentTF_4_01.adjustsFontSizeToFitWidth = true
+			self.contentTF_4_01.frame = CGRect(x: 3 * Int(itemWidth),
+											   y: 0,
+											   width: Int(eachWidth),
+											   height: ITEM_H)
+			self.itemsSV.addSubview(self.contentTF_4_01)
+			self.contentTF_4_01.delegate = self
+		}
+		if( colNum == 5 ) {
+			self.contentTF_5_01.text = contents.filter("id = 4").first?.content1
+			self.contentTF_5_01.layer.borderColor = UIColor.black.cgColor
+			self.contentTF_5_01.layer.borderWidth = 0.5
+			self.contentTF_5_01.adjustsFontSizeToFitWidth = true
+			self.contentTF_5_01.frame = CGRect(x: 4 * Int(itemWidth),
+											   y: 0,
+											   width: Int(eachWidth),
+											   height: ITEM_H)
+			self.itemsSV.addSubview(self.contentTF_5_01)
+			self.contentTF_5_01.delegate = self
+		}
 
 		// item 2~
 		if( items.first != nil) {
