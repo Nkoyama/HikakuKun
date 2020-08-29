@@ -345,7 +345,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 			self.contentTF_3_01.layer.borderColor = UIColor.black.cgColor
 			self.contentTF_3_01.layer.borderWidth = 0.5
 			self.contentTF_3_01.adjustsFontSizeToFitWidth = true
-			self.contentTF_3_01.frame = CGRect(x: 2 * Int(itemWidth),
+			self.contentTF_3_01.frame = CGRect(x: Int(itemWidth + 2*eachWidth),
 											   y: 0,
 											   width: Int(eachWidth),
 											   height: ITEM_H)
@@ -357,7 +357,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 			self.contentTF_4_01.layer.borderColor = UIColor.black.cgColor
 			self.contentTF_4_01.layer.borderWidth = 0.5
 			self.contentTF_4_01.adjustsFontSizeToFitWidth = true
-			self.contentTF_4_01.frame = CGRect(x: 3 * Int(itemWidth),
+			self.contentTF_4_01.frame = CGRect(x: Int(itemWidth + 3*eachWidth),
 											   y: 0,
 											   width: Int(eachWidth),
 											   height: ITEM_H)
@@ -369,7 +369,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 			self.contentTF_5_01.layer.borderColor = UIColor.black.cgColor
 			self.contentTF_5_01.layer.borderWidth = 0.5
 			self.contentTF_5_01.adjustsFontSizeToFitWidth = true
-			self.contentTF_5_01.frame = CGRect(x: 4 * Int(itemWidth),
+			self.contentTF_5_01.frame = CGRect(x: Int(itemWidth + 4*eachWidth),
 											   y: 0,
 											   width: Int(eachWidth),
 											   height: ITEM_H)
