@@ -227,7 +227,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 						nameTF = self.nameTF_3
 						self.view.addSubview(nameTF)
 						if( contents.filter("id = 2").first != nil ) {
-							nameTF.text = contents.first?.name
+							nameTF.text = contents.filter("id = 2").first?.name
 						} else {
 							nameTF.placeholder = "比較対象名を入力"
 						}
@@ -235,7 +235,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 						nameTF = self.nameTF_4
 						self.view.addSubview(nameTF)
 						if( contents.filter("id = 3").first != nil ) {
-							nameTF.text = contents.first?.name
+							nameTF.text = contents.filter("id = 3").first?.name
 						} else {
 							nameTF.placeholder = "比較対象名を入力"
 						}
@@ -243,7 +243,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 						nameTF = self.nameTF_5
 						self.view.addSubview(nameTF)
 						if( contents.filter("id = 4").first != nil ) {
-							nameTF.text = contents.first?.name
+							nameTF.text = contents.filter("id = 4").first?.name
 						} else {
 							nameTF.placeholder = "比較対象名を入力"
 						}
