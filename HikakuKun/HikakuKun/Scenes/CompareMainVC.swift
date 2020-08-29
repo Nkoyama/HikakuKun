@@ -220,30 +220,30 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 
 		// 3~
 		if( colNum >= 3 ) {
-			for nameNum in 3...contents.count {
+			for nameNum in 3...colNum {
 				var nameTF = UITextField()
 				switch nameNum {
 					case 3:
 						nameTF = self.nameTF_3
-						if( (contents.filter("id==" + "2").first?.name.count)! > 0 ) {
+						self.view.addSubview(nameTF)
+						if( contents.filter("id = 2").first != nil ) {
 							nameTF.text = contents.first?.name
-							self.view.addSubview(nameTF)
 						} else {
 							nameTF.placeholder = "比較対象名を入力"
 						}
 					case 4:
 						nameTF = self.nameTF_4
-						if( (contents.filter("id==" + "3").first?.name.count)! > 0 ) {
+						self.view.addSubview(nameTF)
+						if( contents.filter("id = 3").first != nil ) {
 							nameTF.text = contents.first?.name
-							self.view.addSubview(nameTF)
 						} else {
 							nameTF.placeholder = "比較対象名を入力"
 						}
 					case 5:
 						nameTF = self.nameTF_5
-						if( (contents.filter("id==" + "4").first?.name.count)! > 0 ) {
+						self.view.addSubview(nameTF)
+						if( contents.filter("id = 4").first != nil ) {
 							nameTF.text = contents.first?.name
-							self.view.addSubview(nameTF)
 						} else {
 							nameTF.placeholder = "比較対象名を入力"
 						}
@@ -793,6 +793,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 	/// - Authors: Nozomi Koyama
 	@objc func addNewNameBtnDidTap(_ sender: UIButton) {
 		colNum = colNum + 1
+		//redisplay
+		self.viewDidLoad()
 	}
 
 	/// TextField以外の部分をタッチした時の処理
