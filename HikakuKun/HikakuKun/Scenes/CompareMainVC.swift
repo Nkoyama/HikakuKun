@@ -378,8 +378,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 		}
 
 		// item 2~
-		if( items.first != nil) {
-			for itemNum in 1..<7 {
+		if( items.first != nil && rowNum >= 2 ) {
+			for itemNum in 1..<rowNum {
 				var itemNameTF = UITextField()
 				var contentTF_1 = UITextField()
 				var contentTF_2 = UITextField()
@@ -409,12 +409,20 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 								self.itemsSV.addSubview(contentTF_5)
 							}
 						}
+						if( contents.filter("id = 0").first != nil ) {
+							contentTF_1.text = contents.filter("id = 0").first?.content2
+						}
 						if( contents.filter("id = 1").first != nil ) {
-							contentTF_1.text = contents.filter("id = 1").first?.content1
 							contentTF_2.text = contents.filter("id = 1").first?.content2
-							contentTF_3.text = contents.filter("id = 1").first?.content3
-							contentTF_4.text = contents.filter("id = 1").first?.content4
-							contentTF_5.text = contents.filter("id = 1").first?.content5
+						}
+						if( contents.filter("id = 2").first != nil ) {
+							contentTF_3.text = contents.filter("id = 2").first?.content2
+						}
+						if( contents.filter("id = 3").first != nil ) {
+							contentTF_4.text = contents.filter("id = 3").first?.content2
+						}
+						if( contents.filter("id = 4").first != nil ) {
+							contentTF_5.text = contents.filter("id = 4").first?.content2
 						}
 					case 2:
 						itemNameTF = itemTF_03
@@ -438,12 +446,20 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 								self.itemsSV.addSubview(contentTF_5)
 							}
 						}
+						if( contents.filter("id = 0").first != nil ) {
+							contentTF_1.text = contents.filter("id = 0").first?.content3
+						}
+						if( contents.filter("id = 1").first != nil ) {
+							contentTF_2.text = contents.filter("id = 1").first?.content3
+						}
 						if( contents.filter("id = 2").first != nil ) {
-							contentTF_1.text = contents.filter("id = 2").first?.content1
-							contentTF_2.text = contents.filter("id = 2").first?.content2
 							contentTF_3.text = contents.filter("id = 2").first?.content3
-							contentTF_4.text = contents.filter("id = 2").first?.content4
-							contentTF_5.text = contents.filter("id = 2").first?.content5
+						}
+						if( contents.filter("id = 3").first != nil ) {
+							contentTF_4.text = contents.filter("id = 3").first?.content3
+						}
+						if( contents.filter("id = 4").first != nil ) {
+							contentTF_5.text = contents.filter("id = 4").first?.content3
 						}
 					case 3:
 						itemNameTF = itemTF_04
@@ -467,12 +483,20 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 								self.itemsSV.addSubview(contentTF_5)
 							}
 						}
+						if( contents.filter("id = 0").first != nil ) {
+							contentTF_1.text = contents.filter("id = 0").first?.content4
+						}
+						if( contents.filter("id = 1").first != nil ) {
+							contentTF_2.text = contents.filter("id = 1").first?.content4
+						}
+						if( contents.filter("id = 2").first != nil ) {
+							contentTF_3.text = contents.filter("id = 2").first?.content4
+						}
 						if( contents.filter("id = 3").first != nil ) {
-							contentTF_1.text = contents.filter("id = 3").first?.content1
-							contentTF_2.text = contents.filter("id = 3").first?.content2
-							contentTF_3.text = contents.filter("id = 3").first?.content3
 							contentTF_4.text = contents.filter("id = 3").first?.content4
-							contentTF_5.text = contents.filter("id = 3").first?.content5
+						}
+						if( contents.filter("id = 4").first != nil ) {
+							contentTF_5.text = contents.filter("id = 4").first?.content4
 						}
 					case 4:
 						itemNameTF = itemTF_05
@@ -496,11 +520,19 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 								self.itemsSV.addSubview(contentTF_5)
 							}
 						}
+						if( contents.filter("id = 0").first != nil ) {
+							contentTF_1.text = contents.filter("id = 0").first?.content5
+						}
+						if( contents.filter("id = 1").first != nil ) {
+							contentTF_2.text = contents.filter("id = 1").first?.content5
+						}
+						if( contents.filter("id = 2").first != nil ) {
+							contentTF_3.text = contents.filter("id = 2").first?.content5
+						}
+						if( contents.filter("id = 3").first != nil ) {
+							contentTF_4.text = contents.filter("id = 3").first?.content5
+						}
 						if( contents.filter("id = 4").first != nil ) {
-							contentTF_1.text = contents.filter("id = 4").first?.content1
-							contentTF_2.text = contents.filter("id = 4").first?.content2
-							contentTF_3.text = contents.filter("id = 4").first?.content3
-							contentTF_4.text = contents.filter("id = 4").first?.content4
 							contentTF_5.text = contents.filter("id = 4").first?.content5
 						}
 					case 5:
@@ -525,12 +557,20 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 								self.itemsSV.addSubview(contentTF_5)
 							}
 						}
-						if( contents.filter("id = 5").first != nil ) {
-							contentTF_1.text = contents.filter("id = 5").first?.content1
-							contentTF_2.text = contents.filter("id = 5").first?.content2
-							contentTF_3.text = contents.filter("id = 5").first?.content3
-							contentTF_4.text = contents.filter("id = 5").first?.content4
-							contentTF_5.text = contents.filter("id = 5").first?.content5
+						if( contents.filter("id = 0").first != nil ) {
+							contentTF_1.text = contents.filter("id = 0").first?.content6
+						}
+						if( contents.filter("id = 1").first != nil ) {
+							contentTF_2.text = contents.filter("id = 1").first?.content6
+						}
+						if( contents.filter("id = 2").first != nil ) {
+							contentTF_3.text = contents.filter("id = 2").first?.content6
+						}
+						if( contents.filter("id = 3").first != nil ) {
+							contentTF_4.text = contents.filter("id = 3").first?.content6
+						}
+						if( contents.filter("id = 4").first != nil ) {
+							contentTF_5.text = contents.filter("id = 4").first?.content6
 						}
 					case 6:
 						itemNameTF = itemTF_07
@@ -554,12 +594,20 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 								self.itemsSV.addSubview(contentTF_5)
 							}
 						}
-						if( contents.filter("id = 6").first != nil ) {
-							contentTF_1.text = contents.filter("id = 6").first?.content1
-							contentTF_2.text = contents.filter("id = 6").first?.content2
-							contentTF_3.text = contents.filter("id = 6").first?.content3
-							contentTF_4.text = contents.filter("id = 6").first?.content4
-							contentTF_5.text = contents.filter("id = 6").first?.content5
+						if( contents.filter("id = 0").first != nil ) {
+							contentTF_1.text = contents.filter("id = 0").first?.content7
+						}
+						if( contents.filter("id = 1").first != nil ) {
+							contentTF_2.text = contents.filter("id = 1").first?.content7
+						}
+						if( contents.filter("id = 2").first != nil ) {
+							contentTF_3.text = contents.filter("id = 2").first?.content7
+						}
+						if( contents.filter("id = 3").first != nil ) {
+							contentTF_4.text = contents.filter("id = 3").first?.content7
+						}
+						if( contents.filter("id = 4").first != nil ) {
+							contentTF_5.text = contents.filter("id = 4").first?.content7
 						}
 					default:
 						break
