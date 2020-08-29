@@ -677,10 +677,11 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + NAME_H)
 			make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(BOTTOM_H)
 			make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(0)
-			if( contents.count >= 5 ) {
-				make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(0)
-			} else {
+			if( SAFE_AREA_WIDTH >= 800 && colNum <= 4 )
+				|| ( SAFE_AREA_WIDTH < 800 && colNum <= 3 ) {
 				make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(RIGHT_W)
+			} else {
+				make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(0)
 			}
 		}
 		self.itemsSV.delegate = self
@@ -794,6 +795,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 	@objc func addNewNameBtnDidTap(_ sender: UIButton) {
 		colNum = colNum + 1
 		//redisplay
+		self.loadView()
 		self.viewDidLoad()
 	}
 
