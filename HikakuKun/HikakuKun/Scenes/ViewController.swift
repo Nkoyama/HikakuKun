@@ -98,6 +98,7 @@ class ViewController: UIViewController {
 	/// 画面遷移から戻ってきたときに実行する関数
 	func callBack() {
 		// 画面再読み込み
+		self.loadView()
 		self.viewDidLoad()
 	}
 

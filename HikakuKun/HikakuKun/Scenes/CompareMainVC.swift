@@ -766,6 +766,33 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 				colContents.content5 = contentTF_2_05.text!
 				colContents.content6 = contentTF_2_06.text!
 				colContents.content7 = contentTF_2_07.text!
+			} else if( col == 2 ) {
+				colContents.name = nameTF_3.text!
+				colContents.content1 = contentTF_3_01.text!
+				colContents.content2 = contentTF_3_02.text!
+				colContents.content3 = contentTF_3_03.text!
+				colContents.content4 = contentTF_3_04.text!
+				colContents.content5 = contentTF_3_05.text!
+				colContents.content6 = contentTF_3_06.text!
+				colContents.content7 = contentTF_3_07.text!
+			} else if( col == 3 ) {
+				colContents.name = nameTF_4.text!
+				colContents.content1 = contentTF_4_01.text!
+				colContents.content2 = contentTF_4_02.text!
+				colContents.content3 = contentTF_4_03.text!
+				colContents.content4 = contentTF_4_04.text!
+				colContents.content5 = contentTF_4_05.text!
+				colContents.content6 = contentTF_4_06.text!
+				colContents.content7 = contentTF_4_07.text!
+			} else if( col == 4 ) {
+				colContents.name = nameTF_5.text!
+				colContents.content1 = contentTF_5_01.text!
+				colContents.content2 = contentTF_5_02.text!
+				colContents.content3 = contentTF_5_03.text!
+				colContents.content4 = contentTF_5_04.text!
+				colContents.content5 = contentTF_5_05.text!
+				colContents.content6 = contentTF_5_06.text!
+				colContents.content7 = contentTF_5_07.text!
 			}
 			colContents.timestamp = dateFormatter.string(from: dt)
 
