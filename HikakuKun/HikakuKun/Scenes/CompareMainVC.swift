@@ -134,15 +134,15 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 		// calc width
 		let itemWidth = (SAFE_AREA_WIDTH - RIGHT_W) / 6
 		var eachWidth = (SAFE_AREA_WIDTH - itemWidth) / 5
-		if( compareNum <= 2 ) {
+		if( colNum <= 2 ) {
 			eachWidth = (SAFE_AREA_WIDTH - RIGHT_W - itemWidth) / 2
 		} else if( SAFE_AREA_WIDTH >= 800 ) {
-			if( compareNum < 5 ) {
-				eachWidth = (SAFE_AREA_WIDTH - RIGHT_W - itemWidth) / CGFloat(compareNum)
+			if( colNum < 5 ) {
+				eachWidth = (SAFE_AREA_WIDTH - RIGHT_W - itemWidth) / CGFloat(colNum)
 			}
 		} else {
-			if( compareNum < 4 ) {
-				eachWidth = (SAFE_AREA_WIDTH - RIGHT_W - itemWidth) / CGFloat(compareNum)
+			if( colNum < 4 ) {
+				eachWidth = (SAFE_AREA_WIDTH - RIGHT_W - itemWidth) / CGFloat(colNum)
 			}
 		}
 
@@ -193,8 +193,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 
 		// 2
 		if( contents.count >= 2 ) {
-			if( (contents.filter("id = %@", "1").first?.name.count)! > 0 ) {
-				self.nameTF_2.text = contents.first?.name
+			if( (contents.filter("id = 1").first?.name.count)! > 0 ) {
+				self.nameTF_2.text = contents.filter("id = 1").first?.name
 			} else {
 				self.nameTF_2.placeholder = "比較対象名を入力"
 			}
@@ -225,7 +225,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 				switch nameNum {
 					case 3:
 						nameTF = self.nameTF_3
-						if( (contents.filter("id = %@", "2").first?.name.count)! > 0 ) {
+						if( (contents.filter("id==" + "2").first?.name.count)! > 0 ) {
 							nameTF.text = contents.first?.name
 							self.view.addSubview(nameTF)
 						} else {
@@ -233,7 +233,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 						}
 					case 4:
 						nameTF = self.nameTF_4
-						if( (contents.filter("id = %@", "3").first?.name.count)! > 0 ) {
+						if( (contents.filter("id==" + "3").first?.name.count)! > 0 ) {
 							nameTF.text = contents.first?.name
 							self.view.addSubview(nameTF)
 						} else {
@@ -241,7 +241,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 						}
 					case 5:
 						nameTF = self.nameTF_5
-						if( (contents.filter("id = %@", "4").first?.name.count)! > 0 ) {
+						if( (contents.filter("id==" + "4").first?.name.count)! > 0 ) {
 							nameTF.text = contents.first?.name
 							self.view.addSubview(nameTF)
 						} else {
@@ -295,13 +295,17 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 			}
 		}
 
-		/* items(scroll view) */
+		/* ---------------------------------------- */
+		/*	items(scroll view)						*/
+		/* ---------------------------------------- */
 		// item 1
 		if( items.first != nil ) {
 			if( (items.first?.item1.count)! > 0 ) {
 				self.itemTF_01.text = items.first?.item1
 				self.contentTF_1_01.text = contents.first?.content1
-				self.contentTF_2_01.text = contents.first?.content2
+				if( contents.filter("id = 1").first?.content1 != "") {
+					self.contentTF_2_01.text = contents.filter("id = 1").first?.content1
+				}
 			} else {
 				self.itemTF_01.placeholder = "比較項目1"
 			}
@@ -311,40 +315,35 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 		self.itemTF_01.layer.borderColor = UIColor.black.cgColor
 		self.itemTF_01.layer.borderWidth = 0.5
 		self.itemTF_01.adjustsFontSizeToFitWidth = true
+		self.itemTF_01.frame = CGRect(x: 0,
+									  y: 0,
+									  width: Int(itemWidth),
+									  height: ITEM_H)
 		self.itemsSV.addSubview(self.itemTF_01)
-		self.itemTF_01.snp.makeConstraints{ (make) in
-			make.top.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top).inset(0)
-			make.bottom.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top).inset(ITEM_H)
-			make.left.equalToSuperview()
-			make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left).inset(itemWidth)
-		}
 		self.itemTF_01.delegate = self
+
 		self.contentTF_1_01.layer.borderColor = UIColor.black.cgColor
 		self.contentTF_1_01.layer.borderWidth = 0.5
 		self.contentTF_1_01.adjustsFontSizeToFitWidth = true
+		self.contentTF_1_01.frame = CGRect(x: Int(itemWidth),
+										   y: 0,
+										   width: Int(eachWidth),
+										   height: ITEM_H)
 		self.itemsSV.addSubview(self.contentTF_1_01)
-		self.contentTF_1_01.snp.makeConstraints{ (make) in
-			make.top.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top).inset(0)
-			make.bottom.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top).inset(ITEM_H)
-			make.left.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left).inset(itemWidth)
-			make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
-				.inset(itemWidth + eachWidth)
-		}
 		self.contentTF_1_01.delegate = self
+
 		self.contentTF_2_01.layer.borderColor = UIColor.black.cgColor
 		self.contentTF_2_01.layer.borderWidth = 0.5
 		self.contentTF_2_01.adjustsFontSizeToFitWidth = true
+		self.contentTF_2_01.frame = CGRect(x: Int(itemWidth + eachWidth),
+										   y: 0,
+										   width: Int(eachWidth),
+										   height: ITEM_H)
 		self.itemsSV.addSubview(self.contentTF_2_01)
-		self.contentTF_2_01.snp.makeConstraints{ (make) in
-			make.top.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top).inset(0)
-			make.bottom.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top).inset(ITEM_H)
-			make.left.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left).inset(itemWidth + eachWidth)
-			make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
-				.inset(itemWidth + 2*eachWidth)
-		}
 		self.contentTF_2_01.delegate = self
+
 		// item 2~
-		if( items.first != nil ) {
+		if( items.first != nil) {
 			for itemNum in 1..<7 {
 				var itemNameTF = UITextField()
 				var contentTF_1 = UITextField()
@@ -375,12 +374,12 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 								self.itemsSV.addSubview(contentTF_5)
 							}
 						}
-						if( contents.filter("id = %@", "1").first != nil ) {
-							contentTF_1.text = contents.filter("id = %@", "1").first?.content1
-							contentTF_2.text = contents.filter("id = %@", "1").first?.content2
-							contentTF_3.text = contents.filter("id = %@", "1").first?.content3
-							contentTF_4.text = contents.filter("id = %@", "1").first?.content4
-							contentTF_5.text = contents.filter("id = %@", "1").first?.content5
+						if( contents.filter("id = 1").first != nil ) {
+							contentTF_1.text = contents.filter("id = 1").first?.content1
+							contentTF_2.text = contents.filter("id = 1").first?.content2
+							contentTF_3.text = contents.filter("id = 1").first?.content3
+							contentTF_4.text = contents.filter("id = 1").first?.content4
+							contentTF_5.text = contents.filter("id = 1").first?.content5
 						}
 					case 2:
 						itemNameTF = itemTF_03
@@ -404,12 +403,12 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 								self.itemsSV.addSubview(contentTF_5)
 							}
 						}
-						if( contents.filter("id = %@", "2").first != nil ) {
-							contentTF_1.text = contents.filter("id = %@", "2").first?.content1
-							contentTF_2.text = contents.filter("id = %@", "2").first?.content2
-							contentTF_3.text = contents.filter("id = %@", "2").first?.content3
-							contentTF_4.text = contents.filter("id = %@", "2").first?.content4
-							contentTF_5.text = contents.filter("id = %@", "2").first?.content5
+						if( contents.filter("id = 2").first != nil ) {
+							contentTF_1.text = contents.filter("id = 2").first?.content1
+							contentTF_2.text = contents.filter("id = 2").first?.content2
+							contentTF_3.text = contents.filter("id = 2").first?.content3
+							contentTF_4.text = contents.filter("id = 2").first?.content4
+							contentTF_5.text = contents.filter("id = 2").first?.content5
 						}
 					case 3:
 						itemNameTF = itemTF_04
@@ -433,12 +432,12 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 								self.itemsSV.addSubview(contentTF_5)
 							}
 						}
-						if( contents.filter("id = %@", "3").first != nil ) {
-							contentTF_1.text = contents.filter("id = %@", "3").first?.content1
-							contentTF_2.text = contents.filter("id = %@", "3").first?.content2
-							contentTF_3.text = contents.filter("id = %@", "3").first?.content3
-							contentTF_4.text = contents.filter("id = %@", "3").first?.content4
-							contentTF_5.text = contents.filter("id = %@", "3").first?.content5
+						if( contents.filter("id = 3").first != nil ) {
+							contentTF_1.text = contents.filter("id = 3").first?.content1
+							contentTF_2.text = contents.filter("id = 3").first?.content2
+							contentTF_3.text = contents.filter("id = 3").first?.content3
+							contentTF_4.text = contents.filter("id = 3").first?.content4
+							contentTF_5.text = contents.filter("id = 3").first?.content5
 						}
 					case 4:
 						itemNameTF = itemTF_05
@@ -462,12 +461,12 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 								self.itemsSV.addSubview(contentTF_5)
 							}
 						}
-						if( contents.filter("id = %@", "4").first != nil ) {
-							contentTF_1.text = contents.filter("id = %@", "4").first?.content1
-							contentTF_2.text = contents.filter("id = %@", "4").first?.content2
-							contentTF_3.text = contents.filter("id = %@", "4").first?.content3
-							contentTF_4.text = contents.filter("id = %@", "4").first?.content4
-							contentTF_5.text = contents.filter("id = %@", "4").first?.content5
+						if( contents.filter("id = 4").first != nil ) {
+							contentTF_1.text = contents.filter("id = 4").first?.content1
+							contentTF_2.text = contents.filter("id = 4").first?.content2
+							contentTF_3.text = contents.filter("id = 4").first?.content3
+							contentTF_4.text = contents.filter("id = 4").first?.content4
+							contentTF_5.text = contents.filter("id = 4").first?.content5
 						}
 					case 5:
 						itemNameTF = itemTF_06
@@ -491,12 +490,12 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 								self.itemsSV.addSubview(contentTF_5)
 							}
 						}
-						if( contents.filter("id = %@", "5").first != nil ) {
-							contentTF_1.text = contents.filter("id = %@", "5").first?.content1
-							contentTF_2.text = contents.filter("id = %@", "5").first?.content2
-							contentTF_3.text = contents.filter("id = %@", "5").first?.content3
-							contentTF_4.text = contents.filter("id = %@", "5").first?.content4
-							contentTF_5.text = contents.filter("id = %@", "5").first?.content5
+						if( contents.filter("id = 5").first != nil ) {
+							contentTF_1.text = contents.filter("id = 5").first?.content1
+							contentTF_2.text = contents.filter("id = 5").first?.content2
+							contentTF_3.text = contents.filter("id = 5").first?.content3
+							contentTF_4.text = contents.filter("id = 5").first?.content4
+							contentTF_5.text = contents.filter("id = 5").first?.content5
 						}
 					case 6:
 						itemNameTF = itemTF_07
@@ -520,12 +519,12 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 								self.itemsSV.addSubview(contentTF_5)
 							}
 						}
-						if( contents.filter("id = %@", "6").first != nil ) {
-							contentTF_1.text = contents.filter("id = %@", "6").first?.content1
-							contentTF_2.text = contents.filter("id = %@", "6").first?.content2
-							contentTF_3.text = contents.filter("id = %@", "6").first?.content3
-							contentTF_4.text = contents.filter("id = %@", "6").first?.content4
-							contentTF_5.text = contents.filter("id = %@", "6").first?.content5
+						if( contents.filter("id = 6").first != nil ) {
+							contentTF_1.text = contents.filter("id = 6").first?.content1
+							contentTF_2.text = contents.filter("id = 6").first?.content2
+							contentTF_3.text = contents.filter("id = 6").first?.content3
+							contentTF_4.text = contents.filter("id = 6").first?.content4
+							contentTF_5.text = contents.filter("id = 6").first?.content5
 						}
 					default:
 						break
@@ -533,88 +532,58 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 				itemNameTF.layer.borderColor = UIColor.black.cgColor
 				itemNameTF.layer.borderWidth = 0.5
 				itemNameTF.adjustsFontSizeToFitWidth = true
-				itemNameTF.snp.makeConstraints{ (make) in
-					make.top.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
-						.inset(itemNum * ITEM_H)
-					make.bottom.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
-						.inset((itemNum+1) * ITEM_H)
-					make.left.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left).inset(0)
-					make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.right).inset(itemWidth)
-				}
+				itemNameTF.frame = CGRect(x: 0,
+										  y: itemNum * ITEM_H,
+										  width: Int(itemWidth),
+										  height: ITEM_H)
 				itemNameTF.delegate = self
+
 				contentTF_1.layer.borderColor = UIColor.black.cgColor
 				contentTF_1.layer.borderWidth = 0.5
 				contentTF_1.adjustsFontSizeToFitWidth = true
-				contentTF_1.snp.makeConstraints{ (make) in
-					make.top.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
-						.inset(itemNum * ITEM_H)
-					make.bottom.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
-						.inset((itemNum+1) * ITEM_H)
-					make.left.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left).inset(itemWidth)
-					make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
-						.inset(itemWidth + eachWidth)
-				}
+				contentTF_1.frame = CGRect(x: Int(itemWidth),
+										   y: itemNum * ITEM_H,
+										   width: Int(eachWidth),
+										   height: ITEM_H)
 				contentTF_1.delegate = self
+
 				contentTF_2.layer.borderColor = UIColor.black.cgColor
 				contentTF_2.layer.borderWidth = 0.5
 				contentTF_2.adjustsFontSizeToFitWidth = true
-				contentTF_2.snp.makeConstraints{ (make) in
-					make.top.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
-						.inset((itemNum) * ITEM_H)
-					make.bottom.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
-						.inset((itemNum+1) * ITEM_H)
-					make.left.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
-						.inset(itemWidth + eachWidth)
-					make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
-						.inset(itemWidth + 2*eachWidth)
-				}
+				contentTF_2.frame = CGRect(x: Int(itemWidth + eachWidth),
+										   y: itemNum * ITEM_H,
+										   width: Int(eachWidth),
+										   height: ITEM_H)
 				contentTF_2.delegate = self
+
 				if( colNum >= 3 ) {
 					contentTF_3.layer.borderColor = UIColor.black.cgColor
 					contentTF_3.layer.borderWidth = 0.5
 					contentTF_3.adjustsFontSizeToFitWidth = true
-					contentTF_3.snp.makeConstraints{ (make) in
-						make.top.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
-							.inset((itemNum) * ITEM_H)
-						make.bottom.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
-							.inset((itemNum+1) * ITEM_H)
-						make.left.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
-							.inset(itemWidth + 2*eachWidth)
-						make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
-							.inset(itemWidth + 3*eachWidth)
-						contentTF_3.delegate = self
-					}
+					contentTF_3.frame = CGRect(x: Int(itemWidth + 2*eachWidth),
+											   y: itemNum * ITEM_H,
+											   width: Int(eachWidth),
+											   height: ITEM_H)
+					contentTF_3.delegate = self
 				}
 				if( colNum >= 4 ) {
 					contentTF_4.layer.borderColor = UIColor.black.cgColor
 					contentTF_4.layer.borderWidth = 0.5
 					contentTF_4.adjustsFontSizeToFitWidth = true
-					contentTF_4.snp.makeConstraints{ (make) in
-						make.top.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
-							.inset((itemNum) * ITEM_H)
-						make.bottom.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
-							.inset((itemNum+1) * ITEM_H)
-						make.left.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
-							.inset(itemWidth + 3*eachWidth)
-						make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
-							.inset(itemWidth + 4*eachWidth)
-					}
+					contentTF_4.frame = CGRect(x: Int(itemWidth + 3*eachWidth),
+											   y: itemNum * ITEM_H,
+											   width: Int(eachWidth),
+											   height: ITEM_H)
 					contentTF_4.delegate = self
 				}
 				if( colNum >= 5 ) {
 					contentTF_5.layer.borderColor = UIColor.black.cgColor
 					contentTF_5.layer.borderWidth = 0.5
 					contentTF_5.adjustsFontSizeToFitWidth = true
-					contentTF_5.snp.makeConstraints{ (make) in
-						make.top.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
-							.inset((itemNum) * ITEM_H)
-						make.bottom.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.top)
-							.inset((itemNum+1) * ITEM_H)
-						make.left.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
-							.inset(itemWidth + 4*eachWidth)
-						make.right.equalTo(self.itemsSV.safeAreaLayoutGuide.snp.left)
-							.inset(itemWidth + 5*eachWidth)
-					}
+					contentTF_5.frame = CGRect(x: Int(itemWidth + 4*eachWidth),
+											   y: itemNum * ITEM_H,
+											   width: Int(eachWidth),
+											   height: ITEM_H)
 					contentTF_5.delegate = self
 				}
 			}
@@ -632,7 +601,9 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 			}
 		}
 		self.itemsSV.delegate = self
-		/* items(scroll view) end */
+		/* ---------------------------------------- */
+		/*	items(scroll view)	end					*/
+		/* ---------------------------------------- */
 	}
 
 	/// back button action
@@ -682,6 +653,13 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 															options: 0,
 															locale: Locale(identifier: "ja_JP"))
 		colItem.timestamp = dateFormatter.string(from: dt)
+
+		//insert data
+		let realm = try! Realm(configuration: config)
+		try! realm.write {
+			realm.add(colItem)
+		}
+
 		for col in 0..<colNum {
 			let colContents = CompareContentsRealm()
 			colContents.groupId = groupId
@@ -708,16 +686,9 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 			colContents.timestamp = dateFormatter.string(from: dt)
 
 			//insert data
-			let realm = try! Realm(configuration: config)
 			try! realm.write {
 				realm.add(colContents)
 			}
-		}
-
-		//insert data
-		let realm = try! Realm(configuration: config)
-		try! realm.write {
-			realm.add(colItem)
 		}
 
 		//complete message
