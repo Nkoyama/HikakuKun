@@ -66,6 +66,12 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 	let contentTF_5_05	= UITextField()
 	let contentTF_5_06	= UITextField()
 	let contentTF_5_07	= UITextField()
+	let memoLabel		= UILabel()
+	let memoTF_1		= UITextView()
+	let memoTF_2		= UITextView()
+	let memoTF_3		= UITextView()
+	let memoTF_4		= UITextView()
+	let memoTF_5		= UITextView()
 
 	var groupId		= -1
 	var compareNum	= 1
@@ -379,7 +385,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 		}
 
 		// item 2~
-		if( items.first != nil && rowNum >= 2 ) {
+		if( rowNum >= 2 ) {
 			for itemNum in 1..<rowNum {
 				var itemNameTF = UITextField()
 				var contentTF_1 = UITextField()
@@ -395,20 +401,20 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 						contentTF_3 = contentTF_3_02
 						contentTF_4 = contentTF_4_02
 						contentTF_5 = contentTF_5_02
-						if( (items.first?.item2.count)! > 0 ) {
+						self.itemsSV.addSubview(itemNameTF)
+						self.itemsSV.addSubview(contentTF_1)
+						self.itemsSV.addSubview(contentTF_2)
+						if( colNum >= 3 ) {
+							self.itemsSV.addSubview(contentTF_3)
+						}
+						if( colNum >= 4 ) {
+							self.itemsSV.addSubview(contentTF_4)
+						}
+						if( colNum >= 5 ) {
+							self.itemsSV.addSubview(contentTF_5)
+						}
+						if( items.first != nil ) {
 							itemNameTF.text = items.first?.item2
-							self.itemsSV.addSubview(itemNameTF)
-							self.itemsSV.addSubview(contentTF_1)
-							self.itemsSV.addSubview(contentTF_2)
-							if( colNum >= 3 ) {
-								self.itemsSV.addSubview(contentTF_3)
-							}
-							if( colNum >= 4 ) {
-								self.itemsSV.addSubview(contentTF_4)
-							}
-							if( colNum >= 5 ) {
-								self.itemsSV.addSubview(contentTF_5)
-							}
 						}
 						if( contents.filter("id = 0").first != nil ) {
 							contentTF_1.text = contents.filter("id = 0").first?.content2
@@ -432,20 +438,20 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 						contentTF_3 = contentTF_3_03
 						contentTF_4 = contentTF_4_03
 						contentTF_5 = contentTF_5_03
-						if( (items.first?.item3.count)! > 0 ) {
+						self.itemsSV.addSubview(itemNameTF)
+						self.itemsSV.addSubview(contentTF_1)
+						self.itemsSV.addSubview(contentTF_2)
+						if( colNum >= 3 ) {
+							self.itemsSV.addSubview(contentTF_3)
+						}
+						if( colNum >= 4 ) {
+							self.itemsSV.addSubview(contentTF_4)
+						}
+						if( colNum >= 5 ) {
+							self.itemsSV.addSubview(contentTF_5)
+						}
+						if( items.first != nil ) {
 							itemNameTF.text = items.first?.item3
-							self.itemsSV.addSubview(itemNameTF)
-							self.itemsSV.addSubview(contentTF_1)
-							self.itemsSV.addSubview(contentTF_2)
-							if( colNum >= 3 ) {
-								self.itemsSV.addSubview(contentTF_3)
-							}
-							if( colNum >= 4 ) {
-								self.itemsSV.addSubview(contentTF_4)
-							}
-							if( colNum >= 5 ) {
-								self.itemsSV.addSubview(contentTF_5)
-							}
 						}
 						if( contents.filter("id = 0").first != nil ) {
 							contentTF_1.text = contents.filter("id = 0").first?.content3
@@ -469,20 +475,20 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 						contentTF_3 = contentTF_3_04
 						contentTF_4 = contentTF_4_04
 						contentTF_5 = contentTF_5_04
-						if( (items.first?.item4.count)! > 0 ) {
+						self.itemsSV.addSubview(itemNameTF)
+						self.itemsSV.addSubview(contentTF_1)
+						self.itemsSV.addSubview(contentTF_2)
+						if( colNum >= 3 ) {
+							self.itemsSV.addSubview(contentTF_3)
+						}
+						if( colNum >= 4 ) {
+							self.itemsSV.addSubview(contentTF_4)
+						}
+						if( colNum >= 5 ) {
+							self.itemsSV.addSubview(contentTF_5)
+						}
+						if( items.first != nil ) {
 							itemNameTF.text = items.first?.item4
-							self.itemsSV.addSubview(itemNameTF)
-							self.itemsSV.addSubview(contentTF_1)
-							self.itemsSV.addSubview(contentTF_2)
-							if( colNum >= 3 ) {
-								self.itemsSV.addSubview(contentTF_3)
-							}
-							if( colNum >= 4 ) {
-								self.itemsSV.addSubview(contentTF_4)
-							}
-							if( colNum >= 5 ) {
-								self.itemsSV.addSubview(contentTF_5)
-							}
 						}
 						if( contents.filter("id = 0").first != nil ) {
 							contentTF_1.text = contents.filter("id = 0").first?.content4
@@ -506,20 +512,20 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 						contentTF_3 = contentTF_3_05
 						contentTF_4 = contentTF_4_05
 						contentTF_5 = contentTF_5_05
-						if( (items.first?.item5.count)! > 0 ) {
+						self.itemsSV.addSubview(itemNameTF)
+						self.itemsSV.addSubview(contentTF_1)
+						self.itemsSV.addSubview(contentTF_2)
+						if( colNum >= 3 ) {
+							self.itemsSV.addSubview(contentTF_3)
+						}
+						if( colNum >= 4 ) {
+							self.itemsSV.addSubview(contentTF_4)
+						}
+						if( colNum >= 5 ) {
+							self.itemsSV.addSubview(contentTF_5)
+						}
+						if( items.first != nil ) {
 							itemNameTF.text = items.first?.item5
-							self.itemsSV.addSubview(itemNameTF)
-							self.itemsSV.addSubview(contentTF_1)
-							self.itemsSV.addSubview(contentTF_2)
-							if( colNum >= 3 ) {
-								self.itemsSV.addSubview(contentTF_3)
-							}
-							if( colNum >= 4 ) {
-								self.itemsSV.addSubview(contentTF_4)
-							}
-							if( colNum >= 5 ) {
-								self.itemsSV.addSubview(contentTF_5)
-							}
 						}
 						if( contents.filter("id = 0").first != nil ) {
 							contentTF_1.text = contents.filter("id = 0").first?.content5
@@ -543,20 +549,20 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 						contentTF_3 = contentTF_3_06
 						contentTF_4 = contentTF_4_06
 						contentTF_5 = contentTF_5_06
-						if( (items.first?.item6.count)! > 0 ) {
+						self.itemsSV.addSubview(itemNameTF)
+						self.itemsSV.addSubview(contentTF_1)
+						self.itemsSV.addSubview(contentTF_2)
+						if( colNum >= 3 ) {
+							self.itemsSV.addSubview(contentTF_3)
+						}
+						if( colNum >= 4 ) {
+							self.itemsSV.addSubview(contentTF_4)
+						}
+						if( colNum >= 5 ) {
+							self.itemsSV.addSubview(contentTF_5)
+						}
+						if( items.first != nil ) {
 							itemNameTF.text = items.first?.item6
-							self.itemsSV.addSubview(itemNameTF)
-							self.itemsSV.addSubview(contentTF_1)
-							self.itemsSV.addSubview(contentTF_2)
-							if( colNum >= 3 ) {
-								self.itemsSV.addSubview(contentTF_3)
-							}
-							if( colNum >= 4 ) {
-								self.itemsSV.addSubview(contentTF_4)
-							}
-							if( colNum >= 5 ) {
-								self.itemsSV.addSubview(contentTF_5)
-							}
 						}
 						if( contents.filter("id = 0").first != nil ) {
 							contentTF_1.text = contents.filter("id = 0").first?.content6
@@ -580,20 +586,20 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 						contentTF_3 = contentTF_3_07
 						contentTF_4 = contentTF_4_07
 						contentTF_5 = contentTF_5_07
-						if( (items.first?.item7.count)! > 0 ) {
+						self.itemsSV.addSubview(itemNameTF)
+						self.itemsSV.addSubview(contentTF_1)
+						self.itemsSV.addSubview(contentTF_2)
+						if( colNum >= 3 ) {
+							self.itemsSV.addSubview(contentTF_3)
+						}
+						if( colNum >= 4 ) {
+							self.itemsSV.addSubview(contentTF_4)
+						}
+						if( colNum >= 5 ) {
+							self.itemsSV.addSubview(contentTF_5)
+						}
+						if( items.first != nil ) {
 							itemNameTF.text = items.first?.item7
-							self.itemsSV.addSubview(itemNameTF)
-							self.itemsSV.addSubview(contentTF_1)
-							self.itemsSV.addSubview(contentTF_2)
-							if( colNum >= 3 ) {
-								self.itemsSV.addSubview(contentTF_3)
-							}
-							if( colNum >= 4 ) {
-								self.itemsSV.addSubview(contentTF_4)
-							}
-							if( colNum >= 5 ) {
-								self.itemsSV.addSubview(contentTF_5)
-							}
 						}
 						if( contents.filter("id = 0").first != nil ) {
 							contentTF_1.text = contents.filter("id = 0").first?.content7
@@ -685,7 +691,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 			self.addNewItemBtn.layer.borderWidth = 1.0
 			self.addNewItemBtn.layer.cornerRadius = 12.0
 			self.addNewItemBtn.frame = CGRect(x: 3,
-											  y: rowNum * ITEM_H + 3,
+											  y: (rowNum+3) * ITEM_H + 3,
 											  width: 24,
 											  height: 24)
 			self.itemsSV.addSubview(self.addNewItemBtn)
@@ -693,6 +699,17 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 										 action: #selector(self.addNewItemBtnDidTap(_:)),
 										 for: .touchUpInside)
 		}
+
+		// memo
+		self.memoLabel.text = "メモ"
+		self.memoLabel.textColor = .black
+		self.memoLabel.layer.borderColor = UIColor.black.cgColor
+		self.memoLabel.layer.borderWidth = 0.5
+		self.memoLabel.frame = CGRect(x: 0,
+									  y: rowNum * ITEM_H,
+									  width: Int(itemWidth),
+									  height: ITEM_H * 3)
+		self.itemsSV.addSubview(self.memoLabel)
 
 		self.view.addSubview(self.itemsSV)
 		self.itemsSV.snp.makeConstraints{ (make) in
