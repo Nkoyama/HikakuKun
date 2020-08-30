@@ -21,6 +21,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 	let nameTF_4		= UITextField()
 	let nameTF_5		= UITextField()
 	let addNewNameBtn	= UIButton()
+	let addNewItemBtn	= UIButton()
 
 	let itemsSV			= UIScrollView()
 	let itemTF_01		= UITextField()
@@ -672,6 +673,27 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 			}
 		}
 
+		// add new item button
+		if( rowNum <= 6 ) {
+			self.addNewItemBtn.setTitle("＋", for: .normal)
+			self.addNewItemBtn.setTitleColor(UIColor.blue, for: .normal)
+			self.addNewItemBtn.backgroundColor = UIColor.clear
+			self.addNewItemBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20.0)
+			self.addNewItemBtn.titleLabel?.adjustsFontSizeToFitWidth = true
+			self.addNewItemBtn.titleLabel?.baselineAdjustment = .alignCenters
+			self.addNewItemBtn.layer.borderColor = UIColor.blue.cgColor
+			self.addNewItemBtn.layer.borderWidth = 1.0
+			self.addNewItemBtn.layer.cornerRadius = 12.0
+			self.addNewItemBtn.frame = CGRect(x: 3,
+											  y: rowNum * ITEM_H + 3,
+											  width: 24,
+											  height: 24)
+			self.itemsSV.addSubview(self.addNewItemBtn)
+			self.addNewItemBtn.addTarget(self,
+										 action: #selector(self.addNewItemBtnDidTap(_:)),
+										 for: .touchUpInside)
+		}
+
 		self.view.addSubview(self.itemsSV)
 		self.itemsSV.snp.makeConstraints{ (make) in
 			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + NAME_H)
@@ -821,6 +843,16 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 	/// - Authors: Nozomi Koyama
 	@objc func addNewNameBtnDidTap(_ sender: UIButton) {
 		colNum = colNum + 1
+		//redisplay
+		self.loadView()
+		self.viewDidLoad()
+	}
+
+	/// addNewItem button action
+	/// - Parameter sender: UIButton
+	/// - Authors: Nozomi Koyama
+	@objc func addNewItemBtnDidTap(_ sender: UIButton) {
+		rowNum = rowNum + 1
 		//redisplay
 		self.loadView()
 		self.viewDidLoad()
