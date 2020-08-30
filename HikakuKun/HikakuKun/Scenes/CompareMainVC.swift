@@ -846,40 +846,100 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 					updateContent_2!.memo = memoTV_2.text!
 					updateContent_2!.timestamp = dateFormatter.string(from: dt)
 					if( colNum >= 3 ) {
-						updateContent_3!.name = nameTF_3.text!
-						updateContent_3!.content1 = contentTF_3_01.text!
-						updateContent_3!.content2 = contentTF_3_02.text!
-						updateContent_3!.content3 = contentTF_3_03.text!
-						updateContent_3!.content4 = contentTF_3_04.text!
-						updateContent_3!.content5 = contentTF_3_05.text!
-						updateContent_3!.content6 = contentTF_3_06.text!
-						updateContent_3!.content7 = contentTF_3_07.text!
-						updateContent_3!.memo = memoTV_3.text!
-						updateContent_3!.timestamp = dateFormatter.string(from: dt)
+						if( updateContent_3 != nil ) {
+							//既にデータが存在する場合 -> update
+							updateContent_3!.name = nameTF_3.text!
+							updateContent_3!.content1 = contentTF_3_01.text!
+							updateContent_3!.content2 = contentTF_3_02.text!
+							updateContent_3!.content3 = contentTF_3_03.text!
+							updateContent_3!.content4 = contentTF_3_04.text!
+							updateContent_3!.content5 = contentTF_3_05.text!
+							updateContent_3!.content6 = contentTF_3_06.text!
+							updateContent_3!.content7 = contentTF_3_07.text!
+							updateContent_3!.memo = memoTV_3.text!
+							updateContent_3!.timestamp = dateFormatter.string(from: dt)
+						} else {
+							//データが存在しない場合 -> insert
+							let colContent_1 = CompareContentsRealm()
+							colContent_1.groupId = groupId
+							colContent_1.id = 2
+							colContent_1.name = nameTF_3.text!
+							colContent_1.content1 = contentTF_3_01.text!
+							colContent_1.content2 = contentTF_3_02.text!
+							colContent_1.content3 = contentTF_3_03.text!
+							colContent_1.content4 = contentTF_3_04.text!
+							colContent_1.content5 = contentTF_3_05.text!
+							colContent_1.content6 = contentTF_3_06.text!
+							colContent_1.content7 = contentTF_3_07.text!
+							colContent_1.memo = memoTV_3.text!
+							colContent_1.timestamp = dateFormatter.string(from: dt)
+							//insert data
+							realm.add(colContent_1)
+						}
 					}
 					if( colNum >= 4 ) {
-						updateContent_4!.name = nameTF_4.text!
-						updateContent_4!.content1 = contentTF_4_01.text!
-						updateContent_4!.content2 = contentTF_4_02.text!
-						updateContent_4!.content3 = contentTF_4_03.text!
-						updateContent_4!.content4 = contentTF_4_04.text!
-						updateContent_4!.content5 = contentTF_4_05.text!
-						updateContent_4!.content6 = contentTF_4_06.text!
-						updateContent_4!.content7 = contentTF_4_07.text!
-						updateContent_4!.memo = memoTV_4.text!
-						updateContent_4!.timestamp = dateFormatter.string(from: dt)
+						if( updateContent_4 != nil ) {
+							//既にデータが存在する場合 -> update
+							updateContent_4!.name = nameTF_4.text!
+							updateContent_4!.content1 = contentTF_4_01.text!
+							updateContent_4!.content2 = contentTF_4_02.text!
+							updateContent_4!.content3 = contentTF_4_03.text!
+							updateContent_4!.content4 = contentTF_4_04.text!
+							updateContent_4!.content5 = contentTF_4_05.text!
+							updateContent_4!.content6 = contentTF_4_06.text!
+							updateContent_4!.content7 = contentTF_4_07.text!
+							updateContent_4!.memo = memoTV_4.text!
+							updateContent_4!.timestamp = dateFormatter.string(from: dt)
+						} else {
+							//データが存在しない場合 -> insert
+							let colContent_2 = CompareContentsRealm()
+							colContent_2.groupId = groupId
+							colContent_2.id = 3
+							colContent_2.name = nameTF_4.text!
+							colContent_2.content1 = contentTF_4_01.text!
+							colContent_2.content2 = contentTF_4_02.text!
+							colContent_2.content3 = contentTF_4_03.text!
+							colContent_2.content4 = contentTF_4_04.text!
+							colContent_2.content5 = contentTF_4_05.text!
+							colContent_2.content6 = contentTF_4_06.text!
+							colContent_2.content7 = contentTF_4_07.text!
+							colContent_2.memo = memoTV_4.text!
+							colContent_2.timestamp = dateFormatter.string(from: dt)
+							//insert data
+							realm.add(colContent_2)
+						}
 					}
 					if( colNum >= 5 ) {
-						updateContent_5!.name = nameTF_5.text!
-						updateContent_5!.content1 = contentTF_5_01.text!
-						updateContent_5!.content2 = contentTF_5_02.text!
-						updateContent_5!.content3 = contentTF_5_03.text!
-						updateContent_5!.content4 = contentTF_5_04.text!
-						updateContent_5!.content5 = contentTF_5_05.text!
-						updateContent_5!.content6 = contentTF_5_06.text!
-						updateContent_5!.content7 = contentTF_5_07.text!
-						updateContent_5!.memo = memoTV_5.text!
-						updateContent_5!.timestamp = dateFormatter.string(from: dt)
+						if( updateContent_5 != nil ) {
+							//既にデータが存在する場合 -> update
+							updateContent_5!.name = nameTF_5.text!
+							updateContent_5!.content1 = contentTF_5_01.text!
+							updateContent_5!.content2 = contentTF_5_02.text!
+							updateContent_5!.content3 = contentTF_5_03.text!
+							updateContent_5!.content4 = contentTF_5_04.text!
+							updateContent_5!.content5 = contentTF_5_05.text!
+							updateContent_5!.content6 = contentTF_5_06.text!
+							updateContent_5!.content7 = contentTF_5_07.text!
+							updateContent_5!.memo = memoTV_5.text!
+							updateContent_5!.timestamp = dateFormatter.string(from: dt)
+						} else {
+							//データが存在しない場合 -> insert
+							let colContent_3 = CompareContentsRealm()
+							colContent_3.groupId = groupId
+							colContent_3.id = 4
+							colContent_3.name = nameTF_5.text!
+							colContent_3.content1 = contentTF_5_01.text!
+							colContent_3.content2 = contentTF_5_02.text!
+							colContent_3.content3 = contentTF_5_03.text!
+							colContent_3.content4 = contentTF_5_04.text!
+							colContent_3.content5 = contentTF_5_05.text!
+							colContent_3.content6 = contentTF_5_06.text!
+							colContent_3.content7 = contentTF_5_07.text!
+							colContent_3.memo = memoTV_5.text!
+							colContent_3.timestamp = dateFormatter.string(from: dt)
+							//insert data
+							realm.add(colContent_3)
+						}
 					}
 				}
 			} catch {
@@ -967,6 +1027,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 					realm.add(colContents)
 				}
 			}
+			realm.cancelWrite()
 		}
 
 		//complete message
