@@ -133,6 +133,9 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 			//update contents num
 			if( contents.count > 1 ) {
 				compareNum = contents.count
+				if( compareNum > colNum ) {
+					colNum = compareNum
+				}
 			}
 		} catch {
 			print("error")

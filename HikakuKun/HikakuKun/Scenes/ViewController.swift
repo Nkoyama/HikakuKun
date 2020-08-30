@@ -10,11 +10,12 @@ import UIKit
 import SnapKit
 import RealmSwift
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
 	// データ表示用TabelView
 	var hikakuListTable	= UITableView()
 	var displayList: [String] = []
+	var groupIdList: [Int] = []
 
 	let addNewHikakuBtn		= UIButton()
 
@@ -29,6 +30,8 @@ class ViewController: UIViewController {
 		self.view.backgroundColor = UIColor.white
 
 		// 表示用データ取得
+		displayList = []
+		groupIdList = []
 		let realm = try! Realm(configuration: config)
 		let allItems = realm.objects(CompareItemRealm.self)
 		for item in allItems {
@@ -37,13 +40,14 @@ class ViewController: UIViewController {
 			var i = 0
 			for content in contents {
 				if( i == 0 ) {
-					displayText = displayText + "  : " + content.name
+					displayText = displayText + "  :  " + content.name
 				} else {
 					displayText = displayText + ", " + content.name
 				}
 				i += 1
 			}
 			displayList.append(displayText)
+			groupIdList.append(item.groupId)
 			count += 1
 		}
 
@@ -56,6 +60,8 @@ class ViewController: UIViewController {
 			make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(0)
 			make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(100)
 		}
+		self.hikakuListTable.dataSource = self
+		self.hikakuListTable.delegate = self
 
 		// add new hikaku button
 		self.addNewHikakuBtn.setTitle("＋", for: .normal)
@@ -123,16 +129,139 @@ class ViewController: UIViewController {
 		SAFE_AREA_WIDTH = SCREEN_WIDTH - leftPadding - rightPadding
 		SAFE_AREA_HEIGHT = SCREEN_HEIGHT - topPadding - bottomPadding
 	}
-}
 
-extension ViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return displayList.count
 	}
-
+	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = UITableViewCell()
 		cell.textLabel?.text = displayList[indexPath.row]
 		return cell
+	}
+	
+	/// リストタップ時の画面遷移
+	/// - Parameters:
+	///   - tableView: tabelView
+	///   - indexPath: IndexPath
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let groupId = groupIdList[indexPath.row - 1]
+		let nextVC = CompareMainVC()
+		nextVC.groupId = groupId
+		var idNum = 1
+		do {
+			//行数判定
+			let items = try CompareItemRealm().getItems(groupId: groupId)
+			let contents = try CompareContentsRealm().getContentsList(groupId: groupId)
+			let contents_id1 = contents.filter("id = 1").first
+			let contents_id2 = contents.filter("id = 2").first
+			let contents_id3 = contents.filter("id = 3").first
+			let contents_id4 = contents.filter("id = 4").first
+			if( items.first?.item2 != "" ) {
+				idNum = 2
+			} else {
+				if( contents_id1 != nil ) {
+					if( contents_id1?.content2 != "" ) {
+						idNum = 2
+					}
+				}
+				if( contents_id2 != nil ) {
+					if( contents_id2?.content2 != "" ) {
+						idNum = 2
+					}
+				}
+				if( contents_id3 != nil ) {
+					if( contents_id3?.content2 != "" ) {
+						idNum = 2
+					}
+				}
+				if( contents_id4 != nil ) {
+					if( contents_id4?.content2 != "" ) {
+						idNum = 2
+					}
+				}
+			}
+			if( items.first?.item3 != "" ) {
+				idNum = 3
+			} else {
+				if( contents_id1 != nil ) {
+					if( contents_id1?.content3 != "" ) {
+						idNum = 3
+					}
+				}
+				if( contents_id2 != nil ) {
+					if( contents_id2?.content3 != "" ) {
+						idNum = 3
+					}
+				}
+				if( contents_id3 != nil ) {
+					if( contents_id3?.content3 != "" ) {
+						idNum = 3
+					}
+				}
+				if( contents_id4 != nil ) {
+					if( contents_id4?.content3 != "" ) {
+						idNum = 3
+					}
+				}
+			}
+			if( items.first?.item4 != "" ) {
+				idNum = 4
+			} else {
+				if( contents_id1 != nil ) {
+					if( contents_id1?.content4 != "" ) {
+						idNum = 4
+					}
+				}
+				if( contents_id2 != nil ) {
+					if( contents_id2?.content4 != "" ) {
+						idNum = 4
+					}
+				}
+				if( contents_id3 != nil ) {
+					if( contents_id3?.content4 != "" ) {
+						idNum = 4
+					}
+				}
+				if( contents_id4 != nil ) {
+					if( contents_id4?.content4 != "" ) {
+						idNum = 4
+					}
+				}
+			}
+			if( items.first?.item5 != "" ) {
+				idNum = 5
+			} else {
+				if( contents_id1 != nil ) {
+					if( contents_id1?.content5 != "" ) {
+						idNum = 5
+					}
+				}
+				if( contents_id2 != nil ) {
+					if( contents_id2?.content5 != "" ) {
+						idNum = 5
+					}
+				}
+				if( contents_id3 != nil ) {
+					if( contents_id3?.content5 != "" ) {
+						idNum = 5
+					}
+				}
+				if( contents_id4 != nil ) {
+					if( contents_id4?.content5 != "" ) {
+						idNum = 5
+					}
+				}
+			}
+		} catch {
+			print("error")
+		}
+		nextVC.rowNum = idNum
+		nextVC.callBack = { () in
+			self.callBack()
+		}
+		self.present(nextVC,
+					 animated: true,
+					 completion: nil)
 	}
 }
