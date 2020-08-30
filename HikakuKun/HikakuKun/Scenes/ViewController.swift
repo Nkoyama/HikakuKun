@@ -145,7 +145,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 	///   - tableView: tabelView
 	///   - indexPath: IndexPath
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let groupId = groupIdList[indexPath.row - 1]
+		let groupId = groupIdList[indexPath.row]
 		let nextVC = CompareMainVC()
 		nextVC.groupId = groupId
 		var idNum = 1
@@ -263,5 +263,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 		self.present(nextVC,
 					 animated: true,
 					 completion: nil)
+	}
+
+	// リストをスワイプした際の削除処理
+	func tableView(_ tableView: UITableView,
+				   commit editingStyle: UITableViewCell.EditingStyle,
+				   forRowAt indexPath: IndexPath) {
+		self.displayList.remove(at: indexPath.row)
+		self.hikakuListTable.deleteRows(at: [indexPath], with: .automatic)
 	}
 }
