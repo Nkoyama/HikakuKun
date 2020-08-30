@@ -67,11 +67,11 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 	let contentTF_5_06	= UITextField()
 	let contentTF_5_07	= UITextField()
 	let memoLabel		= UILabel()
-	let memoTF_1		= UITextView()
-	let memoTF_2		= UITextView()
-	let memoTF_3		= UITextView()
-	let memoTF_4		= UITextView()
-	let memoTF_5		= UITextView()
+	let memoTV_1		= UITextView()
+	let memoTV_2		= UITextView()
+	let memoTV_3		= UITextView()
+	let memoTV_4		= UITextView()
+	let memoTV_5		= UITextView()
 
 	var groupId		= -1
 	var compareNum	= 1
@@ -702,7 +702,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 			self.addNewItemBtn.removeFromSuperview()
 		}
 
-		// memo
+		// memo label
 		self.memoLabel.text = "メモ"
 		self.memoLabel.textColor = .black
 		self.memoLabel.layer.borderColor = UIColor.black.cgColor
@@ -713,6 +713,39 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 									  height: ITEM_H * 3)
 		self.itemsSV.addSubview(self.memoLabel)
 
+		// memo 1~colNum
+		for col in 1...colNum {
+			var memoTV = UITextView()
+			switch col {
+				case 1:
+					memoTV = memoTV_1
+					memoTV.text = contents.filter("id = 0").first?.memo
+				case 2:
+					memoTV = memoTV_2
+					memoTV.text = contents.filter("id = 1").first?.memo
+				case 3:
+					memoTV = memoTV_3
+					memoTV.text = contents.filter("id = 2").first?.memo
+				case 4:
+					memoTV = memoTV_4
+					memoTV.text = contents.filter("id = 3").first?.memo
+				case 5:
+					memoTV = memoTV_5
+					memoTV.text = contents.filter("id = 4").first?.memo
+				default:
+					break
+			}
+			memoTV.textColor = .black
+			memoTV.layer.borderColor = UIColor.black.cgColor
+			memoTV.layer.borderWidth = 0.5
+			memoTV.frame = CGRect(x: Int(itemWidth + CGFloat(colNum-1)*eachWidth),
+								  y: rowNum * ITEM_H,
+								  width: Int(eachWidth),
+								  height: ITEM_H*3)
+			self.itemsSV.addSubview(memoTV)
+		}
+
+		// add items(scroll view)
 		self.view.addSubview(self.itemsSV)
 		self.itemsSV.snp.makeConstraints{ (make) in
 			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + NAME_H)
@@ -800,6 +833,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 				colContents.content5 = contentTF_1_05.text!
 				colContents.content6 = contentTF_1_06.text!
 				colContents.content7 = contentTF_1_07.text!
+				colContents.memo = memoTV_1.text!
 			} else if( col == 1 ) {
 				colContents.name = nameTF_2.text!
 				colContents.content1 = contentTF_2_01.text!
@@ -809,6 +843,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 				colContents.content5 = contentTF_2_05.text!
 				colContents.content6 = contentTF_2_06.text!
 				colContents.content7 = contentTF_2_07.text!
+				colContents.memo = memoTV_2.text!
 			} else if( col == 2 ) {
 				colContents.name = nameTF_3.text!
 				colContents.content1 = contentTF_3_01.text!
@@ -818,6 +853,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 				colContents.content5 = contentTF_3_05.text!
 				colContents.content6 = contentTF_3_06.text!
 				colContents.content7 = contentTF_3_07.text!
+				colContents.memo = memoTV_3.text!
 			} else if( col == 3 ) {
 				colContents.name = nameTF_4.text!
 				colContents.content1 = contentTF_4_01.text!
@@ -827,6 +863,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 				colContents.content5 = contentTF_4_05.text!
 				colContents.content6 = contentTF_4_06.text!
 				colContents.content7 = contentTF_4_07.text!
+				colContents.memo = memoTV_4.text!
 			} else if( col == 4 ) {
 				colContents.name = nameTF_5.text!
 				colContents.content1 = contentTF_5_01.text!
@@ -836,6 +873,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 				colContents.content5 = contentTF_5_05.text!
 				colContents.content6 = contentTF_5_06.text!
 				colContents.content7 = contentTF_5_07.text!
+				colContents.memo = memoTV_5.text!
 			}
 			colContents.timestamp = dateFormatter.string(from: dt)
 
@@ -934,6 +972,11 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 		self.contentTF_5_05.resignFirstResponder()
 		self.contentTF_5_06.resignFirstResponder()
 		self.contentTF_5_07.resignFirstResponder()
+		self.memoTV_1.resignFirstResponder()
+		self.memoTV_2.resignFirstResponder()
+		self.memoTV_3.resignFirstResponder()
+		self.memoTV_4.resignFirstResponder()
+		self.memoTV_5.resignFirstResponder()
 	}
 
 	/// returnキーが押された時にキーボードを閉じる
