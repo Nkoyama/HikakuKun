@@ -74,7 +74,6 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 	let memoTV_5		= UITextView()
 
 	var groupId		= -1
-	var compareNum	= 1
 	var colNum		= 2
 	var rowNum		= 1
 
@@ -132,9 +131,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 			contents = try CompareContentsRealm().getContentsList(groupId: groupId)
 			//update contents num
 			if( contents.count > 1 ) {
-				compareNum = contents.count
-				if( compareNum > colNum ) {
-					colNum = compareNum
+				if( contents.count > colNum ) {
+					colNum = contents.count
 				}
 			}
 		} catch {
