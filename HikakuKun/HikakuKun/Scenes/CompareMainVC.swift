@@ -698,6 +698,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 			self.addNewItemBtn.addTarget(self,
 										 action: #selector(self.addNewItemBtnDidTap(_:)),
 										 for: .touchUpInside)
+		} else {
+			self.addNewItemBtn.removeFromSuperview()
 		}
 
 		// memo
@@ -723,6 +725,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 				make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(0)
 			}
 		}
+		self.itemsSV.contentSize = CGSize(width: itemWidth + eachWidth * CGFloat(colNum),
+										  height: CGFloat(ITEM_H * (rowNum+4)))
 		self.itemsSV.delegate = self
 		/* ---------------------------------------- */
 		/*	items(scroll view)	end					*/
