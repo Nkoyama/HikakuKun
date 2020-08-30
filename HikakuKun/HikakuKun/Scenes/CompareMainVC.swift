@@ -84,6 +84,9 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 	let ITEM_H				= 30
 	let RIGHT_W: CGFloat	= 30.0
 
+	var items: Results<CompareItemRealm>!
+	var contents: Results<CompareContentsRealm>!
+
 	//クロージャを保持するためのプロパティ
 	var callBack: (() -> Void)?
 
@@ -124,8 +127,6 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 		}
 
 		/* get items and contents */
-		var items: Results<CompareItemRealm>!
-		var contents: Results<CompareContentsRealm>!
 		do{
 			items = try CompareItemRealm().getItems(groupId: groupId)
 			contents = try CompareContentsRealm().getContentsList(groupId: groupId)
@@ -798,89 +799,173 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 	/// - Parameter sender: UIButton
 	/// - Authors: Nozomi Koyama
 	@objc func saveBtnDidTap(_ sender: UIButton) {
-		let colItem = CompareItemRealm()
-		colItem.groupId = groupId
-		colItem.groupName = groupNameTF.text!
-		colItem.item1 = itemTF_01.text!
-		colItem.item2 = itemTF_02.text!
-		colItem.item3 = itemTF_03.text!
-		colItem.item4 = itemTF_04.text!
-		colItem.item5 = itemTF_05.text!
-		colItem.item6 = itemTF_06.text!
-		colItem.item7 = itemTF_07.text!
 		let dt = Date()
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyyMMddHHmmss",
 															options: 0,
 															locale: Locale(identifier: "ja_JP"))
-		colItem.timestamp = dateFormatter.string(from: dt)
+		if( items.filter("groupId = %@", groupId).first != nil ) {
+			//groupIdが既に使われている場合 -> update
+			let updateItems = items.first
+			let updateContent_1 = contents.filter("id = 0").first
+			let updateContent_2 = contents.filter("id = 1").first
+			let updateContent_3 = contents.filter("id = 2").first
+			let updateContent_4 = contents.filter("id = 3").first
+			let updateContent_5 = contents.filter("id = 4").first
+			do {
+				let realm = try Realm(configuration: config)
+				try realm.write {
+					updateItems?.groupName = groupNameTF.text!
+					updateItems?.item1 = itemTF_01.text!
+					updateItems?.item2 = itemTF_02.text!
+					updateItems?.item3 = itemTF_03.text!
+					updateItems?.item4 = itemTF_04.text!
+					updateItems?.item5 = itemTF_05.text!
+					updateItems?.item6 = itemTF_06.text!
+					updateItems?.item7 = itemTF_07.text!
+					updateItems?.timestamp = dateFormatter.string(from: dt)
 
-		//insert data
-		let realm = try! Realm(configuration: config)
-		try! realm.write {
-			realm.add(colItem)
-		}
-
-		for col in 0..<colNum {
-			let colContents = CompareContentsRealm()
-			colContents.groupId = groupId
-			colContents.id = col
-			if( col == 0 ) {
-				colContents.name = nameTF_1.text!
-				colContents.content1 = contentTF_1_01.text!
-				colContents.content2 = contentTF_1_02.text!
-				colContents.content3 = contentTF_1_03.text!
-				colContents.content4 = contentTF_1_04.text!
-				colContents.content5 = contentTF_1_05.text!
-				colContents.content6 = contentTF_1_06.text!
-				colContents.content7 = contentTF_1_07.text!
-				colContents.memo = memoTV_1.text!
-			} else if( col == 1 ) {
-				colContents.name = nameTF_2.text!
-				colContents.content1 = contentTF_2_01.text!
-				colContents.content2 = contentTF_2_02.text!
-				colContents.content3 = contentTF_2_03.text!
-				colContents.content4 = contentTF_2_04.text!
-				colContents.content5 = contentTF_2_05.text!
-				colContents.content6 = contentTF_2_06.text!
-				colContents.content7 = contentTF_2_07.text!
-				colContents.memo = memoTV_2.text!
-			} else if( col == 2 ) {
-				colContents.name = nameTF_3.text!
-				colContents.content1 = contentTF_3_01.text!
-				colContents.content2 = contentTF_3_02.text!
-				colContents.content3 = contentTF_3_03.text!
-				colContents.content4 = contentTF_3_04.text!
-				colContents.content5 = contentTF_3_05.text!
-				colContents.content6 = contentTF_3_06.text!
-				colContents.content7 = contentTF_3_07.text!
-				colContents.memo = memoTV_3.text!
-			} else if( col == 3 ) {
-				colContents.name = nameTF_4.text!
-				colContents.content1 = contentTF_4_01.text!
-				colContents.content2 = contentTF_4_02.text!
-				colContents.content3 = contentTF_4_03.text!
-				colContents.content4 = contentTF_4_04.text!
-				colContents.content5 = contentTF_4_05.text!
-				colContents.content6 = contentTF_4_06.text!
-				colContents.content7 = contentTF_4_07.text!
-				colContents.memo = memoTV_4.text!
-			} else if( col == 4 ) {
-				colContents.name = nameTF_5.text!
-				colContents.content1 = contentTF_5_01.text!
-				colContents.content2 = contentTF_5_02.text!
-				colContents.content3 = contentTF_5_03.text!
-				colContents.content4 = contentTF_5_04.text!
-				colContents.content5 = contentTF_5_05.text!
-				colContents.content6 = contentTF_5_06.text!
-				colContents.content7 = contentTF_5_07.text!
-				colContents.memo = memoTV_5.text!
+					updateContent_1!.name = nameTF_1.text!
+					updateContent_1!.content1 = contentTF_1_01.text!
+					updateContent_1!.content2 = contentTF_1_02.text!
+					updateContent_1!.content3 = contentTF_1_03.text!
+					updateContent_1!.content4 = contentTF_1_04.text!
+					updateContent_1!.content5 = contentTF_1_05.text!
+					updateContent_1!.content6 = contentTF_1_06.text!
+					updateContent_1!.content7 = contentTF_1_07.text!
+					updateContent_1!.memo = memoTV_1.text!
+					updateContent_1!.timestamp = dateFormatter.string(from: dt)
+					updateContent_2!.name = nameTF_2.text!
+					updateContent_2!.content1 = contentTF_2_01.text!
+					updateContent_2!.content2 = contentTF_2_02.text!
+					updateContent_2!.content3 = contentTF_2_03.text!
+					updateContent_2!.content4 = contentTF_2_04.text!
+					updateContent_2!.content5 = contentTF_2_05.text!
+					updateContent_2!.content6 = contentTF_2_06.text!
+					updateContent_2!.content7 = contentTF_2_07.text!
+					updateContent_2!.memo = memoTV_2.text!
+					updateContent_2!.timestamp = dateFormatter.string(from: dt)
+					if( colNum >= 3 ) {
+						updateContent_3!.name = nameTF_3.text!
+						updateContent_3!.content1 = contentTF_3_01.text!
+						updateContent_3!.content2 = contentTF_3_02.text!
+						updateContent_3!.content3 = contentTF_3_03.text!
+						updateContent_3!.content4 = contentTF_3_04.text!
+						updateContent_3!.content5 = contentTF_3_05.text!
+						updateContent_3!.content6 = contentTF_3_06.text!
+						updateContent_3!.content7 = contentTF_3_07.text!
+						updateContent_3!.memo = memoTV_3.text!
+						updateContent_3!.timestamp = dateFormatter.string(from: dt)
+					}
+					if( colNum >= 4 ) {
+						updateContent_4!.name = nameTF_4.text!
+						updateContent_4!.content1 = contentTF_4_01.text!
+						updateContent_4!.content2 = contentTF_4_02.text!
+						updateContent_4!.content3 = contentTF_4_03.text!
+						updateContent_4!.content4 = contentTF_4_04.text!
+						updateContent_4!.content5 = contentTF_4_05.text!
+						updateContent_4!.content6 = contentTF_4_06.text!
+						updateContent_4!.content7 = contentTF_4_07.text!
+						updateContent_4!.memo = memoTV_4.text!
+						updateContent_4!.timestamp = dateFormatter.string(from: dt)
+					}
+					if( colNum >= 5 ) {
+						updateContent_5!.name = nameTF_5.text!
+						updateContent_5!.content1 = contentTF_5_01.text!
+						updateContent_5!.content2 = contentTF_5_02.text!
+						updateContent_5!.content3 = contentTF_5_03.text!
+						updateContent_5!.content4 = contentTF_5_04.text!
+						updateContent_5!.content5 = contentTF_5_05.text!
+						updateContent_5!.content6 = contentTF_5_06.text!
+						updateContent_5!.content7 = contentTF_5_07.text!
+						updateContent_5!.memo = memoTV_5.text!
+						updateContent_5!.timestamp = dateFormatter.string(from: dt)
+					}
+				}
+			} catch {
+				print("error")
 			}
-			colContents.timestamp = dateFormatter.string(from: dt)
-
+		} else {
+			//groupIdが使われていない場合 -> insert
+			let colItem = CompareItemRealm()
+			colItem.groupId = groupId
+			colItem.groupName = groupNameTF.text!
+			colItem.item1 = itemTF_01.text!
+			colItem.item2 = itemTF_02.text!
+			colItem.item3 = itemTF_03.text!
+			colItem.item4 = itemTF_04.text!
+			colItem.item5 = itemTF_05.text!
+			colItem.item6 = itemTF_06.text!
+			colItem.item7 = itemTF_07.text!
+			colItem.timestamp = dateFormatter.string(from: dt)
+			
 			//insert data
+			let realm = try! Realm(configuration: config)
 			try! realm.write {
-				realm.add(colContents)
+				realm.add(colItem)
+			}
+			
+			for col in 0..<colNum {
+				let colContents = CompareContentsRealm()
+				colContents.groupId = groupId
+				colContents.id = col
+				if( col == 0 ) {
+					colContents.name = nameTF_1.text!
+					colContents.content1 = contentTF_1_01.text!
+					colContents.content2 = contentTF_1_02.text!
+					colContents.content3 = contentTF_1_03.text!
+					colContents.content4 = contentTF_1_04.text!
+					colContents.content5 = contentTF_1_05.text!
+					colContents.content6 = contentTF_1_06.text!
+					colContents.content7 = contentTF_1_07.text!
+					colContents.memo = memoTV_1.text!
+				} else if( col == 1 ) {
+					colContents.name = nameTF_2.text!
+					colContents.content1 = contentTF_2_01.text!
+					colContents.content2 = contentTF_2_02.text!
+					colContents.content3 = contentTF_2_03.text!
+					colContents.content4 = contentTF_2_04.text!
+					colContents.content5 = contentTF_2_05.text!
+					colContents.content6 = contentTF_2_06.text!
+					colContents.content7 = contentTF_2_07.text!
+					colContents.memo = memoTV_2.text!
+				} else if( col == 2 ) {
+					colContents.name = nameTF_3.text!
+					colContents.content1 = contentTF_3_01.text!
+					colContents.content2 = contentTF_3_02.text!
+					colContents.content3 = contentTF_3_03.text!
+					colContents.content4 = contentTF_3_04.text!
+					colContents.content5 = contentTF_3_05.text!
+					colContents.content6 = contentTF_3_06.text!
+					colContents.content7 = contentTF_3_07.text!
+					colContents.memo = memoTV_3.text!
+				} else if( col == 3 ) {
+					colContents.name = nameTF_4.text!
+					colContents.content1 = contentTF_4_01.text!
+					colContents.content2 = contentTF_4_02.text!
+					colContents.content3 = contentTF_4_03.text!
+					colContents.content4 = contentTF_4_04.text!
+					colContents.content5 = contentTF_4_05.text!
+					colContents.content6 = contentTF_4_06.text!
+					colContents.content7 = contentTF_4_07.text!
+					colContents.memo = memoTV_4.text!
+				} else if( col == 4 ) {
+					colContents.name = nameTF_5.text!
+					colContents.content1 = contentTF_5_01.text!
+					colContents.content2 = contentTF_5_02.text!
+					colContents.content3 = contentTF_5_03.text!
+					colContents.content4 = contentTF_5_04.text!
+					colContents.content5 = contentTF_5_05.text!
+					colContents.content6 = contentTF_5_06.text!
+					colContents.content7 = contentTF_5_07.text!
+					colContents.memo = memoTV_5.text!
+				}
+				colContents.timestamp = dateFormatter.string(from: dt)
+				
+				//insert data
+				try! realm.write {
+					realm.add(colContents)
+				}
 			}
 		}
 
