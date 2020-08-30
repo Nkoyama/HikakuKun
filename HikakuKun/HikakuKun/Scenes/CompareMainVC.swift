@@ -139,17 +139,17 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 		}
 
 		// calc width
-		let itemWidth = (SAFE_AREA_WIDTH - RIGHT_W) / 6
-		var eachWidth = (SAFE_AREA_WIDTH - itemWidth) / 5
+		let itemWidth = floor_2(num: (SAFE_AREA_WIDTH - RIGHT_W) / 6)
+		var eachWidth = floor_2(num: (SAFE_AREA_WIDTH - itemWidth) / 5)
 		if( colNum <= 2 ) {
-			eachWidth = (SAFE_AREA_WIDTH - RIGHT_W - itemWidth) / 2
+			eachWidth = floor_2(num: (SAFE_AREA_WIDTH - RIGHT_W - itemWidth) / 2)
 		} else if( SAFE_AREA_WIDTH >= 800 ) {
 			if( colNum < 5 ) {
-				eachWidth = (SAFE_AREA_WIDTH - RIGHT_W - itemWidth) / CGFloat(colNum)
+				eachWidth = floor_2(num: (SAFE_AREA_WIDTH - RIGHT_W - itemWidth) / CGFloat(colNum))
 			}
 		} else {
 			if( colNum < 4 ) {
-				eachWidth = (SAFE_AREA_WIDTH - RIGHT_W - itemWidth) / CGFloat(colNum)
+				eachWidth = floor_2(num: (SAFE_AREA_WIDTH - RIGHT_W - itemWidth) / CGFloat(colNum))
 			}
 		}
 
