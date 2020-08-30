@@ -738,7 +738,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 			memoTV.textColor = .black
 			memoTV.layer.borderColor = UIColor.black.cgColor
 			memoTV.layer.borderWidth = 0.5
-			memoTV.frame = CGRect(x: Int(itemWidth + CGFloat(colNum-1)*eachWidth),
+			memoTV.frame = CGRect(x: Int(itemWidth + CGFloat(col-1)*eachWidth),
 								  y: rowNum * ITEM_H,
 								  width: Int(eachWidth),
 								  height: ITEM_H*3)

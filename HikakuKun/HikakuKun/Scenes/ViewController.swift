@@ -100,6 +100,7 @@ class ViewController: UIViewController {
 		// 画面再読み込み
 		self.loadView()
 		self.viewDidLoad()
+		self.hikakuListTable.reloadData()
 	}
 
 	override func viewDidLayoutSubviews() {
