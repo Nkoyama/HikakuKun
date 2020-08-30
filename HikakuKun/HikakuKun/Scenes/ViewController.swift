@@ -269,7 +269,37 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 	func tableView(_ tableView: UITableView,
 				   commit editingStyle: UITableViewCell.EditingStyle,
 				   forRowAt indexPath: IndexPath) {
-		self.displayList.remove(at: indexPath.row)
-		self.hikakuListTable.deleteRows(at: [indexPath], with: .automatic)
+		/* define actions */
+		// alert message：Yesボタン押下
+		let yesAction = UIAlertAction(title: "Yes",
+									  style: .default,
+									  handler:{ (action: UIAlertAction!) -> Void in
+			//画面上の削除
+			self.displayList.remove(at: indexPath.row)
+			self.hikakuListTable.deleteRows(at: [indexPath], with: .automatic)
+			//データ削除
+			let deleteGroupId = self.groupIdList[indexPath.row]
+			do {
+				let realm = try Realm(configuration: config)
+				let deleteItem = try CompareItemRealm().getItems(groupId: deleteGroupId)
+				let deleteContents = try CompareContentsRealm().getContentsList(groupId: deleteGroupId)
+				try realm.write {
+					realm.delete(deleteItem)
+					realm.delete(deleteContents)
+				}
+			} catch {
+				print("error")
+			}
+		})
+		// alert message：Noボタン押下
+		let noAction = UIAlertAction(title: "No",
+									 style: .default,
+									 handler:{(action: UIAlertAction!) -> Void in})
+		let alert = UIAlertController(title: "",
+									  message: "該当データを削除します。よろしいですか？",
+									  preferredStyle: .alert)
+		alert.addAction(yesAction)
+		alert.addAction(noAction)
+		present(alert, animated: true, completion: nil)
 	}
 }
