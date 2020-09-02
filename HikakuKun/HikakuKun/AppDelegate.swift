@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import GoogleMobileAds
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		window?.makeKeyAndVisible()
 
 		config.fileURL = configFileURL
+
+		GADMobileAds.sharedInstance().start(completionHandler: nil)
 
 		return true
 	}

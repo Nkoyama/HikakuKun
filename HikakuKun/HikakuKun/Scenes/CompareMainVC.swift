@@ -9,8 +9,9 @@
 import UIKit
 import SnapKit
 import RealmSwift
+import GoogleMobileAds
 
-class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
+class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, GADInterstitialDelegate {
 
 	let backBtn			= UIButton()
 	let groupNameTF		= UITextField()
@@ -86,11 +87,18 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 
 	var items: Results<CompareItemRealm>!
 	var contents: Results<CompareContentsRealm>!
+	
+	var interstitial: GADInterstitial!
 
 	//クロージャを保持するためのプロパティ
 	var callBack: (() -> Void)?
 
 	override func viewDidLoad() {
+		interstitial = GADInterstitial(adUnitID: adUnitId)
+		interstitial.delegate = self
+		let request = GADRequest()
+		interstitial.load(request)
+
 		// hidden navigation bar
 		self.navigationController?.setNavigationBarHidden(true,
 														  animated:false)
@@ -799,6 +807,13 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 	/// - Parameter sender: UIButton
 	/// - Authors: Nozomi Koyama
 	@objc func saveBtnDidTap(_ sender: UIButton) {
+		// display ad
+		if interstitial.isReady {
+			interstitial.present(fromRootViewController: self)
+		} else {
+			print("Ad wasn't ready")
+		}
+
 		let dt = Date()
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyyMMddHHmmss",
@@ -1030,16 +1045,6 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 			realm.cancelWrite()
 		}
 
-		//complete message
-		let defaultAction = UIAlertAction(title: "OK",
-										  style: .default,
-										  handler:{(action: UIAlertAction!) -> Void in})
-		let alert = UIAlertController(title: "",
-									  message: "保存されました。",
-									  preferredStyle: .alert)
-		alert.addAction(defaultAction)
-		present(alert, animated: true, completion: nil)
-
 		//redisplay
 		self.viewDidLoad()
 	}
@@ -1156,5 +1161,19 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 		}
 		SAFE_AREA_WIDTH = SCREEN_WIDTH - leftPadding - rightPadding
 		SAFE_AREA_HEIGHT = SCREEN_HEIGHT - topPadding - bottomPadding
+	}
+
+	/// 広告を閉じた後に呼ばれるfunction
+	/// - Parameter ad: _
+	func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+		//complete message
+		let defaultAction = UIAlertAction(title: "OK",
+										  style: .default,
+										  handler:{(action: UIAlertAction!) -> Void in})
+		let alert = UIAlertController(title: "",
+									  message: "保存されました。",
+									  preferredStyle: .alert)
+		alert.addAction(defaultAction)
+		present(alert, animated: true, completion: nil)
 	}
 }

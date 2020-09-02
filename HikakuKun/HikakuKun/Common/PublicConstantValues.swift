@@ -22,3 +22,6 @@ public let keyWindow = UIApplication.shared.connectedScenes
 	.compactMap({$0})
 	.first?.windows
 	.filter({$0.isKeyWindow}).first
+
+public let adUnitId = "ca-app-pub-3940256099942544/4411468910"	//develop
+//public let adUnitId = "ca-app-pub-7688401383404240/1582914564"	//deploy
