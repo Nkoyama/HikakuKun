@@ -8,5 +8,6 @@ target 'HikakuKun' do
   # Pods for HikakuKun
   pod 'SnapKit'
   pod 'RealmSwift'
+  pod 'Google-Mobile-Ads-SDK'
 
 end
