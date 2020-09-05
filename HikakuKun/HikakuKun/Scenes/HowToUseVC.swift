@@ -15,8 +15,10 @@ class HowToUseVC: UIViewController, UIScrollViewDelegate {
 	let titleL			= UILabel()
 
 	let mainSV			= UIScrollView()
-	let smallTitleL		= UILabel()
-	
+	let smallTitle1L	= UILabel()
+	let description1L	= UILabel()
+	let smallTitle2L	= UILabel()
+
 	let TITLE_H			= 50
 
 	override func viewDidLoad() {
@@ -54,24 +56,49 @@ class HowToUseVC: UIViewController, UIScrollViewDelegate {
 		/* ---------------------------------------- */
 		/*	main scroll view						*/
 		/* ---------------------------------------- */
-		// 1.first scene
-		self.smallTitleL.text = "初期画面"
-		self.smallTitleL.textColor = .white
-		self.smallTitleL.font = UIFont.systemFont(ofSize: 20)
-		self.smallTitleL.frame = CGRect(x: 0,
+		var totalHeight: CGFloat = 0
+
+		// 1.initial scene - title
+		self.smallTitle1L.text = "初期画面"
+		self.smallTitle1L.textColor = .white
+		self.smallTitle1L.font = UIFont.boldSystemFont(ofSize: 20)
+		self.smallTitle1L.frame = CGRect(x: 0,
 										y: 5,
 										width: 100,
 										height: 25)
-		self.mainSV.addSubview(self.smallTitleL)
-		
+		self.mainSV.addSubview(self.smallTitle1L)
+		totalHeight += 30
+
+		// 1.initial scene - image
 		let img01 = UIImageView(image: UIImage(named: "init_scene"))
 		let img01_width = SAFE_AREA_WIDTH * 3/4
 		let img01_height = (img01.image?.size.height)! * img01_width/(img01.image?.size.width)!
 		img01.frame = CGRect(x: 0,
-							 y: 30,
+							 y: totalHeight,
 							 width: img01_width,
 							 height: img01_height)
 		self.mainSV.addSubview(img01)
+		totalHeight += img01_height
+
+		// 1.initial scene - description
+		self.description1L.text = "←ーーー新しい比較を作成"
+		self.description1L.textColor = .red
+		self.description1L.font = UIFont.systemFont(ofSize: 20)
+		self.description1L.frame = CGRect(x: img01_width - 30,
+										  y: 30 + img01_height * 1/5,
+										  width: SAFE_AREA_WIDTH - img01_width + 30,
+										  height: 20)
+		self.mainSV.addSubview(self.description1L)
+
+		// 2.first main scene - title
+		self.smallTitle2L.text = "メイン画面"
+		self.smallTitle2L.textColor = .white
+		self.smallTitle2L.font = UIFont.boldSystemFont(ofSize: 20)
+		self.smallTitle2L.frame = CGRect(x: 0,
+										 y: totalHeight + 5,
+										 width: 100,
+										 height: 25)
+		self.mainSV.addSubview(self.smallTitle2L)
 
 		self.mainSV.backgroundColor = UIColor.black
 		self.view.addSubview(self.mainSV)
@@ -82,7 +109,7 @@ class HowToUseVC: UIViewController, UIScrollViewDelegate {
 			make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(0)
 		}
 		self.mainSV.contentSize = CGSize(width: SAFE_AREA_WIDTH,
-										 height: 1000)
+										 height: totalHeight)
 		self.mainSV.delegate = self
 		/* ---------------------------------------- */
 		/*	main scroll view	end					*/
