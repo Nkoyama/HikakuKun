@@ -22,6 +22,7 @@ class HowToUseVC: UIViewController, UIScrollViewDelegate {
 	let description4L	= UILabel()
 	let description5L	= UILabel()
 	let smallTitle6L	= UILabel()
+	let description6L	= UILabel()
 
 	let TITLE_H			= 50
 
@@ -88,6 +89,7 @@ class HowToUseVC: UIViewController, UIScrollViewDelegate {
 		self.description1L.text = "←ーーー新しい比較を作成"
 		self.description1L.textColor = .red
 		self.description1L.font = UIFont.systemFont(ofSize: 20)
+		self.description1L.adjustsFontSizeToFitWidth = true
 		self.description1L.frame = CGRect(x: img01_width - 30,
 										  y: 30 + img01_height * 1/5,
 										  width: SAFE_AREA_WIDTH - img01_width + 30,
@@ -128,17 +130,17 @@ class HowToUseVC: UIViewController, UIScrollViewDelegate {
 		self.mainSV.addSubview(img03)
 
 		// 3.second main scene - description
-		self.description3L.numberOfLines = 10
+		self.description3L.numberOfLines = 12
 		self.description3L.text = "・タイトル\n・比較対象\n・比較項目\n・内容\nを入力する。\n\n"
-								+ "比較項目を追加する場合は\n左下の＋ボタンを、\n"
-								+ "比較対象を追加する場合は\n右上の＋ボタンを、タップ"
+								+ "比較項目を追加する場合は左下の＋を、\n"
+								+ "比較対象を追加する場合は右上の＋をタップ"
 		self.description3L.adjustsFontSizeToFitWidth = true
 		self.description3L.textColor = .red
 		self.description3L.font = UIFont.systemFont(ofSize: 20)
 		self.description3L.frame = CGRect(x: img03_width + 3,
 										  y: totalHeight + 30,
 										  width: SAFE_AREA_WIDTH - img03_width,
-										  height: 200)
+										  height: 240)
 		self.mainSV.addSubview(self.description3L)
 		totalHeight += img03_height + 5
 
@@ -154,8 +156,8 @@ class HowToUseVC: UIViewController, UIScrollViewDelegate {
 
 		// 4.main scene full - description
 		self.description4L.numberOfLines = 6
-		self.description4L.text = "項目は、\nメモを除いて最大7個\n"
-								+ "比較対象は、\n最大5個\n(機種によっては4個)\nまで追加可能"
+		self.description4L.text = "項目は、メモを除いて最大7個\n"
+								+ "比較対象は、最大5個(機種によっては4個)まで追加可能"
 		self.description4L.adjustsFontSizeToFitWidth = true
 		self.description4L.textColor = .red
 		self.description4L.font = UIFont.systemFont(ofSize: 20)
@@ -177,18 +179,52 @@ class HowToUseVC: UIViewController, UIScrollViewDelegate {
 		self.mainSV.addSubview(img05)
 
 		// 5.hikaku list scene - description
-		self.description5L.numberOfLines = 6
-		self.description5L.text = "「保存」ボタンをタップし、\n「< back」ボタンで戻ると\nリストに反映される\n\n"
-								+ "該当行をタップすることで、\n過去に登録した内容を\n参照・編集できる。"
+		self.description5L.numberOfLines = 8
+		self.description5L.text = "「保存」をタップし、\n「< back」ボタンで戻るとリストに反映される\n\n"
+								+ "該当行をタップすることで、過去に登録した内容を参照・編集できる。"
 		self.description5L.adjustsFontSizeToFitWidth = true
 		self.description5L.textColor = .red
 		self.description5L.font = UIFont.systemFont(ofSize: 20)
 		self.description5L.frame = CGRect(x: img05_width + 3,
 										  y: totalHeight + 30,
 										  width: SAFE_AREA_WIDTH - img05_width,
-										  height: 120)
+										  height: 160)
 		self.mainSV.addSubview(self.description5L)
 		totalHeight += img05_height + 5
+
+		// 6.list scene delete - title
+		self.smallTitle6L.text = "削除"
+		self.smallTitle6L.textColor = .white
+		self.smallTitle6L.font = UIFont.boldSystemFont(ofSize: 20)
+		self.smallTitle6L.frame = CGRect(x: 0,
+										 y: totalHeight + 10,
+										 width: 100,
+										 height: 25)
+		self.mainSV.addSubview(self.smallTitle6L)
+		totalHeight += 35
+
+		// 6.list scene delete - image
+		let img06 = UIImageView(image: UIImage(named: "list_delete"))
+		let img06_width = SAFE_AREA_WIDTH * 3/4
+		let img06_height = (img06.image?.size.height)! * img06_width/(img06.image?.size.width)!
+		img06.frame = CGRect(x: 0,
+							 y: totalHeight + 5,
+							 width: img06_width,
+							 height: img06_height)
+		self.mainSV.addSubview(img06)
+
+		// 6.list scene delete - description
+		self.description6L.numberOfLines = 3
+		self.description6L.text = "該当行を左にスライドすることで削除も可能"
+		self.description6L.adjustsFontSizeToFitWidth = true
+		self.description6L.textColor = .red
+		self.description6L.font = UIFont.systemFont(ofSize: 20)
+		self.description6L.frame = CGRect(x: img05_width + 3,
+										  y: totalHeight + 30,
+										  width: SAFE_AREA_WIDTH - img06_width,
+										  height: 120)
+		self.mainSV.addSubview(self.description6L)
+		totalHeight += img06_height + 5
 
 		self.mainSV.backgroundColor = UIColor.black
 		self.view.addSubview(self.mainSV)
