@@ -15,19 +15,21 @@ class HowToUseVC: UIViewController, UIScrollViewDelegate {
 	let titleL			= UILabel()
 
 	let mainSV			= UIScrollView()
+	let smallTitleL		= UILabel()
 	
 	let TITLE_H			= 50
 
 	override func viewDidLoad() {
 		// background color
-		self.view.backgroundColor = UIColor.init(red: 210/255,
-												 green: 209/255,
-												 blue: 192/255,
-												 alpha: 1.0)
+		self.view.backgroundColor = UIColor.black
 
 		// close button
 		self.closeBtn.setTitle("× close", for: .normal)
-		self.closeBtn.setTitleColor(UIColor.blue, for: .normal)
+		self.closeBtn.setTitleColor(UIColor.init(red: 0/255,
+												 green: 163/255,
+												 blue: 219/255,
+												 alpha: 1.0),
+									for: .normal)
 		self.closeBtn.backgroundColor = UIColor.clear
 		self.closeBtn.layer.borderColor = UIColor.clear.cgColor
 		self.view.addSubview(self.closeBtn)
@@ -41,7 +43,7 @@ class HowToUseVC: UIViewController, UIScrollViewDelegate {
 
 		// title
 		self.titleL.text = "使い方"
-		self.titleL.textColor = .black
+		self.titleL.textColor = .white
 		self.titleL.font = UIFont.systemFont(ofSize: 30)
 		self.view.addSubview(self.titleL)
 		self.titleL.snp.makeConstraints{ (make) in
@@ -52,13 +54,32 @@ class HowToUseVC: UIViewController, UIScrollViewDelegate {
 		/* ---------------------------------------- */
 		/*	main scroll view						*/
 		/* ---------------------------------------- */
-		self.mainSV.backgroundColor = .blue
+		// 1.first scene
+		self.smallTitleL.text = "初期画面"
+		self.smallTitleL.textColor = .white
+		self.smallTitleL.font = UIFont.systemFont(ofSize: 20)
+		self.smallTitleL.frame = CGRect(x: 0,
+										y: 5,
+										width: 100,
+										height: 25)
+		self.mainSV.addSubview(self.smallTitleL)
+		
+		let img01 = UIImageView(image: UIImage(named: "init_scene"))
+		let img01_width = (img01.image?.size.width)! * 0.7
+		let img01_height = (img01.image?.size.height)! * 0.7
+		img01.frame = CGRect(x: 0,
+							 y: 30,
+							 width: img01_width,
+							 height: img01_height)
+		self.mainSV.addSubview(img01)
+
+		self.mainSV.backgroundColor = UIColor.black
 		self.view.addSubview(self.mainSV)
 		self.mainSV.snp.makeConstraints{ (make) in
 			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H)
 			make.bottom.equalToSuperview()
-			make.left.equalToSuperview()
-			make.right.equalToSuperview()
+			make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(0)
+			make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(0)
 		}
 		self.mainSV.contentSize = CGSize(width: SAFE_AREA_WIDTH,
 										 height: 1000)
