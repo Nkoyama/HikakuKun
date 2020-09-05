@@ -12,6 +12,7 @@ import SnapKit
 class HowToUseVC: UIViewController {
 	
 	let closeBtn		= UIButton()
+	let titleL			= UILabel()
 
 	override func viewDidLoad() {
 		// background color
@@ -29,6 +30,16 @@ class HowToUseVC: UIViewController {
 		self.closeBtn.snp.makeConstraints { (make) in
 			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(10)
 			make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(10)
+		}
+
+		// title
+		self.titleL.text = "使い方"
+		self.titleL.textColor = .black
+		self.titleL.font = UIFont.systemFont(ofSize: 30)
+		self.view.addSubview(self.titleL)
+		self.titleL.snp.makeConstraints{ (make) in
+			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(10)
+			make.centerX.equalToSuperview()
 		}
 	}
 	
