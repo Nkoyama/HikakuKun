@@ -87,7 +87,11 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 
 	var items: Results<CompareItemRealm>!
 	var contents: Results<CompareContentsRealm>!
-	
+
+	var activeTextField: UITextField?
+	var activeTextView: UITextView?
+	var saveContentOffsetY: CGFloat?
+
 	var interstitial: GADInterstitial!
 
 	//クロージャを保持するためのプロパティ
@@ -757,6 +761,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 
 		// add items(scroll view)
 		self.view.addSubview(self.itemsSV)
+		self.itemsSV.backgroundColor = .white
 		self.itemsSV.snp.makeConstraints{ (make) in
 			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + NAME_H)
 			make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(0)
@@ -1175,5 +1180,105 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 									  preferredStyle: .alert)
 		alert.addAction(defaultAction)
 		present(alert, animated: true, completion: nil)
+	}
+
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+
+		// 監視開始
+		NotificationCenter.default.addObserver(self,
+											   selector: #selector(self.keyboardWillShow(_:)),
+											   name: UIResponder.keyboardWillShowNotification,
+											   object: nil)
+		NotificationCenter.default.addObserver(self,
+											   selector: #selector(self.keyboardWillHide(_:)) ,
+											   name: UIResponder.keyboardDidHideNotification,
+											   object: nil)
+	}
+
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+
+		// 監視終了
+		NotificationCenter.default.removeObserver(self,
+												  name: UIResponder.keyboardWillShowNotification,
+												  object: self.view.window)
+		NotificationCenter.default.removeObserver(self,
+												  name: UIResponder.keyboardDidHideNotification,
+												  object: self.view.window)
+	}
+
+	/// UITeixtFieldが選択された場合
+	func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+		self.activeTextField = textField
+		self.activeTextView = nil
+		return true
+	}
+
+	/// UITextViewが選択された場合
+	func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+		self.activeTextView = textView
+		self.activeTextField = nil
+		return true
+	}
+
+	/// キーボードが表示されたときに呼ばれる
+	/// - Parameter notification:
+	@objc func keyboardWillShow(_ notification: Notification) {
+		if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+			var bottomH = CGFloat(TITLE_H + NAME_H)
+			if activeTextField != nil {
+				bottomH += activeTextField!.frame.origin.y + CGFloat(ITEM_H)
+				let moveHeight = keyboardSize.height - (SAFE_AREA_HEIGHT - bottomH)
+				if( moveHeight > 0 ) {
+					self.itemsSV.frame.origin.y = CGFloat(TITLE_H + NAME_H) - moveHeight
+				} else {
+					self.itemsSV.snp.makeConstraints{ (make) in
+						make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + NAME_H)
+						make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(0)
+						make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(0)
+						if( SAFE_AREA_WIDTH >= 800 && colNum <= 4 )
+							|| ( SAFE_AREA_WIDTH < 800 && colNum <= 3 ) {
+							make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(RIGHT_W)
+						} else {
+							make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(0)
+						}
+					}
+				}
+			} else if activeTextView != nil {
+				bottomH += activeTextView!.frame.origin.y + CGFloat(ITEM_H * 3)
+				let moveHeight = keyboardSize.height - (SAFE_AREA_HEIGHT - bottomH)
+				if( moveHeight > 0 ) {
+					self.itemsSV.frame.origin.y = CGFloat(TITLE_H + NAME_H) - moveHeight
+				} else {
+					self.itemsSV.snp.makeConstraints{ (make) in
+						make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + NAME_H)
+						make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(0)
+						make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(0)
+						if( SAFE_AREA_WIDTH >= 800 && colNum <= 4 )
+							|| ( SAFE_AREA_WIDTH < 800 && colNum <= 3 ) {
+							make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(RIGHT_W)
+						} else {
+							make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(0)
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	/// キーボードが消える時に呼ばれる
+	@objc func keyboardWillHide(_ notification: Notification) {
+		self.itemsSV.snp.makeConstraints{ (make) in
+			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + NAME_H)
+			make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(0)
+			make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(0)
+			if( SAFE_AREA_WIDTH >= 800 && colNum <= 4 )
+				|| ( SAFE_AREA_WIDTH < 800 && colNum <= 3 ) {
+				make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(RIGHT_W)
+			} else {
+				make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(0)
+			}
+		}
 	}
 }
