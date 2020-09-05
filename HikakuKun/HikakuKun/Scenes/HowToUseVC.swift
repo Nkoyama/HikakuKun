@@ -20,6 +20,8 @@ class HowToUseVC: UIViewController, UIScrollViewDelegate {
 	let smallTitle2L	= UILabel()
 	let description3L	= UILabel()
 	let description4L	= UILabel()
+	let description5L	= UILabel()
+	let smallTitle6L	= UILabel()
 
 	let TITLE_H			= 50
 
@@ -162,7 +164,31 @@ class HowToUseVC: UIViewController, UIScrollViewDelegate {
 										  width: SAFE_AREA_WIDTH - img04_width,
 										  height: 120)
 		self.mainSV.addSubview(self.description4L)
-		totalHeight += img03_height + 5
+		totalHeight += img04_height + 5
+
+		// 5.hikaku list scene - image
+		let img05 = UIImageView(image: UIImage(named: "hikaku_list"))
+		let img05_width = SAFE_AREA_WIDTH * 3/4
+		let img05_height = (img05.image?.size.height)! * img05_width/(img05.image?.size.width)!
+		img05.frame = CGRect(x: 0,
+							 y: totalHeight + 5,
+							 width: img05_width,
+							 height: img05_height)
+		self.mainSV.addSubview(img05)
+
+		// 5.hikaku list scene - description
+		self.description5L.numberOfLines = 6
+		self.description5L.text = "「保存」ボタンをタップし、\n「< back」ボタンで戻ると\nリストに反映される\n\n"
+								+ "該当行をタップすることで、\n過去に登録した内容を\n参照・編集できる。"
+		self.description5L.adjustsFontSizeToFitWidth = true
+		self.description5L.textColor = .red
+		self.description5L.font = UIFont.systemFont(ofSize: 20)
+		self.description5L.frame = CGRect(x: img05_width + 3,
+										  y: totalHeight + 30,
+										  width: SAFE_AREA_WIDTH - img05_width,
+										  height: 120)
+		self.mainSV.addSubview(self.description5L)
+		totalHeight += img05_height + 5
 
 		self.mainSV.backgroundColor = UIColor.black
 		self.view.addSubview(self.mainSV)
