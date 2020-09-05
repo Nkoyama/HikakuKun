@@ -759,7 +759,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 		self.view.addSubview(self.itemsSV)
 		self.itemsSV.snp.makeConstraints{ (make) in
 			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + NAME_H)
-			make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(BOTTOM_H)
+			make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(0)
 			make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(0)
 			if( SAFE_AREA_WIDTH >= 800 && colNum <= 4 )
 				|| ( SAFE_AREA_WIDTH < 800 && colNum <= 3 ) {
