@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1661DB13C27FF0604E2F5C3F /* Pods_HikakuKun.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F658453B2C01A20502952D2C /* Pods_HikakuKun.framework */; };
+		433C1E7425034FB700032651 /* HowToUseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433C1E7325034FB700032651 /* HowToUseVC.swift */; };
 		434D599724CD64C0007FEEFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434D599624CD64C0007FEEFC /* AppDelegate.swift */; };
 		434D599924CD64C0007FEEFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434D599824CD64C0007FEEFC /* SceneDelegate.swift */; };
 		434D599B24CD64C0007FEEFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434D599A24CD64C0007FEEFC /* ViewController.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		433C1E7325034FB700032651 /* HowToUseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToUseVC.swift; sourceTree = "<group>"; };
 		434D599324CD64C0007FEEFC /* 比較くん.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "比較くん.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		434D599624CD64C0007FEEFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		434D599824CD64C0007FEEFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 			children = (
 				434D599A24CD64C0007FEEFC /* ViewController.swift */,
 				434D59B024CD88DE007FEEFC /* CompareMainVC.swift */,
+				433C1E7325034FB700032651 /* HowToUseVC.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				433C1E7425034FB700032651 /* HowToUseVC.swift in Sources */,
 				434D599B24CD64C0007FEEFC /* ViewController.swift in Sources */,
 				434D599724CD64C0007FEEFC /* AppDelegate.swift in Sources */,
 				434D59B824D6CEF4007FEEFC /* PublicValues.swift in Sources */,

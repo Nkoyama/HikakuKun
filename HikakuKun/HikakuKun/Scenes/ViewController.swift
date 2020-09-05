@@ -18,6 +18,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 	var groupIdList: [Int] = []
 
 	let addNewHikakuBtn		= UIButton()
+	let howToUseBtn			= UIButton()
 
 	var count = 0
 
@@ -83,6 +84,27 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 			make.left.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(70)
 			make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(20)
 		}
+
+		// how-to-use button
+		self.howToUseBtn.setTitle("？", for: .normal)
+		self.howToUseBtn.setTitleColor(UIColor.blue, for: .normal)
+		self.howToUseBtn.backgroundColor = UIColor.clear
+		self.howToUseBtn.titleLabel?.font = UIFont.systemFont(ofSize: 35.0)
+		self.howToUseBtn.titleLabel?.adjustsFontSizeToFitWidth = true
+		self.howToUseBtn.titleLabel?.baselineAdjustment = .alignCenters
+		self.howToUseBtn.layer.borderColor = UIColor.blue.cgColor
+		self.howToUseBtn.layer.borderWidth = 1.0
+		self.howToUseBtn.layer.cornerRadius = 25.0
+		self.view.addSubview(self.howToUseBtn)
+		self.howToUseBtn.addTarget(self,
+								   action: #selector(self.howToUseBtnDidTap(_:)),
+								   for: .touchUpInside)
+		self.howToUseBtn.snp.makeConstraints { (make) in
+			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(90)
+			make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(140)
+			make.left.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(70)
+			make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(20)
+		}
 	}
 
 	/// add new hikaku button action
@@ -96,6 +118,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 		nextVC.callBack = { () in
 			self.callBack()
 		}
+		self.present(nextVC,
+					 animated: true,
+					 completion: nil)
+	}
+
+	/// how-to-use button action
+	/// - Parameter sender: UIButton
+	/// - Authors: Nozomi Koyama
+	@objc func howToUseBtnDidTap(_ sender: UIButton) {
+		let nextVC = HowToUseVC()
 		self.present(nextVC,
 					 animated: true,
 					 completion: nil)
