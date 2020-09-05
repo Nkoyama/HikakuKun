@@ -65,8 +65,8 @@ class HowToUseVC: UIViewController, UIScrollViewDelegate {
 		self.mainSV.addSubview(self.smallTitleL)
 		
 		let img01 = UIImageView(image: UIImage(named: "init_scene"))
-		let img01_width = (img01.image?.size.width)! * 0.7
-		let img01_height = (img01.image?.size.height)! * 0.7
+		let img01_width = SAFE_AREA_WIDTH * 3/4
+		let img01_height = (img01.image?.size.height)! * img01_width/(img01.image?.size.width)!
 		img01.frame = CGRect(x: 0,
 							 y: 30,
 							 width: img01_width,
