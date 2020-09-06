@@ -11,7 +11,7 @@ import SnapKit
 import RealmSwift
 import GoogleMobileAds
 
-class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, GADInterstitialDelegate {
+class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIScrollViewDelegate, GADInterstitialDelegate {
 
 	let backBtn			= UIButton()
 	let groupNameTF		= UITextField()
@@ -757,6 +757,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 								  width: Int(eachWidth),
 								  height: ITEM_H*3)
 			self.itemsSV.addSubview(memoTV)
+			memoTV.delegate = self
 		}
 
 		// add items(scroll view)
@@ -1184,7 +1185,6 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-
 		// 監視開始
 		NotificationCenter.default.addObserver(self,
 											   selector: #selector(self.keyboardWillShow(_:)),
@@ -1198,7 +1198,6 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
-
 		// 監視終了
 		NotificationCenter.default.removeObserver(self,
 												  name: UIResponder.keyboardWillShowNotification,
@@ -1216,7 +1215,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 	}
 
 	/// UITextViewが選択された場合
-	func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+	func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
 		self.activeTextView = textView
 		self.activeTextField = nil
 		return true
@@ -1227,41 +1226,21 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 	@objc func keyboardWillShow(_ notification: Notification) {
 		if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
 			var bottomH = CGFloat(TITLE_H + NAME_H)
-			if activeTextField != nil {
-				bottomH += activeTextField!.frame.origin.y + CGFloat(ITEM_H)
+			if self.activeTextField != nil {
+				bottomH += self.activeTextField!.frame.origin.y + CGFloat(ITEM_H)
 				let moveHeight = keyboardSize.height - (SAFE_AREA_HEIGHT - bottomH)
 				if( moveHeight > 0 ) {
 					self.itemsSV.frame.origin.y = CGFloat(TITLE_H + NAME_H) - moveHeight
 				} else {
-					self.itemsSV.snp.makeConstraints{ (make) in
-						make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + NAME_H)
-						make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(0)
-						make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(0)
-						if( SAFE_AREA_WIDTH >= 800 && colNum <= 4 )
-							|| ( SAFE_AREA_WIDTH < 800 && colNum <= 3 ) {
-							make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(RIGHT_W)
-						} else {
-							make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(0)
-						}
-					}
+					self.itemsSV.frame.origin.y = CGFloat(TITLE_H + NAME_H)
 				}
-			} else if activeTextView != nil {
-				bottomH += activeTextView!.frame.origin.y + CGFloat(ITEM_H * 3)
+			} else if self.activeTextView != nil {
+				bottomH += self.activeTextView!.frame.origin.y + CGFloat(ITEM_H * 3)
 				let moveHeight = keyboardSize.height - (SAFE_AREA_HEIGHT - bottomH)
 				if( moveHeight > 0 ) {
 					self.itemsSV.frame.origin.y = CGFloat(TITLE_H + NAME_H) - moveHeight
 				} else {
-					self.itemsSV.snp.makeConstraints{ (make) in
-						make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + NAME_H)
-						make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(0)
-						make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(0)
-						if( SAFE_AREA_WIDTH >= 800 && colNum <= 4 )
-							|| ( SAFE_AREA_WIDTH < 800 && colNum <= 3 ) {
-							make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(RIGHT_W)
-						} else {
-							make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(0)
-						}
-					}
+					self.itemsSV.frame.origin.y = CGFloat(TITLE_H + NAME_H)
 				}
 			}
 		}
@@ -1269,16 +1248,6 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UIScrollViewDelegate
 	
 	/// キーボードが消える時に呼ばれる
 	@objc func keyboardWillHide(_ notification: Notification) {
-		self.itemsSV.snp.makeConstraints{ (make) in
-			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + NAME_H)
-			make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(0)
-			make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(0)
-			if( SAFE_AREA_WIDTH >= 800 && colNum <= 4 )
-				|| ( SAFE_AREA_WIDTH < 800 && colNum <= 3 ) {
-				make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(RIGHT_W)
-			} else {
-				make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(0)
-			}
-		}
+		self.itemsSV.frame.origin.y = CGFloat(TITLE_H + NAME_H)
 	}
 }
