@@ -285,6 +285,54 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 					}
 				}
 			}
+			if( items.first?.item6 != "" ) {
+				idNum = 6
+			} else {
+				if( contents_id1 != nil ) {
+					if( contents_id1?.content6 != "" ) {
+						idNum = 6
+					}
+				}
+				if( contents_id2 != nil ) {
+					if( contents_id2?.content6 != "" ) {
+						idNum = 6
+					}
+				}
+				if( contents_id3 != nil ) {
+					if( contents_id3?.content6 != "" ) {
+						idNum = 6
+					}
+				}
+				if( contents_id4 != nil ) {
+					if( contents_id4?.content6 != "" ) {
+						idNum = 6
+					}
+				}
+			}
+			if( items.first?.item7 != "" ) {
+				idNum = 7
+			} else {
+				if( contents_id1 != nil ) {
+					if( contents_id1?.content7 != "" ) {
+						idNum = 7
+					}
+				}
+				if( contents_id2 != nil ) {
+					if( contents_id2?.content7 != "" ) {
+						idNum = 7
+					}
+				}
+				if( contents_id3 != nil ) {
+					if( contents_id3?.content7 != "" ) {
+						idNum = 7
+					}
+				}
+				if( contents_id4 != nil ) {
+					if( contents_id4?.content7 != "" ) {
+						idNum = 7
+					}
+				}
+			}
 		} catch {
 			print("error")
 		}

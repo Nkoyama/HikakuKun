@@ -676,7 +676,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 		self.nameTF_1.backgroundColor = UIColor.init(red: 242/255,
 													 green: 279/255,
 													 blue: 61/255,
-													 alpha: 1.0)
+													 alpha: 0.5)
 		self.nameTF_1.layer.borderColor = UIColor.black.cgColor
 		self.nameTF_1.layer.borderWidth = 0.5
 		self.view.addSubview(self.nameTF_1)
@@ -703,7 +703,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 		self.nameTF_2.backgroundColor = UIColor.init(red: 242/255,
 													 green: 279/255,
 													 blue: 61/255,
-													 alpha: 1.0)
+													 alpha: 0.5)
 		self.nameTF_2.layer.borderColor = UIColor.black.cgColor
 		self.nameTF_2.layer.borderWidth = 0.5
 		self.view.addSubview(self.nameTF_2)
@@ -752,7 +752,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 				nameTF.backgroundColor = UIColor.init(red: 242/255,
 													  green: 279/255,
 													  blue: 61/255,
-													  alpha: 1.0)
+													  alpha: 0.5)
 				nameTF.layer.borderColor = UIColor.black.cgColor
 				nameTF.layer.borderWidth = 0.5
 				nameTF.snp.makeConstraints{ (make) in
@@ -1086,7 +1086,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 		self.viewDidLoad()
 	}
 
-	/// TextField以外の部分をタッチした時の処理
+	/// TextField, TextView以外の部分をタッチした時の処理
 	/// - Parameters:
 	///   - touches: Set<UITouch>
 	///   - event: UIEvent
