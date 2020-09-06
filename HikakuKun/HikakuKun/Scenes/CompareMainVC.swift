@@ -23,6 +23,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 	let nameTF_5		= UITextField()
 	let addNewNameBtn	= UIButton()
 	let addNewItemBtn	= UIButton()
+	let dummyLabel		= UILabel()
 
 	let itemsSV			= UIScrollView()
 	let itemTF_01		= UITextField()
@@ -110,34 +111,6 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 		// background color
 		self.view.backgroundColor = UIColor.white
 
-		// back button
-		self.backBtn.setTitle("< back", for: .normal)
-		self.backBtn.setTitleColor(UIColor.blue, for: .normal)
-		self.backBtn.backgroundColor = UIColor.clear
-		self.backBtn.layer.borderColor = UIColor.clear.cgColor
-		self.view.addSubview(self.backBtn)
-		self.backBtn.addTarget(self,
-							   action: #selector(self.backBtnDidTap(_:)),
-							   for: .touchUpInside)
-		self.backBtn.snp.makeConstraints { (make) in
-			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(10)
-			make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(10)
-		}
-
-		// save button
-		self.saveBtn.setTitle("保存", for: .normal)
-		self.saveBtn.setTitleColor(UIColor.blue, for: .normal)
-		self.saveBtn.backgroundColor = UIColor.clear
-		self.saveBtn.layer.borderColor = UIColor.clear.cgColor
-		self.view.addSubview(self.saveBtn)
-		self.saveBtn.addTarget(self,
-							   action: #selector(self.saveBtnDidTap(_:)),
-							   for: .touchUpInside)
-		self.saveBtn.snp.makeConstraints { (make) in
-			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(10)
-			make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(10)
-		}
-
 		/* get items and contents */
 		do{
 			items = try CompareItemRealm().getItems(groupId: groupId)
@@ -164,155 +137,6 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 		} else {
 			if( colNum < 4 ) {
 				eachWidth = floor_2(num: (SAFE_AREA_WIDTH - RIGHT_W - itemWidth) / CGFloat(colNum))
-			}
-		}
-
-		// gourp name
-		if( items.count > 0 ) {
-			self.groupNameTF.text = items.first?.groupName
-		} else {
-			self.groupNameTF.placeholder = "タイトル"
-		}
-		self.groupNameTF.textAlignment = NSTextAlignment.center
-		self.groupNameTF.font = UIFont.systemFont(ofSize: 25.0)
-		self.view.addSubview(self.groupNameTF)
-		self.groupNameTF.snp.makeConstraints{ (make) in
-			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(0)
-			make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H)
-			make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(75)
-			make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(75)
-		}
-		self.groupNameTF.delegate = self
-
-		/* 比較対象名 */
-		// 1
-		if( contents.count > 0 ) {
-			if( (contents.first?.name.count)! > 0 ) {
-				self.nameTF_1.text = contents.first?.name
-			} else {
-				self.nameTF_1.placeholder = "比較対象名を入力"
-			}
-		} else {
-			self.nameTF_1.placeholder = "比較対象名を入力"
-		}
-		self.nameTF_1.textAlignment = NSTextAlignment.center
-		self.nameTF_1.adjustsFontSizeToFitWidth = true
-		self.nameTF_1.backgroundColor = UIColor.init(red: 242/255,
-													 green: 279/255,
-													 blue: 61/255,
-													 alpha: 0.5)
-		self.nameTF_1.layer.borderColor = UIColor.black.cgColor
-		self.nameTF_1.layer.borderWidth = 0.5
-		self.view.addSubview(self.nameTF_1)
-		self.nameTF_1.snp.makeConstraints{ (make) in
-			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H)
-			make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + NAME_H)
-			make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(itemWidth)
-			make.right.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(eachWidth + itemWidth)
-		}
-		self.nameTF_1.delegate = self
-
-		// 2
-		if( contents.count >= 2 ) {
-			if( (contents.filter("id = 1").first?.name.count)! > 0 ) {
-				self.nameTF_2.text = contents.filter("id = 1").first?.name
-			} else {
-				self.nameTF_2.placeholder = "比較対象名を入力"
-			}
-		} else {
-			self.nameTF_2.placeholder = "比較対象名を入力"
-		}
-		self.nameTF_2.textAlignment = NSTextAlignment.center
-		self.nameTF_2.adjustsFontSizeToFitWidth = true
-		self.nameTF_2.backgroundColor = UIColor.init(red: 242/255,
-													 green: 279/255,
-													 blue: 61/255,
-													 alpha: 0.5)
-		self.nameTF_2.layer.borderColor = UIColor.black.cgColor
-		self.nameTF_2.layer.borderWidth = 0.5
-		self.view.addSubview(self.nameTF_2)
-		self.nameTF_2.snp.makeConstraints{ (make) in
-			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H)
-			make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + NAME_H)
-			make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(eachWidth + itemWidth)
-			make.right.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(2*eachWidth + itemWidth)
-		}
-		self.nameTF_2.delegate = self
-
-		// 3~
-		if( colNum >= 3 ) {
-			for nameNum in 3...colNum {
-				var nameTF = UITextField()
-				switch nameNum {
-					case 3:
-						nameTF = self.nameTF_3
-						self.view.addSubview(nameTF)
-						if( contents.filter("id = 2").first != nil ) {
-							nameTF.text = contents.filter("id = 2").first?.name
-						} else {
-							nameTF.placeholder = "比較対象名を入力"
-						}
-					case 4:
-						nameTF = self.nameTF_4
-						self.view.addSubview(nameTF)
-						if( contents.filter("id = 3").first != nil ) {
-							nameTF.text = contents.filter("id = 3").first?.name
-						} else {
-							nameTF.placeholder = "比較対象名を入力"
-						}
-					case 5:
-						nameTF = self.nameTF_5
-						self.view.addSubview(nameTF)
-						if( contents.filter("id = 4").first != nil ) {
-							nameTF.text = contents.filter("id = 4").first?.name
-						} else {
-							nameTF.placeholder = "比較対象名を入力"
-						}
-					default:
-						break
-				}
-				nameTF.textAlignment = NSTextAlignment.center
-				nameTF.adjustsFontSizeToFitWidth = true
-				nameTF.backgroundColor = UIColor.init(red: 242/255,
-													  green: 279/255,
-													  blue: 61/255,
-													  alpha: 0.5)
-				nameTF.layer.borderColor = UIColor.black.cgColor
-				nameTF.layer.borderWidth = 0.5
-				nameTF.snp.makeConstraints{ (make) in
-					make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H)
-					make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-						.inset(TITLE_H + NAME_H)
-					make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left)
-						.inset(CGFloat(nameNum-1) * eachWidth + itemWidth)
-					make.right.equalTo(self.view.safeAreaLayoutGuide.snp.left)
-						.inset(CGFloat(nameNum) * eachWidth + itemWidth)
-				}
-				nameTF.delegate = self
-			}
-		}
-
-		// add new name button
-		if( ( SAFE_AREA_WIDTH >= 800 && colNum <= 4 )
-			|| ( SAFE_AREA_WIDTH < 800 && colNum <= 3 ) ) {
-			self.addNewNameBtn.setTitle("＋", for: .normal)
-			self.addNewNameBtn.setTitleColor(UIColor.blue, for: .normal)
-			self.addNewNameBtn.backgroundColor = UIColor.clear
-			self.addNewNameBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20.0)
-			self.addNewNameBtn.titleLabel?.adjustsFontSizeToFitWidth = true
-			self.addNewNameBtn.titleLabel?.baselineAdjustment = .alignCenters
-			self.addNewNameBtn.layer.borderColor = UIColor.blue.cgColor
-			self.addNewNameBtn.layer.borderWidth = 1.0
-			self.addNewNameBtn.layer.cornerRadius = 12.0
-			self.view.addSubview(self.addNewNameBtn)
-			self.addNewNameBtn.addTarget(self,
-										 action: #selector(self.addNewNameBtnDidTap(_:)),
-										 for: .touchUpInside)
-			self.addNewNameBtn.snp.makeConstraints { (make) in
-				make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + 3)
-				make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + 27)
-				make.left.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(27)
-				make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(3)
 			}
 		}
 
@@ -780,6 +604,193 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 		/* ---------------------------------------- */
 		/*	items(scroll view)	end					*/
 		/* ---------------------------------------- */
+
+		// dummy panel
+		self.dummyLabel.backgroundColor = .white
+		self.view.addSubview(self.dummyLabel)
+		self.dummyLabel.snp.makeConstraints{ (make) in
+			make.top.equalToSuperview()
+			make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + NAME_H)
+			make.left.equalToSuperview()
+			make.right.equalToSuperview()
+		}
+
+		// back button
+		self.backBtn.setTitle("< back", for: .normal)
+		self.backBtn.setTitleColor(UIColor.blue, for: .normal)
+		self.backBtn.backgroundColor = UIColor.clear
+		self.backBtn.layer.borderColor = UIColor.clear.cgColor
+		self.view.addSubview(self.backBtn)
+		self.backBtn.addTarget(self,
+							   action: #selector(self.backBtnDidTap(_:)),
+							   for: .touchUpInside)
+		self.backBtn.snp.makeConstraints { (make) in
+			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(10)
+			make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(10)
+		}
+		
+		// save button
+		self.saveBtn.setTitle("保存", for: .normal)
+		self.saveBtn.setTitleColor(UIColor.blue, for: .normal)
+		self.saveBtn.backgroundColor = UIColor.clear
+		self.saveBtn.layer.borderColor = UIColor.clear.cgColor
+		self.view.addSubview(self.saveBtn)
+		self.saveBtn.addTarget(self,
+							   action: #selector(self.saveBtnDidTap(_:)),
+							   for: .touchUpInside)
+		self.saveBtn.snp.makeConstraints { (make) in
+			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(10)
+			make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(10)
+		}
+
+		// gourp name
+		if( items.count > 0 ) {
+			self.groupNameTF.text = items.first?.groupName
+		} else {
+			self.groupNameTF.placeholder = "タイトル"
+		}
+		self.groupNameTF.textAlignment = NSTextAlignment.center
+		self.groupNameTF.font = UIFont.systemFont(ofSize: 25.0)
+		self.view.addSubview(self.groupNameTF)
+		self.groupNameTF.snp.makeConstraints{ (make) in
+			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(0)
+			make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H)
+			make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(75)
+			make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(75)
+		}
+		self.groupNameTF.delegate = self
+		
+		/* 比較対象名 */
+		// 1
+		if( contents.count > 0 ) {
+			if( (contents.first?.name.count)! > 0 ) {
+				self.nameTF_1.text = contents.first?.name
+			} else {
+				self.nameTF_1.placeholder = "比較対象名を入力"
+			}
+		} else {
+			self.nameTF_1.placeholder = "比較対象名を入力"
+		}
+		self.nameTF_1.textAlignment = NSTextAlignment.center
+		self.nameTF_1.adjustsFontSizeToFitWidth = true
+		self.nameTF_1.backgroundColor = UIColor.init(red: 242/255,
+													 green: 279/255,
+													 blue: 61/255,
+													 alpha: 1.0)
+		self.nameTF_1.layer.borderColor = UIColor.black.cgColor
+		self.nameTF_1.layer.borderWidth = 0.5
+		self.view.addSubview(self.nameTF_1)
+		self.nameTF_1.snp.makeConstraints{ (make) in
+			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H)
+			make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + NAME_H)
+			make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(itemWidth)
+			make.right.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(eachWidth + itemWidth)
+		}
+		self.nameTF_1.delegate = self
+		
+		// 2
+		if( contents.count >= 2 ) {
+			if( (contents.filter("id = 1").first?.name.count)! > 0 ) {
+				self.nameTF_2.text = contents.filter("id = 1").first?.name
+			} else {
+				self.nameTF_2.placeholder = "比較対象名を入力"
+			}
+		} else {
+			self.nameTF_2.placeholder = "比較対象名を入力"
+		}
+		self.nameTF_2.textAlignment = NSTextAlignment.center
+		self.nameTF_2.adjustsFontSizeToFitWidth = true
+		self.nameTF_2.backgroundColor = UIColor.init(red: 242/255,
+													 green: 279/255,
+													 blue: 61/255,
+													 alpha: 1.0)
+		self.nameTF_2.layer.borderColor = UIColor.black.cgColor
+		self.nameTF_2.layer.borderWidth = 0.5
+		self.view.addSubview(self.nameTF_2)
+		self.nameTF_2.snp.makeConstraints{ (make) in
+			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H)
+			make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + NAME_H)
+			make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(eachWidth + itemWidth)
+			make.right.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(2*eachWidth + itemWidth)
+		}
+		self.nameTF_2.delegate = self
+		
+		// 3~
+		if( colNum >= 3 ) {
+			for nameNum in 3...colNum {
+				var nameTF = UITextField()
+				switch nameNum {
+					case 3:
+						nameTF = self.nameTF_3
+						self.view.addSubview(nameTF)
+						if( contents.filter("id = 2").first != nil ) {
+							nameTF.text = contents.filter("id = 2").first?.name
+						} else {
+							nameTF.placeholder = "比較対象名を入力"
+					}
+					case 4:
+						nameTF = self.nameTF_4
+						self.view.addSubview(nameTF)
+						if( contents.filter("id = 3").first != nil ) {
+							nameTF.text = contents.filter("id = 3").first?.name
+						} else {
+							nameTF.placeholder = "比較対象名を入力"
+					}
+					case 5:
+						nameTF = self.nameTF_5
+						self.view.addSubview(nameTF)
+						if( contents.filter("id = 4").first != nil ) {
+							nameTF.text = contents.filter("id = 4").first?.name
+						} else {
+							nameTF.placeholder = "比較対象名を入力"
+					}
+					default:
+						break
+				}
+				nameTF.textAlignment = NSTextAlignment.center
+				nameTF.adjustsFontSizeToFitWidth = true
+				nameTF.backgroundColor = UIColor.init(red: 242/255,
+													  green: 279/255,
+													  blue: 61/255,
+													  alpha: 1.0)
+				nameTF.layer.borderColor = UIColor.black.cgColor
+				nameTF.layer.borderWidth = 0.5
+				nameTF.snp.makeConstraints{ (make) in
+					make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H)
+					make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+						.inset(TITLE_H + NAME_H)
+					make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left)
+						.inset(CGFloat(nameNum-1) * eachWidth + itemWidth)
+					make.right.equalTo(self.view.safeAreaLayoutGuide.snp.left)
+						.inset(CGFloat(nameNum) * eachWidth + itemWidth)
+				}
+				nameTF.delegate = self
+			}
+		}
+		
+		// add new name button
+		if( ( SAFE_AREA_WIDTH >= 800 && colNum <= 4 )
+			|| ( SAFE_AREA_WIDTH < 800 && colNum <= 3 ) ) {
+			self.addNewNameBtn.setTitle("＋", for: .normal)
+			self.addNewNameBtn.setTitleColor(UIColor.blue, for: .normal)
+			self.addNewNameBtn.backgroundColor = UIColor.clear
+			self.addNewNameBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20.0)
+			self.addNewNameBtn.titleLabel?.adjustsFontSizeToFitWidth = true
+			self.addNewNameBtn.titleLabel?.baselineAdjustment = .alignCenters
+			self.addNewNameBtn.layer.borderColor = UIColor.blue.cgColor
+			self.addNewNameBtn.layer.borderWidth = 1.0
+			self.addNewNameBtn.layer.cornerRadius = 12.0
+			self.view.addSubview(self.addNewNameBtn)
+			self.addNewNameBtn.addTarget(self,
+										 action: #selector(self.addNewNameBtnDidTap(_:)),
+										 for: .touchUpInside)
+			self.addNewNameBtn.snp.makeConstraints { (make) in
+				make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + 3)
+				make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(TITLE_H + 27)
+				make.left.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(27)
+				make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(3)
+			}
+		}
 	}
 
 	/// back button action
