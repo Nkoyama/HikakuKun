@@ -1071,9 +1071,13 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 	/// - Authors: Nozomi Koyama
 	@objc func addNewNameBtnDidTap(_ sender: UIButton) {
 		colNum = colNum + 1
+		//backup
+		let editingData = backupData()
 		//redisplay
 		self.loadView()
 		self.viewDidLoad()
+		//restore
+		restoreData(editingData: editingData)
 	}
 
 	/// addNewItem button action
@@ -1081,9 +1085,13 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 	/// - Authors: Nozomi Koyama
 	@objc func addNewItemBtnDidTap(_ sender: UIButton) {
 		rowNum = rowNum + 1
+		//backup
+		let editingData = backupData()
 		//redisplay
 		self.loadView()
 		self.viewDidLoad()
+		//restore
+		restoreData(editingData: editingData)
 	}
 
 	/// TextField, TextView以外の部分をタッチした時の処理
@@ -1256,9 +1264,167 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 			}
 		}
 	}
-	
+
 	/// キーボードが消える時に呼ばれる
 	@objc func keyboardWillHide(_ notification: Notification) {
 		self.itemsSV.frame.origin.y = CGFloat(TITLE_H + NAME_H)
+	}
+
+	/// 行・列を追加する前に未保存の入力内容を保持
+	/// - Returns: editing data ([[String]])
+	@objc func backupData() -> [[String]] {
+		var editingDataArray:[[String]] = []
+		//add group name (title)
+		editingDataArray.append([self.groupNameTF.text!])
+		//add names
+		editingDataArray.append([self.nameTF_1.text!,
+								 self.nameTF_2.text!,
+								 self.nameTF_3.text!,
+								 self.nameTF_4.text!,
+								 self.nameTF_5.text!])
+		//add memo
+		editingDataArray.append([self.memoTV_1.text!,
+								 self.memoTV_2.text!,
+								 self.memoTV_3.text!,
+								 self.memoTV_4.text!,
+								 self.memoTV_5.text!])
+		//add 1st row
+		editingDataArray.append([self.itemTF_01.text!,
+								 self.contentTF_1_01.text!,
+								 self.contentTF_2_01.text!,
+								 self.contentTF_3_01.text!,
+								 self.contentTF_4_01.text!,
+								 self.contentTF_5_01.text!])
+		//add 2nd row
+		editingDataArray.append([self.itemTF_02.text!,
+								 self.contentTF_1_02.text!,
+								 self.contentTF_2_02.text!,
+								 self.contentTF_3_02.text!,
+								 self.contentTF_4_02.text!,
+								 self.contentTF_5_02.text!])
+		if( rowNum >= 3 ) {
+			//add 3rd row
+			editingDataArray.append([self.itemTF_03.text!,
+									 self.contentTF_1_03.text!,
+									 self.contentTF_2_03.text!,
+									 self.contentTF_3_03.text!,
+									 self.contentTF_4_03.text!,
+									 self.contentTF_5_03.text!])
+		}
+		if( rowNum >= 4 ) {
+			//add 4th row
+			editingDataArray.append([self.itemTF_04.text!,
+									 self.contentTF_1_04.text!,
+									 self.contentTF_2_04.text!,
+									 self.contentTF_3_04.text!,
+									 self.contentTF_4_04.text!,
+									 self.contentTF_5_04.text!])
+		}
+		if( rowNum >= 5 ) {
+			//add 5th row
+			editingDataArray.append([self.itemTF_05.text!,
+									 self.contentTF_1_05.text!,
+									 self.contentTF_2_05.text!,
+									 self.contentTF_3_05.text!,
+									 self.contentTF_4_05.text!,
+									 self.contentTF_5_05.text!])
+		}
+		if( rowNum >= 6 ) {
+			//add 6th row
+			editingDataArray.append([self.itemTF_06.text!,
+									 self.contentTF_1_06.text!,
+									 self.contentTF_2_06.text!,
+									 self.contentTF_3_06.text!,
+									 self.contentTF_4_06.text!,
+									 self.contentTF_5_06.text!])
+		}
+		if( rowNum >= 7 ) {
+			//add 7th row
+			editingDataArray.append([self.itemTF_07.text!,
+									 self.contentTF_1_07.text!,
+									 self.contentTF_2_07.text!,
+									 self.contentTF_3_07.text!,
+									 self.contentTF_4_07.text!,
+									 self.contentTF_5_07.text!])
+		}
+		return editingDataArray
+	}
+
+	/// バックアップした未保存のデータを復元
+	/// - Parameter editinData: back up data
+	@objc func restoreData(editingData: [[String]]) {
+		//set group name (title)
+		self.groupNameTF.text = editingData[0][0]
+		//set names
+		self.nameTF_1.text = editingData[1][0]
+		self.nameTF_2.text = editingData[1][1]
+		self.nameTF_3.text = editingData[1][2]
+		self.nameTF_4.text = editingData[1][3]
+		self.nameTF_5.text = editingData[1][4]
+		//set memo
+		self.memoTV_1.text = editingData[2][0]
+		self.memoTV_2.text = editingData[2][1]
+		self.memoTV_3.text = editingData[2][2]
+		self.memoTV_4.text = editingData[2][3]
+		self.memoTV_5.text = editingData[2][4]
+		//set 1st row
+		self.itemTF_01.text = editingData[3][0]
+		self.contentTF_1_01.text = editingData[3][1]
+		self.contentTF_2_01.text = editingData[3][2]
+		self.contentTF_3_01.text = editingData[3][3]
+		self.contentTF_4_01.text = editingData[3][4]
+		self.contentTF_5_01.text = editingData[3][5]
+		//set 2nd row
+		self.itemTF_02.text = editingData[4][0]
+		self.contentTF_1_02.text = editingData[4][1]
+		self.contentTF_2_02.text = editingData[4][2]
+		self.contentTF_3_02.text = editingData[4][3]
+		self.contentTF_4_02.text = editingData[4][4]
+		self.contentTF_5_02.text = editingData[4][5]
+		if( editingData.count >= 6 ) {
+			//set 3rd row
+			self.itemTF_03.text = editingData[5][0]
+			self.contentTF_1_03.text = editingData[5][1]
+			self.contentTF_2_03.text = editingData[5][2]
+			self.contentTF_3_03.text = editingData[5][3]
+			self.contentTF_4_03.text = editingData[5][4]
+			self.contentTF_5_03.text = editingData[5][5]
+		}
+		if( editingData.count >= 7 ) {
+			//set 4th row
+			self.itemTF_04.text = editingData[6][0]
+			self.contentTF_1_04.text = editingData[6][1]
+			self.contentTF_2_04.text = editingData[6][2]
+			self.contentTF_3_04.text = editingData[6][3]
+			self.contentTF_4_04.text = editingData[6][4]
+			self.contentTF_5_04.text = editingData[6][5]
+		}
+		if( editingData.count >= 9 ) {
+			//set 5th row
+			self.itemTF_05.text = editingData[7][0]
+			self.contentTF_1_05.text = editingData[7][1]
+			self.contentTF_2_05.text = editingData[7][2]
+			self.contentTF_3_05.text = editingData[7][3]
+			self.contentTF_4_05.text = editingData[7][4]
+			self.contentTF_5_05.text = editingData[7][5]
+		}
+		if( editingData.count >= 10 ) {
+			//set 6th row
+			self.itemTF_06.text = editingData[8][0]
+			self.contentTF_1_06.text = editingData[8][1]
+			self.contentTF_2_06.text = editingData[8][2]
+			self.contentTF_3_06.text = editingData[8][3]
+			self.contentTF_4_06.text = editingData[8][4]
+			self.contentTF_5_06.text = editingData[8][5]
+		}
+		if( editingData.count >= 11 ) {
+			//set 7th row
+			self.itemTF_07.text = editingData[9][0]
+			self.contentTF_1_07.text = editingData[9][1]
+			self.contentTF_2_07.text = editingData[9][2]
+			self.contentTF_3_07.text = editingData[9][3]
+			self.contentTF_4_07.text = editingData[9][4]
+			self.contentTF_5_07.text = editingData[9][5]
+		}
 	}
 }
