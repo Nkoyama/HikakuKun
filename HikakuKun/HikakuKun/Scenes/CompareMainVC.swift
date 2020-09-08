@@ -117,7 +117,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 			contents = try CompareContentsRealm().getContentsList(groupId: groupId)
 			//update contents num
 			if( contents.count > 1 ) {
-				if( contents.count > colNum ) {
+				if( contents.last!.id > colNum ) {
 					colNum = contents.count
 				}
 			}
@@ -1169,7 +1169,6 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
-
 		// safe area の width, height を取得
 		let SCREEN_WIDTH = UIScreen.main.bounds.size.width
 		let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
