@@ -46,7 +46,7 @@ class CompareItemRealm: Object {
 	/// - Authors: Nozomi Koyama
 	func getItems(groupId: Int) throws -> Results<CompareItemRealm> {
 		var items: Results<CompareItemRealm>
-		do{
+		do {
 			let realm = try Realm(configuration: config)
 			items = realm.objects(CompareItemRealm.self).filter("groupId = %@", groupId)
 		} catch {

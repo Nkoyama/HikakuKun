@@ -112,7 +112,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 		self.view.backgroundColor = UIColor.white
 
 		/* get items and contents */
-		do{
+		do {
 			items = try CompareItemRealm().getItems(groupId: groupId)
 			contents = try CompareContentsRealm().getContentsList(groupId: groupId)
 			//update contents num
@@ -628,7 +628,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(10)
 			make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(10)
 		}
-		
+
 		// save button
 		self.saveBtn.setTitle("保存", for: .normal)
 		self.saveBtn.setTitleColor(UIColor.blue, for: .normal)
@@ -659,7 +659,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 			make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(75)
 		}
 		self.groupNameTF.delegate = self
-		
+
 		/* 比較対象名 */
 		// 1
 		if( contents.count > 0 ) {
@@ -831,6 +831,25 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 			print("Ad wasn't ready")
 		}
 
+		do {
+			try saveData()
+		} catch {
+			//error message
+			let defaultAction = UIAlertAction(title: "(>_<)",
+											  style: .default,
+											  handler:{(action: UIAlertAction!) -> Void in})
+			let alert = UIAlertController(title: "",
+										  message: "保存処理に失敗しました。",
+										  preferredStyle: .alert)
+			alert.addAction(defaultAction)
+			present(alert, animated: true, completion: nil)
+		}
+
+		//redisplay
+		self.viewDidLoad()
+	}
+	
+	func saveData() throws {
 		let dt = Date()
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyyMMddHHmmss",
@@ -975,7 +994,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 					}
 				}
 			} catch {
-				print("error")
+				throw NSError(domain: "error", code: -1, userInfo: nil)
 			}
 		} else {
 			//groupIdが使われていない場合 -> insert
@@ -990,13 +1009,13 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 			colItem.item6 = itemTF_06.text!
 			colItem.item7 = itemTF_07.text!
 			colItem.timestamp = dateFormatter.string(from: dt)
-			
+
 			//insert data
 			let realm = try! Realm(configuration: config)
 			try! realm.write {
 				realm.add(colItem)
 			}
-			
+
 			for col in 0..<colNum {
 				let colContents = CompareContentsRealm()
 				colContents.groupId = groupId
@@ -1053,7 +1072,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 					colContents.memo = memoTV_5.text!
 				}
 				colContents.timestamp = dateFormatter.string(from: dt)
-				
+
 				//insert data
 				try! realm.write {
 					realm.add(colContents)
@@ -1061,9 +1080,6 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 			}
 			realm.cancelWrite()
 		}
-
-		//redisplay
-		self.viewDidLoad()
 	}
 
 	/// addNewName button action

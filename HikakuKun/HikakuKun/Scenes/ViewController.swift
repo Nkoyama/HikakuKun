@@ -171,7 +171,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 		cell.textLabel?.text = displayList[indexPath.row]
 		return cell
 	}
-	
+
 	/// リストタップ時の画面遷移
 	/// - Parameters:
 	///   - tableView: tabelView
