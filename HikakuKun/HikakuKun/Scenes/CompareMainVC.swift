@@ -825,30 +825,55 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 	/// - Authors: Nozomi Koyama
 	@objc func saveBtnDidTap(_ sender: UIButton) {
 		// display ad
-		if interstitial.isReady {
-			interstitial.present(fromRootViewController: self)
-		} else {
-			print("Ad wasn't ready")
-		}
-
 		do {
-			try saveData()
+			//万が一広告が表示できなくても保存処理を続ける
+			defer {
+				//save data
+				do {
+					try saveData()
+					defer {
+						//complete message
+						let defaultAction = UIAlertAction(title: "OK",
+														  style: .default,
+														  handler:{(action: UIAlertAction!) -> Void in})
+						let alert = UIAlertController(title: "",
+													  message: "保存されました。",
+													  preferredStyle: .alert)
+						alert.addAction(defaultAction)
+						present(alert, animated: true, completion: nil)
+					}
+				} catch {
+					//error message
+					let defaultAction = UIAlertAction(title: "(>_<)",
+													  style: .default,
+													  handler:{(action: UIAlertAction!) -> Void in})
+					let alert = UIAlertController(title: "",
+												  message: "保存処理に失敗しました。",
+												  preferredStyle: .alert)
+					alert.addAction(defaultAction)
+					present(alert, animated: true, completion: nil)
+				}
+			}
+			try displayAd()
 		} catch {
-			//error message
-			let defaultAction = UIAlertAction(title: "(>_<)",
-											  style: .default,
-											  handler:{(action: UIAlertAction!) -> Void in})
-			let alert = UIAlertController(title: "",
-										  message: "保存処理に失敗しました。",
-										  preferredStyle: .alert)
-			alert.addAction(defaultAction)
-			present(alert, animated: true, completion: nil)
+			print("add error")
 		}
 
 		//redisplay
 		self.viewDidLoad()
 	}
-	
+
+	func displayAd() throws {
+		if interstitial.isReady {
+			interstitial.present(fromRootViewController: self)
+		} else {
+			print("Ad wasn't ready")
+			throw NSError(domain: "error", code: -1, userInfo: nil)
+		}
+	}
+
+	/// save data function
+	/// - Throws: error
 	func saveData() throws {
 		let dt = Date()
 		let dateFormatter = DateFormatter()
