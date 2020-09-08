@@ -117,7 +117,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 			contents = try CompareContentsRealm().getContentsList(groupId: groupId)
 			//update contents num
 			if( contents.count > 1 ) {
-				if( contents.last!.id > colNum ) {
+				if( contents.last!.id + 1 > colNum ) {
 					colNum = contents.count
 				}
 			}
