@@ -24,7 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// 表示する
 		window?.makeKeyAndVisible()
 
-		config.fileURL = configFileURL
+		let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+		let documentsDirectory = paths[0]
+		let realmURL = documentsDirectory.appendingPathComponent("develop.realm")
+		config.fileURL = realmURL
+		Realm.Configuration.defaultConfiguration = config
 
 		GADMobileAds.sharedInstance().start(completionHandler: nil)
 

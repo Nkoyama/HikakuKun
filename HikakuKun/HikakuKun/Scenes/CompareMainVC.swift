@@ -889,7 +889,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 			let updateContent_4 = contents.filter("id = 3").first
 			let updateContent_5 = contents.filter("id = 4").first
 			do {
-				let realm = try Realm(configuration: config)
+//				let realm = try Realm(configuration: config)
+				let realm = try Realm()
 				try realm.write {
 					updateItems?.groupName = groupNameTF.text!
 					updateItems?.item1 = itemTF_01.text!
@@ -1036,7 +1037,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 			colItem.timestamp = dateFormatter.string(from: dt)
 
 			//insert data
-			let realm = try! Realm(configuration: config)
+//			let realm = try! Realm(configuration: config)
+			let realm = try! Realm()
 			try! realm.write {
 				realm.add(colItem)
 			}

@@ -33,7 +33,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 		// 表示用データ取得
 		displayList = []
 		groupIdList = []
-		let realm = try! Realm(configuration: config)
+//		let realm = try! Realm(configuration: config)
+		let realm = try! Realm()
 		let allItems = realm.objects(CompareItemRealm.self)
 		for item in allItems {
 			var displayText = item.groupName
@@ -360,7 +361,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 			//データ削除
 			let deleteGroupId = self.groupIdList[indexPath.row]
 			do {
-				let realm = try Realm(configuration: config)
+//				let realm = try Realm(configuration: config)
+				let realm = try Realm()
 				let deleteItem = try CompareItemRealm().getItems(groupId: deleteGroupId)
 				let deleteContents = try CompareContentsRealm().getContentsList(groupId: deleteGroupId)
 				try realm.write {

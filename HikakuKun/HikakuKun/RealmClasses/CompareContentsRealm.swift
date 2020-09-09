@@ -31,7 +31,8 @@ class CompareContentsRealm: Object {
 	/// - Returns: max id(Int)
 	/// - Authors: Nozomi Koyama
 	func getMaxId() -> String {
-		let realm = try! Realm(configuration: config)
+//		let realm = try! Realm(configuration: config)
+		let realm = try! Realm()
 		let idCount = realm.objects(CompareContentsRealm.self).count
 		var maxId: String = "-1"
 		if( idCount > 0 ) {
@@ -49,7 +50,8 @@ class CompareContentsRealm: Object {
 	func getContentsList(groupId: Int) throws -> Results<CompareContentsRealm> {
 		var contentsList: Results<CompareContentsRealm>
 		do {
-			let realm = try Realm(configuration: config)
+//			let realm = try Realm(configuration: config)
+			let realm = try Realm()
 			contentsList = realm.objects(CompareContentsRealm.self).filter("groupId="+String(groupId))
 		} catch {
 			throw NSError(domain: "error", code: -1, userInfo: nil)
