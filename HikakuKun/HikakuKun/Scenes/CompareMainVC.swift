@@ -155,6 +155,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 		} else {
 			self.itemTF_01.placeholder = "比較項目1"
 		}
+		self.itemTF_01.backgroundColor = .white
+		self.itemTF_01.textColor = .black
 		self.itemTF_01.layer.borderColor = UIColor.black.cgColor
 		self.itemTF_01.layer.borderWidth = 0.5
 		self.itemTF_01.adjustsFontSizeToFitWidth = true
@@ -165,6 +167,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 		self.itemsSV.addSubview(self.itemTF_01)
 		self.itemTF_01.delegate = self
 
+		self.contentTF_1_01.backgroundColor = .white
+		self.contentTF_1_01.textColor = .black
 		self.contentTF_1_01.layer.borderColor = UIColor.black.cgColor
 		self.contentTF_1_01.layer.borderWidth = 0.5
 		self.contentTF_1_01.adjustsFontSizeToFitWidth = true
@@ -175,6 +179,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 		self.itemsSV.addSubview(self.contentTF_1_01)
 		self.contentTF_1_01.delegate = self
 
+		self.contentTF_2_01.backgroundColor = .white
+		self.contentTF_2_01.textColor = .black
 		self.contentTF_2_01.layer.borderColor = UIColor.black.cgColor
 		self.contentTF_2_01.layer.borderWidth = 0.5
 		self.contentTF_2_01.adjustsFontSizeToFitWidth = true
@@ -186,6 +192,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 		self.contentTF_2_01.delegate = self
 
 		if( colNum >= 3 ) {
+			self.contentTF_3_01.backgroundColor = .white
+			self.contentTF_3_01.textColor = .black
 			self.contentTF_3_01.text = contents.filter("id = 2").first?.content1
 			self.contentTF_3_01.layer.borderColor = UIColor.black.cgColor
 			self.contentTF_3_01.layer.borderWidth = 0.5
@@ -198,6 +206,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 			self.contentTF_3_01.delegate = self
 		}
 		if( colNum >= 4 ) {
+			self.contentTF_4_01.backgroundColor = .white
+			self.contentTF_4_01.textColor = .black
 			self.contentTF_4_01.text = contents.filter("id = 3").first?.content1
 			self.contentTF_4_01.layer.borderColor = UIColor.black.cgColor
 			self.contentTF_4_01.layer.borderWidth = 0.5
@@ -210,6 +220,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 			self.contentTF_4_01.delegate = self
 		}
 		if( colNum == 5 ) {
+			self.contentTF_5_01.backgroundColor = .white
+			self.contentTF_5_01.textColor = .black
 			self.contentTF_5_01.text = contents.filter("id = 4").first?.content1
 			self.contentTF_5_01.layer.borderColor = UIColor.black.cgColor
 			self.contentTF_5_01.layer.borderWidth = 0.5
@@ -457,6 +469,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 					default:
 						break
 				}
+				itemNameTF.backgroundColor = .white
+				itemNameTF.textColor = .black
 				itemNameTF.layer.borderColor = UIColor.black.cgColor
 				itemNameTF.layer.borderWidth = 0.5
 				itemNameTF.adjustsFontSizeToFitWidth = true
@@ -466,6 +480,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 										  height: ITEM_H)
 				itemNameTF.delegate = self
 
+				contentTF_1.backgroundColor = .white
+				contentTF_1.textColor = .black
 				contentTF_1.layer.borderColor = UIColor.black.cgColor
 				contentTF_1.layer.borderWidth = 0.5
 				contentTF_1.adjustsFontSizeToFitWidth = true
@@ -475,6 +491,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 										   height: ITEM_H)
 				contentTF_1.delegate = self
 
+				contentTF_2.backgroundColor = .white
+				contentTF_2.textColor = .black
 				contentTF_2.layer.borderColor = UIColor.black.cgColor
 				contentTF_2.layer.borderWidth = 0.5
 				contentTF_2.adjustsFontSizeToFitWidth = true
@@ -485,6 +503,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 				contentTF_2.delegate = self
 
 				if( colNum >= 3 ) {
+					contentTF_3.backgroundColor = .white
+					contentTF_3.textColor = .black
 					contentTF_3.layer.borderColor = UIColor.black.cgColor
 					contentTF_3.layer.borderWidth = 0.5
 					contentTF_3.adjustsFontSizeToFitWidth = true
@@ -495,6 +515,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 					contentTF_3.delegate = self
 				}
 				if( colNum >= 4 ) {
+					contentTF_4.backgroundColor = .white
+					contentTF_4.textColor = .black
 					contentTF_4.layer.borderColor = UIColor.black.cgColor
 					contentTF_4.layer.borderWidth = 0.5
 					contentTF_4.adjustsFontSizeToFitWidth = true
@@ -505,6 +527,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 					contentTF_4.delegate = self
 				}
 				if( colNum >= 5 ) {
+					contentTF_5.backgroundColor = .white
+					contentTF_5.textColor = .black
 					contentTF_5.layer.borderColor = UIColor.black.cgColor
 					contentTF_5.layer.borderWidth = 0.5
 					contentTF_5.adjustsFontSizeToFitWidth = true
@@ -573,6 +597,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 				default:
 					break
 			}
+			memoTV.backgroundColor = .white
 			memoTV.textColor = .black
 			memoTV.layer.borderColor = UIColor.black.cgColor
 			memoTV.layer.borderWidth = 0.5
@@ -649,6 +674,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 		} else {
 			self.groupNameTF.placeholder = "タイトル"
 		}
+		self.groupNameTF.backgroundColor = .white
+		self.groupNameTF.textColor = .black
 		self.groupNameTF.textAlignment = NSTextAlignment.center
 		self.groupNameTF.font = UIFont.systemFont(ofSize: 25.0)
 		self.view.addSubview(self.groupNameTF)
@@ -671,6 +698,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 		} else {
 			self.nameTF_1.placeholder = "比較対象名を入力"
 		}
+		self.nameTF_1.backgroundColor = .white
+		self.nameTF_1.textColor = .black
 		self.nameTF_1.textAlignment = NSTextAlignment.center
 		self.nameTF_1.adjustsFontSizeToFitWidth = true
 		self.nameTF_1.backgroundColor = UIColor.init(red: 242/255,
@@ -698,6 +727,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 		} else {
 			self.nameTF_2.placeholder = "比較対象名を入力"
 		}
+		self.nameTF_2.backgroundColor = .white
+		self.nameTF_2.textColor = .black
 		self.nameTF_2.textAlignment = NSTextAlignment.center
 		self.nameTF_2.adjustsFontSizeToFitWidth = true
 		self.nameTF_2.backgroundColor = UIColor.init(red: 242/255,
@@ -747,6 +778,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 					default:
 						break
 				}
+				nameTF.backgroundColor = .white
+				nameTF.textColor = .black
 				nameTF.textAlignment = NSTextAlignment.center
 				nameTF.adjustsFontSizeToFitWidth = true
 				nameTF.backgroundColor = UIColor.init(red: 242/255,
@@ -831,17 +864,15 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 				//save data
 				do {
 					try saveData()
-					defer {
-						//complete message
-						let defaultAction = UIAlertAction(title: "OK",
-														  style: .default,
-														  handler:{(action: UIAlertAction!) -> Void in})
-						let alert = UIAlertController(title: "",
-													  message: "保存されました。",
-													  preferredStyle: .alert)
-						alert.addAction(defaultAction)
-						present(alert, animated: true, completion: nil)
-					}
+					//complete message
+					let defaultAction = UIAlertAction(title: "OK",
+													  style: .default,
+													  handler:{(action: UIAlertAction!) -> Void in})
+					let alert = UIAlertController(title: "",
+												  message: "保存されました。",
+												  preferredStyle: .alert)
+					alert.addAction(defaultAction)
+					present(alert, animated: true, completion: nil)
 				} catch {
 					//error message
 					let defaultAction = UIAlertAction(title: "(>_<)",
@@ -889,7 +920,6 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 			let updateContent_4 = contents.filter("id = 3").first
 			let updateContent_5 = contents.filter("id = 4").first
 			do {
-//				let realm = try Realm(configuration: config)
 				let realm = try Realm()
 				try realm.write {
 					updateItems?.groupName = groupNameTF.text!
@@ -1037,9 +1067,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 			colItem.timestamp = dateFormatter.string(from: dt)
 
 			//insert data
-//			let realm = try! Realm(configuration: config)
-			let realm = try! Realm()
-			try! realm.write {
+			let realm = try Realm()
+			try realm.write {
 				realm.add(colItem)
 			}
 
@@ -1101,11 +1130,10 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 				colContents.timestamp = dateFormatter.string(from: dt)
 
 				//insert data
-				try! realm.write {
+				try realm.write {
 					realm.add(colContents)
 				}
 			}
-			realm.cancelWrite()
 		}
 	}
 

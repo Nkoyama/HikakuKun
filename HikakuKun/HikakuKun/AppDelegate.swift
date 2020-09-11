@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 		let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 		let documentsDirectory = paths[0]
+		print(documentsDirectory)
 		let realmURL = documentsDirectory.appendingPathComponent("develop.realm")
 		config.fileURL = realmURL
 		Realm.Configuration.defaultConfiguration = config

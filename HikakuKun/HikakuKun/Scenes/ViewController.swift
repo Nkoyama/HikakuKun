@@ -33,7 +33,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 		// 表示用データ取得
 		displayList = []
 		groupIdList = []
-//		let realm = try! Realm(configuration: config)
 		let realm = try! Realm()
 		let allItems = realm.objects(CompareItemRealm.self)
 		for item in allItems {
@@ -55,6 +54,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
 		// 取得したデータ表示
 		self.hikakuListTable.dataSource = self
+		self.hikakuListTable.backgroundColor = .white
 		self.view.addSubview(self.hikakuListTable)
 		self.hikakuListTable.snp.makeConstraints { make in
 			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(0)
@@ -169,6 +169,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = UITableViewCell()
+		cell.backgroundColor = .white
 		cell.textLabel?.text = displayList[indexPath.row]
 		return cell
 	}
@@ -361,7 +362,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 			//データ削除
 			let deleteGroupId = self.groupIdList[indexPath.row]
 			do {
-//				let realm = try Realm(configuration: config)
 				let realm = try Realm()
 				let deleteItem = try CompareItemRealm().getItems(groupId: deleteGroupId)
 				let deleteContents = try CompareContentsRealm().getContentsList(groupId: deleteGroupId)
