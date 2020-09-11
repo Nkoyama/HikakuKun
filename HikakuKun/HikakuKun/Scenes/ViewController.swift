@@ -33,23 +33,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 		// 表示用データ取得
 		displayList = []
 		groupIdList = []
-		let realm = try! Realm()
-		let allItems = realm.objects(CompareItemRealm.self)
-		for item in allItems {
-			var displayText = item.groupName
-			let contents = realm.objects(CompareContentsRealm.self).filter("groupId="+String(item.groupId))
-			var i = 0
-			for content in contents {
-				if( i == 0 ) {
-					displayText = displayText + "  :  " + content.name
-				} else {
-					displayText = displayText + ", " + content.name
+		do {
+			let realm = try Realm()
+			let allItems = realm.objects(CompareItemRealm.self)
+			for item in allItems {
+				var displayText = item.groupName
+				let contents = realm.objects(CompareContentsRealm.self).filter("groupId="+String(item.groupId))
+				var i = 0
+				for content in contents {
+					if( i == 0 ) {
+						displayText = displayText + "  :  " + content.name
+					} else {
+						displayText = displayText + ", " + content.name
+					}
+					i += 1
 				}
-				i += 1
+				displayList.append(displayText)
+				groupIdList.append(item.groupId)
+				count += 1
 			}
-			displayList.append(displayText)
-			groupIdList.append(item.groupId)
-			count += 1
+		} catch {
+			// data acquisition error
+			// ToDo
 		}
 
 		// 取得したデータ表示
@@ -113,15 +118,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 	/// - Authors: Nozomi Koyama
 	@objc func addNewHikakuBtnDidTap(_ sender: UIButton) {
 		let nextVC = CompareMainVC()
-		let newGroupId = Int(CompareItemRealm().getMaxGroupId()) + 1
-		nextVC.groupId = newGroupId
-		nextVC.rowNum = 1
-		nextVC.callBack = { () in
-			self.callBack()
+		do {
+			let newGroupId = Int(try CompareItemRealm().getMaxGroupId()) + 1
+			nextVC.groupId = newGroupId
+			nextVC.rowNum = 1
+			nextVC.callBack = { () in
+				self.callBack()
+			}
+			self.present(nextVC,
+						 animated: true,
+						 completion: nil)
+		} catch {
+			// 新規比較作成失敗
+			// ToDo
 		}
-		self.present(nextVC,
-					 animated: true,
-					 completion: nil)
 	}
 
 	/// how-to-use button action
