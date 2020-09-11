@@ -170,6 +170,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = UITableViewCell()
 		cell.backgroundColor = .white
+		cell.textLabel?.textColor = .black
 		cell.textLabel?.text = displayList[indexPath.row]
 		return cell
 	}
