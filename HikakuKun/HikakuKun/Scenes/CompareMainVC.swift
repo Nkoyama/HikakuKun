@@ -122,7 +122,8 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 				}
 			}
 		} catch {
-			print("error")
+			// data acquisition error
+			// ToDo
 		}
 
 		// calc width
@@ -874,7 +875,7 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 					alert.addAction(defaultAction)
 					present(alert, animated: true, completion: nil)
 				} catch {
-					//error message
+					// data save error message
 					let defaultAction = UIAlertAction(title: "(>_<)",
 													  style: .default,
 													  handler:{(action: UIAlertAction!) -> Void in})
@@ -887,7 +888,15 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 			}
 			try displayAd()
 		} catch {
-			print("add error")
+			// data save error message
+			let defaultAction = UIAlertAction(title: "(>_<)",
+											  style: .default,
+											  handler:{(action: UIAlertAction!) -> Void in})
+			let alert = UIAlertController(title: "",
+										  message: "保存処理に失敗しました。",
+										  preferredStyle: .alert)
+			alert.addAction(defaultAction)
+			present(alert, animated: true, completion: nil)
 		}
 
 		//redisplay
