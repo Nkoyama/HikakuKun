@@ -9,8 +9,8 @@
 import UIKit
 import RealmSwift
 
-public let realmFileNmae = "develop.realm"		//develop
-//public let realmFileNmae = "Hikakukun.realm"	//deploy
+//public let realmFileNmae = "develop.realm"		//develop
+public let realmFileNmae = "Hikakukun.realm"	//deploy
 
 public let keyWindow = UIApplication.shared.connectedScenes
 	.filter({$0.activationState == .foregroundActive})
@@ -19,5 +19,5 @@ public let keyWindow = UIApplication.shared.connectedScenes
 	.first?.windows
 	.filter({$0.isKeyWindow}).first
 
-public let adUnitId = "ca-app-pub-3940256099942544/4411468910"	//develop
-//public let adUnitId = "ca-app-pub-7688401383404240/1582914564"	//deploy
+//public let adUnitId = "ca-app-pub-3940256099942544/4411468910"	//develop
+public let adUnitId = "ca-app-pub-7688401383404240/1582914564"	//deploy
