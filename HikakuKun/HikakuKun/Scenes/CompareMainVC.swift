@@ -123,7 +123,14 @@ class CompareMainVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, 
 			}
 		} catch {
 			// data acquisition error
-			// ToDo
+			let defaultAction = UIAlertAction(title: "(>_<)",
+											  style: .default,
+											  handler:{(action: UIAlertAction!) -> Void in})
+			let alert = UIAlertController(title: "",
+										  message: "データ取得に失敗しました。",
+										  preferredStyle: .alert)
+			alert.addAction(defaultAction)
+			present(alert, animated: true, completion: nil)
 		}
 
 		// calc width

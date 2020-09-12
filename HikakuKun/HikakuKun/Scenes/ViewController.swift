@@ -54,7 +54,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 			}
 		} catch {
 			// data acquisition error
-			// ToDo
+			let defaultAction = UIAlertAction(title: "(>_<)",
+											  style: .default,
+											  handler:{(action: UIAlertAction!) -> Void in})
+			let alert = UIAlertController(title: "",
+										  message: "データ取得に失敗しました。",
+										  preferredStyle: .alert)
+			alert.addAction(defaultAction)
+			present(alert, animated: true, completion: nil)
 		}
 
 		// 取得したデータ表示
@@ -130,7 +137,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 						 completion: nil)
 		} catch {
 			// 新規比較作成失敗
-			// ToDo
+			let defaultAction = UIAlertAction(title: "(>_<)",
+											  style: .default,
+											  handler:{(action: UIAlertAction!) -> Void in})
+			let alert = UIAlertController(title: "",
+										  message: "新規比較の作成に失敗しました。",
+										  preferredStyle: .alert)
+			alert.addAction(defaultAction)
+			present(alert, animated: true, completion: nil)
 		}
 	}
 
@@ -347,7 +361,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 				}
 			}
 		} catch {
-			print("error")
+			let defaultAction = UIAlertAction(title: "(>_<)",
+											  style: .default,
+											  handler:{(action: UIAlertAction!) -> Void in})
+			let alert = UIAlertController(title: "",
+										  message: "データ取得に失敗しました。",
+										  preferredStyle: .alert)
+			alert.addAction(defaultAction)
+			present(alert, animated: true, completion: nil)
 		}
 		nextVC.rowNum = idNum
 		nextVC.callBack = { () in
@@ -381,7 +402,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 					realm.delete(deleteContents)
 				}
 			} catch {
-				print("error")
+				let defaultAction = UIAlertAction(title: "(>_<)",
+												  style: .default,
+												  handler:{(action: UIAlertAction!) -> Void in})
+				let alert = UIAlertController(title: "",
+											  message: "データ削除に失敗しました。",
+											  preferredStyle: .alert)
+				alert.addAction(defaultAction)
+				self.present(alert, animated: true, completion: nil)
 			}
 		})
 		// alert message：Noボタン押下
