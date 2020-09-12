@@ -33,27 +33,40 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 		// 表示用データ取得
 		displayList = []
 		groupIdList = []
-		let realm = try! Realm(configuration: config)
-		let allItems = realm.objects(CompareItemRealm.self)
-		for item in allItems {
-			var displayText = item.groupName
-			let contents = realm.objects(CompareContentsRealm.self).filter("groupId="+String(item.groupId))
-			var i = 0
-			for content in contents {
-				if( i == 0 ) {
-					displayText = displayText + "  :  " + content.name
-				} else {
-					displayText = displayText + ", " + content.name
+		do {
+			let realm = try Realm()
+			let allItems = realm.objects(CompareItemRealm.self)
+			for item in allItems {
+				var displayText = item.groupName
+				let contents = realm.objects(CompareContentsRealm.self).filter("groupId="+String(item.groupId))
+				var i = 0
+				for content in contents {
+					if( i == 0 ) {
+						displayText = displayText + "  :  " + content.name
+					} else {
+						displayText = displayText + ", " + content.name
+					}
+					i += 1
 				}
-				i += 1
+				displayList.append(displayText)
+				groupIdList.append(item.groupId)
+				count += 1
 			}
-			displayList.append(displayText)
-			groupIdList.append(item.groupId)
-			count += 1
+		} catch {
+			// data acquisition error
+			let defaultAction = UIAlertAction(title: "(>_<)",
+											  style: .default,
+											  handler:{(action: UIAlertAction!) -> Void in})
+			let alert = UIAlertController(title: "",
+										  message: "データ取得に失敗しました。",
+										  preferredStyle: .alert)
+			alert.addAction(defaultAction)
+			present(alert, animated: true, completion: nil)
 		}
 
 		// 取得したデータ表示
 		self.hikakuListTable.dataSource = self
+		self.hikakuListTable.backgroundColor = .white
 		self.view.addSubview(self.hikakuListTable)
 		self.hikakuListTable.snp.makeConstraints { make in
 			make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(0)
@@ -112,15 +125,27 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 	/// - Authors: Nozomi Koyama
 	@objc func addNewHikakuBtnDidTap(_ sender: UIButton) {
 		let nextVC = CompareMainVC()
-		let newGroupId = Int(CompareItemRealm().getMaxGroupId()) + 1
-		nextVC.groupId = newGroupId
-		nextVC.rowNum = 1
-		nextVC.callBack = { () in
-			self.callBack()
+		do {
+			let newGroupId = Int(try CompareItemRealm().getMaxGroupId()) + 1
+			nextVC.groupId = newGroupId
+			nextVC.rowNum = 1
+			nextVC.callBack = { () in
+				self.callBack()
+			}
+			self.present(nextVC,
+						 animated: true,
+						 completion: nil)
+		} catch {
+			// 新規比較作成失敗
+			let defaultAction = UIAlertAction(title: "(>_<)",
+											  style: .default,
+											  handler:{(action: UIAlertAction!) -> Void in})
+			let alert = UIAlertController(title: "",
+										  message: "新規比較の作成に失敗しました。",
+										  preferredStyle: .alert)
+			alert.addAction(defaultAction)
+			present(alert, animated: true, completion: nil)
 		}
-		self.present(nextVC,
-					 animated: true,
-					 completion: nil)
 	}
 
 	/// how-to-use button action
@@ -168,6 +193,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = UITableViewCell()
+		cell.backgroundColor = .white
+		cell.textLabel?.textColor = .black
 		cell.textLabel?.text = displayList[indexPath.row]
 		return cell
 	}
@@ -334,7 +361,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 				}
 			}
 		} catch {
-			print("error")
+			let defaultAction = UIAlertAction(title: "(>_<)",
+											  style: .default,
+											  handler:{(action: UIAlertAction!) -> Void in})
+			let alert = UIAlertController(title: "",
+										  message: "データ取得に失敗しました。",
+										  preferredStyle: .alert)
+			alert.addAction(defaultAction)
+			present(alert, animated: true, completion: nil)
 		}
 		nextVC.rowNum = idNum
 		nextVC.callBack = { () in
@@ -360,7 +394,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 			//データ削除
 			let deleteGroupId = self.groupIdList[indexPath.row]
 			do {
-				let realm = try Realm(configuration: config)
+				let realm = try Realm()
 				let deleteItem = try CompareItemRealm().getItems(groupId: deleteGroupId)
 				let deleteContents = try CompareContentsRealm().getContentsList(groupId: deleteGroupId)
 				try realm.write {
@@ -368,7 +402,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 					realm.delete(deleteContents)
 				}
 			} catch {
-				print("error")
+				let defaultAction = UIAlertAction(title: "(>_<)",
+												  style: .default,
+												  handler:{(action: UIAlertAction!) -> Void in})
+				let alert = UIAlertController(title: "",
+											  message: "データ削除に失敗しました。",
+											  preferredStyle: .alert)
+				alert.addAction(defaultAction)
+				self.present(alert, animated: true, completion: nil)
 			}
 		})
 		// alert message：Noボタン押下
